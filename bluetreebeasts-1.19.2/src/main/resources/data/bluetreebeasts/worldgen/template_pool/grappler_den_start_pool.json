@@ -1,0 +1,27 @@
+{
+
+
+  "name": "bluetreebeasts:grappler_den_start_pool",
+
+  "fallback": "minecraft:empty",
+
+  "elements": [
+    {
+
+      "weight": 1,
+      "element": {
+
+
+        "location": "bluetreebeasts:grappler_den",
+
+        "processors": "minecraft:empty",
+
+
+        "projection": "rigid",
+
+
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

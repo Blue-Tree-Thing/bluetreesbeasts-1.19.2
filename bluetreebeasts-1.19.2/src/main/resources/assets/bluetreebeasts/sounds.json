@@ -1,0 +1,22 @@
+{
+  "hell_bender_ambient": {
+    "subtitle": "bluetreebeasts.hell_bender_ambient",
+    "sounds": [
+      "bluetreebeasts:hell_bender_ambient"
+    ]
+  },
+
+  "hell_bender_hurt": {
+    "subtitle": "bluetreebeasts.hell_bender_hurt",
+    "sounds": [
+      "bluetreebeasts:hell_bender_hurt"
+    ]
+  },
+
+  "hell_bender_death": {
+    "subtitle": "bluetreebeasts.hell_bender_death",
+    "sounds": [
+      "bluetreebeasts:hell_bender_death"
+    ]
+  }
+}

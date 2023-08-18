@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 5.0,
+                "min": 5.0
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 6.0,
+                "min": 6.0
+              },
+              "function": "minecraft:looting_enchant"
+            }
+          ],
+          "name": "bluetreebeasts:grappler_chop"
+        }
+      ],
+      "rolls": 1.0
+    }
+
+
+
+  ]
+}

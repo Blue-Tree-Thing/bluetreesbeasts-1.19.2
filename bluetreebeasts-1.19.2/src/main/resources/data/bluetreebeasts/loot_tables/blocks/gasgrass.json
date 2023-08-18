@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "bluetreebeasts:cowardice_leaf"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "bluetreebeasts:gasgrass"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

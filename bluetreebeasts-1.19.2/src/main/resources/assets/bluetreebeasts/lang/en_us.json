@@ -1,0 +1,23 @@
+{
+  "block.bluetreebeasts.healcup": "Healcup",
+  "block.bluetreebeasts.gasgrass": "Gasgrass",
+  "block.bluetreebeasts.quack_station": "Quack Station",
+  "itemGroup.bluetreebeasts.heartburn_glaive": "Bluetree's Beasts",
+  "item.bluetreebeasts.hell_bender_heart": "Hellbender Heart",
+  "item.bluetreebeasts.grappler_chop": "Grappler Mandible",
+  "item.bluetreebeasts.cowardice_leaf": "Cowardice Leaf",
+  "item.bluetreebeasts.empty_quack_jar": "Empty Quackery Jar",
+  "item.bluetreebeasts.quack_jar_of_primal_instinct": "Quackery Jar Of Primal Instincts",
+  "item.bluetreebeasts.quack_jar_of_cowardice": "Quackery Jar Of Cowardice",
+  "item.bluetreebeasts.hell_bender_spawn_egg": "Hellbender Spawn Egg",
+  "item.bluetreebeasts.greater_grappler_spawn_egg": "Greater Grappler Spawn Egg",
+  "item.bluetreebeasts.forest_flish_spawn_egg": "Forest Flish Spawn Egg",
+  "item.bluetreebeasts.heartburn_glaive": "Heartburn Glaive",
+  "entity.bluetreebeasts.hell_bender": "Hellbender",
+  "entity.bluetreebeasts.forest_flish": "Forest Flish",
+  "entity.bluetreebeasts.greater_grappler": "Greater Grappler",
+  "bluetreebeasts.hell_bender_ambient": "Hellbender Ambience",
+  "bluetreebeasts.hell_bender_hurt": "Hellbender Hurt",
+  "bluetreebeasts.hell_bender_death": "Hellbender Dies",
+  "effects.bluetreebeasts.spectral_poision_effect": "Spectral Poison"
+}

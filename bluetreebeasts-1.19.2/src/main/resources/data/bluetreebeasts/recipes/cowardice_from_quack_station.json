@@ -1,0 +1,14 @@
+{
+  "type": "bluetreebeasts:quack_station",
+  "ingredients": [
+    {
+      "item": "bluetreebeasts:empty_quack_jar"
+    },
+    {
+      "item": "bluetreebeasts:cowardice_leaf"
+    }
+  ],
+  "output": {
+    "item": "bluetreebeasts:quack_jar_of_cowardice"
+  }
+}

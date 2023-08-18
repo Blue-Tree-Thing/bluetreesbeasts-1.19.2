@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:fire_charge"
+    },
+    "title": "Bluetree's Beasts",
+    "description": "Welcome to Pain",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "bluetreebeasts:textures/item/blobstone_brick.png"
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+             "bluetreebeasts:quack_station"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

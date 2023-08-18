@@ -1,0 +1,19 @@
+{
+
+  "structures": [
+    {
+      "structure": "bluetreebeasts:grappler_den",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1343188574,
+
+    "spacing": 20,
+
+    "separation": 5,
+
+    "type": "minecraft:random_spread"
+  }
+
+}

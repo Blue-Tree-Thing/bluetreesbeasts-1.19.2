@@ -1,0 +1,19 @@
+{
+
+  "structures": [
+    {
+      "structure": "bluetreebeasts:hellbender_nest",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1642177474,
+
+    "spacing": 40,
+
+    "separation": 10,
+
+    "type": "minecraft:random_spread"
+  }
+
+}

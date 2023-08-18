@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:cobbled_deepslate"
+    },
+    "title": "Firefighter",
+    "description": "Kill A Hellbender In Its Deep Underground Nest Under A Jungle",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "bluetreebeasts:bluetreebeastsadvancement",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "bluetreebeasts:hell_bender"
+        }
+      }
+    }
+  }
+}
