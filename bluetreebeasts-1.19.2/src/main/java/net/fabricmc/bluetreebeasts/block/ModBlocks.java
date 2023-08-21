@@ -15,8 +15,8 @@ import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
 
-    public static final Block HEALCUP = registerBlock("healcup", new FernBlock(FabricBlockSettings.of(Material.LEAVES).collidable(false)), ModItemGroup.BLUETREEBEASTS);
-    public static final Block GASGRASS = registerBlock("gasgrass", new FernBlock(FabricBlockSettings.of(Material.LEAVES).collidable(false)), ModItemGroup.BLUETREEBEASTS);
+    public static final Block HEALCUP = registerBlock("healcup", new PlantBlock(FabricBlockSettings.of(Material.PLANT).collidable(false)), ModItemGroup.BLUETREEBEASTS);
+    public static final Block GASGRASS = registerBlock("gasgrass", new PlantBlock(FabricBlockSettings.of(Material.PLANT).collidable(false)), ModItemGroup.BLUETREEBEASTS);
     public static final Block QUACKSTATION = registerBlock("quack_station", new QuackStationBlock(FabricBlockSettings.of(Material.WOOD).strength(2f).requiresTool().nonOpaque()), ModItemGroup.BLUETREEBEASTS);
 
     private static Block registerBlock(String name, Block block, ItemGroup tab){

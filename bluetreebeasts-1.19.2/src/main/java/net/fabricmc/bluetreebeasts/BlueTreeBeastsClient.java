@@ -6,6 +6,7 @@ import net.fabricmc.bluetreebeasts.entities.ModEntities;
 import net.fabricmc.bluetreebeasts.entities.client.ForestFlishRenderer;
 import net.fabricmc.bluetreebeasts.entities.client.GreaterGrapplerRenderer;
 import net.fabricmc.bluetreebeasts.entities.client.HellBenderRenderer;
+import net.fabricmc.bluetreebeasts.entities.client.OceanFlishRenderer;
 import net.fabricmc.bluetreebeasts.screen.ModScreenHandlers;
 import net.fabricmc.bluetreebeasts.screen.QuackStationScreen;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -20,6 +21,7 @@ public class BlueTreeBeastsClient implements ClientModInitializer {
         register(ModEntities.HELLBENDER, HellBenderRenderer::new);
         register(ModEntities.GREATERGRAPPLER, GreaterGrapplerRenderer::new);
         register(ModEntities.FORESTFLISH, ForestFlishRenderer::new);
+        register(ModEntities.OCEANFLISH, OceanFlishRenderer::new);
 
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.HEALCUP, RenderLayer.getCutout());

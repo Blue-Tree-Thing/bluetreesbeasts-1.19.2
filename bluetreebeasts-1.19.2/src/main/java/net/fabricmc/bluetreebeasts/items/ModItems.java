@@ -23,7 +23,8 @@ public class ModItems {
 
     public static final SpawnEggItem HELLBENDERSPAWNEGG = (SpawnEggItem) registerItem ("hell_bender_spawn_egg", new SpawnEggItem(ModEntities.HELLBENDER, 0xf44600,0xeff660, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final SpawnEggItem GREATERGRAPPLERSPAWNEGG = (SpawnEggItem) registerItem ("greater_grappler_spawn_egg", new SpawnEggItem(ModEntities.GREATERGRAPPLER, 0xfa9100,0xefd110, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
-    public static final SpawnEggItem FORESTFLISHSPAWNEGG = (SpawnEggItem) registerItem ("forest_flish_spawn_egg", new SpawnEggItem(ModEntities.FORESTFLISH, 0xc11420,0xbef690, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
+    public static final SpawnEggItem FORESTFLISHSPAWNEGG = (SpawnEggItem) registerItem ("forest_flish_spawn_egg", new SpawnEggItem(ModEntities.FORESTFLISH, 0xa66420,0x9999, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
+    public static final SpawnEggItem OCEANFLISHSPAWNEGG = (SpawnEggItem) registerItem ("ocean_flish_spawn_egg", new SpawnEggItem(ModEntities.OCEANFLISH, 0xa77726,0xa33190, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
 
     public static final Item HEARTBURN_GLAIVE = registerItem("heartburn_glaive",new HeartburnGlaiveItem(BTBToolMaterials.GLAIVE, 7, -2f, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
 

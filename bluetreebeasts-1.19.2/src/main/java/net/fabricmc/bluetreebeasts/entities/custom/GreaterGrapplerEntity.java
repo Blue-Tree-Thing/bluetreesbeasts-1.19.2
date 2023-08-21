@@ -8,6 +8,7 @@ import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.ai.pathing.SpiderNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.*;
@@ -52,8 +53,8 @@ public class GreaterGrapplerEntity extends HostileEntity implements IAnimatable 
     @Override
     protected void initGoals() {
         this.goalSelector.add(1, new LookAtEntityGoal(this, LivingEntity.class, 20.0f));
-        if(!isAttacking()){
-            this.goalSelector.add(2, new WanderAroundFarGoal(this, .8f));
+        if(!this.hasPositionTarget()){
+            this.goalSelector.add(1, new WanderAroundFarGoal(this, .5f));
         }
         this.goalSelector.add(2, new MeleeAttackGoal(this, .5, false));
         this.targetSelector.add(1, new RevengeGoal(this));
@@ -61,6 +62,7 @@ public class GreaterGrapplerEntity extends HostileEntity implements IAnimatable 
         this.goalSelector.add(3, new LookAroundGoal(this));
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, AnimalEntity.class, true));
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, CreeperEntity.class, true));
     }
 
     @Override

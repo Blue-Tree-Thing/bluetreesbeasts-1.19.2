@@ -8,6 +8,7 @@ import net.fabricmc.bluetreebeasts.entities.ModEntities;
 import net.fabricmc.bluetreebeasts.entities.custom.ForestFlishEntity;
 import net.fabricmc.bluetreebeasts.entities.custom.GreaterGrapplerEntity;
 import net.fabricmc.bluetreebeasts.entities.custom.HellBenderEntity;
+import net.fabricmc.bluetreebeasts.entities.custom.OceanFlishEntity;
 import net.fabricmc.bluetreebeasts.items.ModItems;
 import net.fabricmc.bluetreebeasts.recipe.ModRecipes;
 import net.fabricmc.bluetreebeasts.screen.ModScreenHandlers;
@@ -39,6 +40,7 @@ public class BlueTreeBeasts implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.HELLBENDER, HellBenderEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.GREATERGRAPPLER, GreaterGrapplerEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.FORESTFLISH, ForestFlishEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.OCEANFLISH, OceanFlishEntity.setAttributes());
 
 	}
 }

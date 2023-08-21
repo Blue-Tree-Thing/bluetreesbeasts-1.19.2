@@ -42,7 +42,7 @@ public class HellBenderEntity extends HostileEntity implements IAnimatable {
     private static final AnimationBuilder chase_animation = new AnimationBuilder().addAnimation("animation.hell_bender.chase", true);
     private static final AnimationBuilder sleep_animation = new AnimationBuilder().addAnimation("animation.hell_bender.sleep", true);
     private PlayerEntity player;
-    private final ServerBossBar bossBar = (ServerBossBar)new ServerBossBar(this.getDisplayName(), BossBar.Color.YELLOW, BossBar.Style.PROGRESS).setDarkenSky(false);
+    private final ServerBossBar bossBar = (ServerBossBar)new ServerBossBar(this.getDisplayName(), BossBar.Color.GREEN, BossBar.Style.PROGRESS).setDarkenSky(false);
 
 
     public HellBenderEntity(EntityType<? extends HostileEntity> entityType, World world) {
@@ -129,11 +129,19 @@ public class HellBenderEntity extends HostileEntity implements IAnimatable {
         }
 
         public void tick(){
-            if(hellbender.getHealth() <= 100){
+            if(hellbender.getHealth() <= 150){
 
-                hellbender.bossBar.setColor(BossBar.Color.RED);
+                hellbender.bossBar.setColor(BossBar.Color.YELLOW);
                 hellbender.speed = hellbender.speed * 2f;
                 hellbender.isImmuneToExplosion();
+
+                if(hellbender.getHealth() <= 75){
+
+                    hellbender.bossBar.setColor(BossBar.Color.RED);
+                    hellbender.speed = hellbender.speed * 2f;
+                    hellbender.isImmuneToExplosion();
+
+                }
             }
         }
     }
