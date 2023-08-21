@@ -2,9 +2,7 @@ package net.fabricmc.bluetreebeasts.items;
 
 import net.fabricmc.bluetreebeasts.BlueTreeBeasts;
 import net.fabricmc.bluetreebeasts.entities.ModEntities;
-import net.fabricmc.bluetreebeasts.items.custom.HeartburnGlaiveItem;
-import net.fabricmc.bluetreebeasts.items.custom.QuackJarOfCowardiceItem;
-import net.fabricmc.bluetreebeasts.items.custom.QuackJarOfPrimalInstinctsItem;
+import net.fabricmc.bluetreebeasts.items.custom.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
@@ -20,6 +18,11 @@ public class ModItems {
     public static final Item QUACKJAROFPRIMALINSTINCT = registerItem("quack_jar_of_primal_instinct", new Item(new Item.Settings().food(QuackJarOfPrimalInstinctsItem.QUACKJAROFPRIMALINSTINCT).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item QUACKJAROFCOWARDICE = registerItem("quack_jar_of_cowardice", new Item(new Item.Settings().food(QuackJarOfCowardiceItem.QUACKJAROFCOWARDICE).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item COWARDICELEAF = registerItem("cowardice_leaf", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
+    public static final Item RAWFLISH = registerItem("raw_flish", new Item(new Item.Settings().food(RawFlishItem.RAWFLISH).group(ModItemGroup.BLUETREEBEASTS)));
+    public static final Item COOKEDFLISH = registerItem("cooked_flish", new Item(new Item.Settings().food(CookedFlishItem.COOKEDFLISH).group(ModItemGroup.BLUETREEBEASTS)));
+
+
+
 
     public static final SpawnEggItem HELLBENDERSPAWNEGG = (SpawnEggItem) registerItem ("hell_bender_spawn_egg", new SpawnEggItem(ModEntities.HELLBENDER, 0xf44600,0xeff660, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final SpawnEggItem GREATERGRAPPLERSPAWNEGG = (SpawnEggItem) registerItem ("greater_grappler_spawn_egg", new SpawnEggItem(ModEntities.GREATERGRAPPLER, 0xfa9100,0xefd110, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
