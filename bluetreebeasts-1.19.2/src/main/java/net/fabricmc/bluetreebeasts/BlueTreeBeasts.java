@@ -14,6 +14,7 @@ import net.fabricmc.bluetreebeasts.recipe.ModRecipes;
 import net.fabricmc.bluetreebeasts.screen.ModScreenHandlers;
 import net.fabricmc.bluetreebeasts.sounds.ModSounds;
 import net.fabricmc.bluetreebeasts.world.gen.ForestFlishEntitySpawn;
+import net.fabricmc.bluetreebeasts.world.gen.GreaterGrapplerEntitySpawn;
 import net.fabricmc.bluetreebeasts.world.gen.OceanFlishEntitySpawn;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import org.slf4j.Logger;
@@ -39,6 +40,7 @@ public class BlueTreeBeasts implements ModInitializer {
 		ModEntities.registerModEntities();
 		ForestFlishEntitySpawn.addForestFlishEntitySpawn();
 		OceanFlishEntitySpawn.addOceanFlishEntitySpawn();
+		GreaterGrapplerEntitySpawn.addGreaterGrapplerEntitySpawn();
 		FabricDefaultAttributeRegistry.register(ModEntities.HELLBENDER, HellBenderEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.GREATERGRAPPLER, GreaterGrapplerEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.FORESTFLISH, ForestFlishEntity.setAttributes());

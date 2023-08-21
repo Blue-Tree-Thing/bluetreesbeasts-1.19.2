@@ -13,8 +13,8 @@ import net.minecraft.world.biome.BiomeKeys;
 public class OceanFlishEntitySpawn {
 
     public static void addOceanFlishEntitySpawn(){
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.BEACH), SpawnGroup.CREATURE, ModEntities.OCEANFLISH, 50, 5,10);
-        SpawnRestriction.register(ModEntities.OCEANFLISH, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.RIVER, BiomeKeys.OCEAN, BiomeKeys.STONY_SHORE), SpawnGroup.CREATURE, ModEntities.OCEANFLISH, 50, 5,10);
+        SpawnRestriction.register(ModEntities.OCEANFLISH, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.WORLD_SURFACE_WG, AnimalEntity::isValidNaturalSpawn);
     }
 
 
