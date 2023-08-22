@@ -66,6 +66,7 @@ public class QuackStationBlockEntity extends BlockEntity implements NamedScreenH
 
 
 
+
     @Override
     public Text getDisplayName() {
         return Text.translatable("Quack Station");

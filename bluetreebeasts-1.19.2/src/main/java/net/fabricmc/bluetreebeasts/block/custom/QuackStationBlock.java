@@ -36,6 +36,16 @@ public class QuackStationBlock extends BlockWithEntity implements BlockEntityPro
     private static VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 10, 16);
 
     @Override
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
+        if(Screen.hasShiftDown()){
+            tooltip.add(Text.literal("Hate the complexity of brewing? Now, simply mush up something in a jar and call it a day!").formatted(Formatting.AQUA));
+        }else{
+            tooltip.add(Text.literal("Press Shift For Enlightenment :)").formatted(Formatting.GOLD));
+        }
+        super.appendTooltip(stack, world, tooltip, options);
+    }
+
+    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
