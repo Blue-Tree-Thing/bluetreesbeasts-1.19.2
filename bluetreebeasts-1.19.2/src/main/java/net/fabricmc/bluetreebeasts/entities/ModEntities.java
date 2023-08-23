@@ -1,10 +1,7 @@
 package net.fabricmc.bluetreebeasts.entities;
 
 import net.fabricmc.bluetreebeasts.BlueTreeBeasts;
-import net.fabricmc.bluetreebeasts.entities.custom.ForestFlishEntity;
-import net.fabricmc.bluetreebeasts.entities.custom.GreaterGrapplerEntity;
-import net.fabricmc.bluetreebeasts.entities.custom.HellBenderEntity;
-import net.fabricmc.bluetreebeasts.entities.custom.OceanFlishEntity;
+import net.fabricmc.bluetreebeasts.entities.custom.*;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -29,6 +26,10 @@ public class ModEntities {
     public static final EntityType<OceanFlishEntity> OCEANFLISH = register(
             Registry.ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "ocean_flish"), FabricEntityTypeBuilder.create
                     (SpawnGroup.CREATURE, OceanFlishEntity::new).dimensions(EntityDimensions.fixed(1f,1f)).build());
+
+    public static final EntityType<WoollyGigantelopeEntity> WOOLLYGIGANTELOPE = register(
+            Registry.ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "woolly_gigantelope"), FabricEntityTypeBuilder.create
+                    (SpawnGroup.CREATURE, WoollyGigantelopeEntity::new).dimensions(EntityDimensions.fixed(1.5f,1.5f)).build());
 
 
     public static void registerModEntities(){

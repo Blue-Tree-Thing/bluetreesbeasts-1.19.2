@@ -15,6 +15,7 @@
   "item.bluetreebeasts.greater_grappler_spawn_egg": "Greater Grappler Spawn Egg",
   "item.bluetreebeasts.forest_flish_spawn_egg": "Forest Flish Spawn Egg",
   "item.bluetreebeasts.ocean_flish_spawn_egg": "Ocean Flish Spawn Egg",
+  "item.bluetreebeasts.woolly_gigantelope_spawn_egg": "Woolly Gigantelope Spawn Egg",
   "item.bluetreebeasts.heartburn_glaive": "Heartburn Glaive",
   "item.bluetreebeasts.raw_flish": "Raw Ocean Flish",
   "item.bluetreebeasts.cooked_flish": "Cooked Ocean Flish",
@@ -23,6 +24,7 @@
   "entity.bluetreebeasts.forest_flish": "Forest Flish",
   "entity.bluetreebeasts.ocean_flish": "Ocean Flish",
   "entity.bluetreebeasts.greater_grappler": "Greater Grappler",
+  "entity.bluetreebeasts.woolly_gigantelope": "Woolly Gigantelope",
 
   "bluetreebeasts.hell_bender_ambient": "Hellbender Ambience",
   "bluetreebeasts.hell_bender_hurt": "Hellbender Hurt",
