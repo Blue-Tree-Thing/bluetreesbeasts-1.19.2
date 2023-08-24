@@ -29,11 +29,7 @@ public class QuackStationRecipe implements Recipe<SimpleInventory> {
             return false;
         }
 
-        if(recipeItems.get(0).test(inventory.getStack(0)) && recipeItems.get(1).test(inventory.getStack(1))) {
-            return true;
-        }
-
-        return false;
+        return recipeItems.get(0).test(inventory.getStack(0)) && recipeItems.get(1).test(inventory.getStack(1));
     }
 
     @Override

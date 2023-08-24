@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: software.bernie.geckolib:geckolib-core:1.0.14" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="software.bernie.geckolib" artifactId="geckolib-core" version="1.0.14" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.bernie.geckolib/geckolib-core/1.0.14/fc195c9aa4a87f8aec3abdb603405f5a26991ec6/geckolib-core-1.0.14.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

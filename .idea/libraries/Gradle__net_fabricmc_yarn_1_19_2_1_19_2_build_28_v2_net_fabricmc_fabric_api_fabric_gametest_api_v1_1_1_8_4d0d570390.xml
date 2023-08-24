@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.net.fabricmc.fabric-api:fabric-gametest-api-v1:1.1.8+4d0d570390" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.net.fabricmc.fabric-api" artifactId="fabric-gametest-api-v1" version="1.1.8+4d0d570390" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bluetreebeasts-1.19.2/.gradle/loom-cache/remapped_mods/net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2/net/fabricmc/fabric-api/fabric-gametest-api-v1/1.1.8+4d0d570390/fabric-gametest-api-v1-1.1.8+4d0d570390.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/bluetreebeasts-1.19.2/.gradle/loom-cache/remapped_mods/net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2/net/fabricmc/fabric-api/fabric-gametest-api-v1/1.1.8+4d0d570390/fabric-gametest-api-v1-1.1.8+4d0d570390-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

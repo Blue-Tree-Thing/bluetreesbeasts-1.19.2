@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.net.fabricmc.fabric-api:fabric-rendering-v0:1.1.27+df3654b390" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.net.fabricmc.fabric-api" artifactId="fabric-rendering-v0" version="1.1.27+df3654b390" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bluetreebeasts-1.19.2/.gradle/loom-cache/remapped_mods/net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2/net/fabricmc/fabric-api/fabric-rendering-v0/1.1.27+df3654b390/fabric-rendering-v0-1.1.27+df3654b390.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/bluetreebeasts-1.19.2/.gradle/loom-cache/remapped_mods/net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2/net/fabricmc/fabric-api/fabric-rendering-v0/1.1.27+df3654b390/fabric-rendering-v0-1.1.27+df3654b390-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: net.minecraft:minecraft-merged-project-root:1.19.2-net.fabricmc.yarn.1_19_2.1.19.2+build.28-v2" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="net.minecraft" artifactId="minecraft-merged-project-root" version="1.19.2-net.fabricmc.yarn.1_19_2.1.19.2+build.28-v2" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bluetreebeasts-1.19.2/.gradle/loom-cache/minecraftMaven/net/minecraft/minecraft-merged-project-root/1.19.2-net.fabricmc.yarn.1_19_2.1.19.2+build.28-v2/minecraft-merged-project-root-1.19.2-net.fabricmc.yarn.1_19_2.1.19.2+build.28-v2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/bluetreebeasts-1.19.2/.gradle/loom-cache/minecraftMaven/net/minecraft/minecraft-merged-project-root/1.19.2-net.fabricmc.yarn.1_19_2.1.19.2+build.28-v2/minecraft-merged-project-root-1.19.2-net.fabricmc.yarn.1_19_2.1.19.2+build.28-v2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.net.fabricmc.fabric-api:fabric-sound-api-v1:1.0.2+c4f28df590" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.net.fabricmc.fabric-api" artifactId="fabric-sound-api-v1" version="1.0.2+c4f28df590" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bluetreebeasts-1.19.2/.gradle/loom-cache/remapped_mods/net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2/net/fabricmc/fabric-api/fabric-sound-api-v1/1.0.2+c4f28df590/fabric-sound-api-v1-1.0.2+c4f28df590.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/bluetreebeasts-1.19.2/.gradle/loom-cache/remapped_mods/net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2/net/fabricmc/fabric-api/fabric-sound-api-v1/1.0.2+c4f28df590/fabric-sound-api-v1-1.0.2+c4f28df590-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
