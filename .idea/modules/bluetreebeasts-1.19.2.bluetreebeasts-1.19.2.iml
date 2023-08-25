@@ -12,7 +12,6 @@
       <excludeFolder url="file://$MODULE_DIR$/../../bluetreebeasts-1.19.2/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/../../bluetreebeasts-1.19.2/build" />
       <excludeFolder url="file://$MODULE_DIR$/../../bluetreebeasts-1.19.2/out" />
-      <excludeFolder url="file://$MODULE_DIR$/../../bluetreebeasts-1.19.2/run" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
