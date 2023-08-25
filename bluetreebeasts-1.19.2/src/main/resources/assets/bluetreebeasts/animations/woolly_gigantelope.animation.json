@@ -180,7 +180,7 @@
 							"vector": [0, 0, 0]
 						},
 						"0.5": {
-							"vector": [0, 0, 0],
+							"vector": [0, 0, 1],
 							"easing": "linear"
 						},
 						"1.0": {
@@ -188,7 +188,7 @@
 							"easing": "linear"
 						},
 						"1.5": {
-							"vector": [0, 0, 2],
+							"vector": [0, 0, 0],
 							"easing": "linear"
 						},
 						"2.0": {
@@ -272,11 +272,11 @@
 							"easing": "linear"
 						},
 						"1.0": {
-							"vector": [0, 0, 1],
+							"vector": [0, 0, 0],
 							"easing": "linear"
 						},
 						"1.5": {
-							"vector": [0, 0, 0],
+							"vector": [0, 0, 1],
 							"easing": "linear"
 						},
 						"2.0": {

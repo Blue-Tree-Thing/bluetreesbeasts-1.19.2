@@ -100,7 +100,7 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
 
         @Override
         public void start() {
-            timer = this.getTickCount(40);
+            timer = this.getTickCount(120);
             this.woollyGigantelope.world.sendEntityStatus(this.woollyGigantelope, EntityStatuses.SET_SHEEP_EAT_GRASS_TIMER_OR_PRIME_TNT_MINECART);
             this.woollyGigantelope.getNavigation().stop();
         }
