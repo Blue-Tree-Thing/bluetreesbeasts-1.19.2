@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "bluetreebeasts:block/quack_station_texture",
-		"particle": "bluetreebeasts:block/quack_station_texture"
+		"0": "bluetreebeasts:block/beast_builder_texture",
+		"particle": "bluetreebeasts:block/beast_builder_texture"
 	},
 	"elements": [
 		{

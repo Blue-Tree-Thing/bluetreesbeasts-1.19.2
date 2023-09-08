@@ -1,7 +1,8 @@
 package net.fabricmc.bluetreebeasts.block;
 
 import net.fabricmc.bluetreebeasts.BlueTreeBeasts;
-import net.fabricmc.bluetreebeasts.block.custom.QuackStationBlock;
+import net.fabricmc.bluetreebeasts.block.custom.BeastBuilderBlock;
+import net.fabricmc.bluetreebeasts.block.custom.BeastBuilderBlock;
 import net.fabricmc.bluetreebeasts.items.ModItemGroup;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -17,7 +18,7 @@ public class ModBlocks {
 
     public static final Block HEALCUP = registerBlock("healcup", new FernBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).collidable(false)), ModItemGroup.BLUETREEBEASTS);
     public static final Block GASGRASS = registerBlock("gasgrass", new FernBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).collidable(false)), ModItemGroup.BLUETREEBEASTS);
-    public static final Block QUACKSTATION = registerBlock("quack_station", new QuackStationBlock(FabricBlockSettings.of(Material.WOOD).strength(2f).requiresTool().nonOpaque()), ModItemGroup.BLUETREEBEASTS);
+    public static final Block BEASTBUIDER = registerBlock("beast_builder", new BeastBuilderBlock(FabricBlockSettings.of(Material.WOOD).strength(2f).requiresTool().nonOpaque()), ModItemGroup.BLUETREEBEASTS);
 
     private static Block registerBlock(String name, Block block, ItemGroup tab){
         registerBlockItem(name, block, tab);

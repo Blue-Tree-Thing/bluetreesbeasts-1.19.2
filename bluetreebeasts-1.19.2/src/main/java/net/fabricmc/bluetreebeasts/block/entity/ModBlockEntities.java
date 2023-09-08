@@ -8,9 +8,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModBlockEntities {
-    public static BlockEntityType<QuackStationBlockEntity> QUACKSTATION;
+    public static BlockEntityType<BeastBuilderBlockEntity> BEASTBUILDER;
 
     public static void registerBlockEntities(){
-        QUACKSTATION = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "quack_station"), FabricBlockEntityTypeBuilder.create(QuackStationBlockEntity::new, ModBlocks.QUACKSTATION).build(null));
+        BEASTBUILDER = Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "beast_builder"), FabricBlockEntityTypeBuilder.create(BeastBuilderBlockEntity::new, ModBlocks.BEASTBUIDER).build(null));
     }
 }

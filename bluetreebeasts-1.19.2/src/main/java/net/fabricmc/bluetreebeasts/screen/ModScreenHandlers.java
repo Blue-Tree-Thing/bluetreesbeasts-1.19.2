@@ -4,9 +4,9 @@ import net.minecraft.screen.ScreenHandlerType;
 
 public class ModScreenHandlers {
 
-    public static ScreenHandlerType<QuackStationScreenHandler> QUACK_STATION_SCREEN_HANDLER;
+    public static ScreenHandlerType<BeastBuilderScreenHandler> BEAST_BUILDER_SCREEN_HANDLER;
 
     public static void registerAllScreenHandlers(){
-        QUACK_STATION_SCREEN_HANDLER = new ScreenHandlerType<>(QuackStationScreenHandler::new);
+        BEAST_BUILDER_SCREEN_HANDLER = new ScreenHandlerType<>(BeastBuilderScreenHandler::new);
     }
 }

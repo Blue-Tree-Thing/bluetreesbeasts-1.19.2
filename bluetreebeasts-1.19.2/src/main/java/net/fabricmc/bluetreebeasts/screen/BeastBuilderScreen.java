@@ -10,11 +10,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class QuackStationScreen extends HandledScreen<QuackStationScreenHandler> {
+public class BeastBuilderScreen extends HandledScreen<BeastBuilderScreenHandler> {
 
-    private static final Identifier TEXTURE = new Identifier(BlueTreeBeasts.MODID, "textures/gui/quack_station_gui.png");
+    private static final Identifier TEXTURE = new Identifier(BlueTreeBeasts.MODID, "textures/gui/beast_builder_gui.png");
 
-    public QuackStationScreen(QuackStationScreenHandler handler, PlayerInventory inventory, Text title) {
+    public BeastBuilderScreen(BeastBuilderScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
 

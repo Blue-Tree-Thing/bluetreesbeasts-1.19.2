@@ -1,7 +1,7 @@
 package net.fabricmc.bluetreebeasts.block.custom;
 
 import net.fabricmc.bluetreebeasts.block.entity.ModBlockEntities;
-import net.fabricmc.bluetreebeasts.block.entity.QuackStationBlockEntity;
+import net.fabricmc.bluetreebeasts.block.entity.BeastBuilderBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -26,10 +26,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class QuackStationBlock extends BlockWithEntity implements BlockEntityProvider {
+public class BeastBuilderBlock extends BlockWithEntity implements BlockEntityProvider {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
-    public QuackStationBlock(Settings settings) {
+    public BeastBuilderBlock(Settings settings) {
         super(settings);
     }
 
@@ -83,8 +83,8 @@ public class QuackStationBlock extends BlockWithEntity implements BlockEntityPro
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof QuackStationBlockEntity) {
-                ItemScatterer.spawn(world, pos, (QuackStationBlockEntity)blockEntity);
+            if (blockEntity instanceof BeastBuilderBlockEntity) {
+                ItemScatterer.spawn(world, pos, (BeastBuilderBlockEntity)blockEntity);
                 world.updateComparators(pos,this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -108,12 +108,12 @@ public class QuackStationBlock extends BlockWithEntity implements BlockEntityPro
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new QuackStationBlockEntity(pos, state);
+        return new BeastBuilderBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.QUACKSTATION, QuackStationBlockEntity::tick);
+        return checkType(type, ModBlockEntities.BEASTBUILDER, BeastBuilderBlockEntity::tick);
     }
 }

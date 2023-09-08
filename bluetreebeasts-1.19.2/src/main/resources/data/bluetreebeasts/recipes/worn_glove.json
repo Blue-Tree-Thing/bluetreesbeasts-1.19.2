@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped", "pattern":
+[
+  "o##",
+  "c# ",
+  "o##"
+],"key": {
+  "#": {
+    "item": "bluetreebeasts:grappler_chop"
+  },
+  "c": {
+    "item": "minecraft:redstone_block"
+  },
+  "o": {
+    "item": "minecraft:rotten_flesh"
+  }
+},
+  "result": {
+    "count": 1,
+    "item": "bluetreebeasts:worn_glove"
+  }
+}

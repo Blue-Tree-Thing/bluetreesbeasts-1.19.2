@@ -19,7 +19,7 @@
     <content url="file://$MODULE_DIR$/../../bluetreebeasts-1.19.2/src/test" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="bluetreebeasts-1.19.2.bluetreebeasts-1.19.2.main~3" />
+    <orderEntry type="module" module-name="bluetreebeasts-1.19.2.bluetreebeasts-1.19.2.main~4" />
     <orderEntry type="library" name="Gradle: net.fabricmc:tiny-mappings-parser:0.3.0+build.17" level="project" />
     <orderEntry type="library" name="Gradle: net.fabricmc:sponge-mixin:0.12.4+mixin.0.8.5" level="project" />
     <orderEntry type="library" name="Gradle: net.fabricmc:tiny-remapper:0.8.2" level="project" />

@@ -14,12 +14,13 @@ public class ModItems {
 
     public static final Item HELLBENDEREART = registerItem("hell_bender_heart", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final Item GRAPPLERCHOP = registerItem("grappler_chop", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
-    public static final Item EMPTYQUACKJAR = registerItem("empty_quack_jar", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
+    public static final Item PUPPETCATALYST = registerItem("puppet_catalyst", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item QUACKJAROFPRIMALINSTINCT = registerItem("quack_jar_of_primal_instinct", new Item(new Item.Settings().food(QuackJarOfPrimalInstinctsItem.QUACKJAROFPRIMALINSTINCT).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item QUACKJAROFCOWARDICE = registerItem("quack_jar_of_cowardice", new Item(new Item.Settings().food(QuackJarOfCowardiceItem.QUACKJAROFCOWARDICE).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item COWARDICELEAF = registerItem("cowardice_leaf", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item RAWFLISH = registerItem("raw_flish", new Item(new Item.Settings().food(RawFlishItem.RAWFLISH).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item COOKEDFLISH = registerItem("cooked_flish", new Item(new Item.Settings().food(CookedFlishItem.COOKEDFLISH).group(ModItemGroup.BLUETREEBEASTS)));
+    public static final Item WORNGLOVE = registerItem("worn_glove", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
 
 
 

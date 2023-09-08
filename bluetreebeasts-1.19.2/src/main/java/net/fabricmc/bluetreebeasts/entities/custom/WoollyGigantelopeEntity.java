@@ -9,7 +9,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.predicate.block.BlockStatePredicate;
@@ -26,7 +25,6 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
 import java.util.EnumSet;
 import java.util.function.Predicate;
 
@@ -44,7 +42,6 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
         super(entityType, world);
     }
 
-
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 40)
@@ -57,6 +54,7 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
         this.goalSelector.add(1, new LookAtEntityGoal(this, LivingEntity.class, 20.0f));
         this.goalSelector.add(2, new WanderAroundFarGoal(this, .4f));
         this.goalSelector.add(1, new SwimGoal(this));
+        this.goalSelector.add(1, new EscapeDangerGoal(this, .6));
         this.goalSelector.add(3, new LookAroundGoal(this));
         this.goalSelector.add(2, new GigantelopeForageGoal(this));
 
@@ -100,7 +98,8 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
 
         @Override
         public void start() {
-            timer = this.getTickCount(120);
+            timer = this.getTickCount(40);
+
             this.woollyGigantelope.world.sendEntityStatus(this.woollyGigantelope, EntityStatuses.SET_SHEEP_EAT_GRASS_TIMER_OR_PRIME_TNT_MINECART);
             this.woollyGigantelope.getNavigation().stop();
         }
@@ -108,6 +107,7 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
         @Override
         public void stop() {
             timer = 0;
+
         }
 
         @Override
@@ -129,6 +129,7 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
             if (SNOW_LAYER_PREDICATE.test(this.woollyGigantelope.world.getBlockState(blockPos))) {
                 if (this.woollyGigantelope.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
                     this.woollyGigantelope.world.breakBlock(blockPos, false);
+                    isDigging = true;
                 }
                 this.woollyGigantelope.onEatingGrass();
             } else {
@@ -138,12 +139,12 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
                         isDigging = true;
                         this.woollyGigantelope.world.syncWorldEvent(WorldEvents.BLOCK_BROKEN, blockPos2, Block.getRawIdFromState(Blocks.SNOW.getDefaultState()));
                         this.woollyGigantelope.world.setBlockState(blockPos2, Blocks.AIR.getDefaultState(), Block.NOTIFY_LISTENERS);
+
                     }
                     this.woollyGigantelope.onEatingGrass();
-
                 }
-
             }
+            isDigging = false;
         }
     }
 
@@ -159,17 +160,22 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
             return PlayState.CONTINUE;
         } else if(event.isMoving()){
             event.getController().setAnimation(walking_animation);}
-        else if(isDigging){
-                event.getController().setAnimation(foraging_animation);
+        return PlayState.CONTINUE;
+    }
+
+    private PlayState feedPredicate (AnimationEvent event) {
+        if (isDigging) {
+            event.getController().setAnimation(foraging_animation);
+            return PlayState.CONTINUE;
         }
         return PlayState.CONTINUE;
-
     }
 
 
     @Override
     public void registerControllers(AnimationData animationData) {
         animationData.addAnimationController(new AnimationController(this,"controller", 0, this::predicate));
+        animationData.addAnimationController(new AnimationController(this,"feed_controller", 0, this::feedPredicate));
     }
 
     @Override

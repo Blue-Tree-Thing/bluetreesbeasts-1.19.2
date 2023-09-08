@@ -29,7 +29,7 @@ public class ModEntities {
 
     public static final EntityType<WoollyGigantelopeEntity> WOOLLYGIGANTELOPE = register(
             Registry.ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "woolly_gigantelope"), FabricEntityTypeBuilder.create
-                    (SpawnGroup.CREATURE, WoollyGigantelopeEntity::new).dimensions(EntityDimensions.fixed(1.5f,1.5f)).build());
+                    (SpawnGroup.CREATURE, WoollyGigantelopeEntity::new).dimensions(EntityDimensions.fixed(3f,3f)).build());
 
 
     public static void registerModEntities(){

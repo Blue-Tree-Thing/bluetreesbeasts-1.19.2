@@ -23,7 +23,7 @@ public class WoollyGigantelopeRenderer extends GeoEntityRenderer<WoollyGigantelo
 
     @Override
     public RenderLayer getRenderType(WoollyGigantelopeEntity animatable, float partialTicks, MatrixStack stack, VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn, Identifier textureLocation) {
-        stack.scale(1f,1f,1f);
+        stack.scale(1.1f,1.1f,1.1f);
 
         return super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
     }

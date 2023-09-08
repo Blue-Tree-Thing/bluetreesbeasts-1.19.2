@@ -11,13 +11,13 @@ import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
-public class QuackStationRecipe implements Recipe<SimpleInventory> {
+public class BeastBuilderRecipe implements Recipe<SimpleInventory> {
 
     private final Identifier id;
     private final ItemStack output;
     private final DefaultedList<Ingredient> recipeItems;
 
-    public QuackStationRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
+    public BeastBuilderRecipe(Identifier id, ItemStack output, DefaultedList<Ingredient> recipeItems) {
         this.id = id;
         this.output = output;
         this.recipeItems = recipeItems;
@@ -62,19 +62,19 @@ public class QuackStationRecipe implements Recipe<SimpleInventory> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<QuackStationRecipe> {
+    public static class Type implements RecipeType<BeastBuilderRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();
-        public static final String ID = "quack_station";
+        public static final String ID = "beast_builder";
     }
 
-    public static class Serializer implements RecipeSerializer<QuackStationRecipe> {
+    public static class Serializer implements RecipeSerializer<BeastBuilderRecipe> {
         public static final Serializer INSTANCE = new Serializer();
-        public static final String ID = "quack_station";
+        public static final String ID = "beast_builder";
         // this is the name given in the json file
 
         @Override
-        public QuackStationRecipe read(Identifier id, JsonObject json) {
+        public BeastBuilderRecipe read(Identifier id, JsonObject json) {
             ItemStack output = ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "output"));
 
             JsonArray ingredients = JsonHelper.getArray(json, "ingredients");
@@ -84,11 +84,11 @@ public class QuackStationRecipe implements Recipe<SimpleInventory> {
                 inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
             }
 
-            return new QuackStationRecipe(id, output, inputs);
+            return new BeastBuilderRecipe(id, output, inputs);
         }
 
         @Override
-        public QuackStationRecipe read(Identifier id, PacketByteBuf buf) {
+        public BeastBuilderRecipe read(Identifier id, PacketByteBuf buf) {
             DefaultedList<Ingredient> inputs = DefaultedList.ofSize(buf.readInt(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
@@ -96,11 +96,11 @@ public class QuackStationRecipe implements Recipe<SimpleInventory> {
             }
 
             ItemStack output = buf.readItemStack();
-            return new QuackStationRecipe(id, output, inputs);
+            return new BeastBuilderRecipe(id, output, inputs);
         }
 
         @Override
-        public void write(PacketByteBuf buf, QuackStationRecipe recipe) {
+        public void write(PacketByteBuf buf, BeastBuilderRecipe recipe) {
             buf.writeInt(recipe.getIngredients().size());
             for (Ingredient ing : recipe.getIngredients()) {
                 ing.write(buf);

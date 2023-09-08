@@ -11,16 +11,16 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
 
-public class QuackStationScreenHandler extends ScreenHandler {
+public class BeastBuilderScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
 
-    public QuackStationScreenHandler(int syncId, PlayerInventory inventory) {
+    public BeastBuilderScreenHandler(int syncId, PlayerInventory inventory) {
         this(syncId, inventory, new SimpleInventory(3), new ArrayPropertyDelegate(2));
     }
 
-    public QuackStationScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
-        super(ModScreenHandlers.QUACK_STATION_SCREEN_HANDLER, syncId);
+    public BeastBuilderScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
+        super(ModScreenHandlers.BEAST_BUILDER_SCREEN_HANDLER, syncId);
         checkSize(inventory, 3);
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);

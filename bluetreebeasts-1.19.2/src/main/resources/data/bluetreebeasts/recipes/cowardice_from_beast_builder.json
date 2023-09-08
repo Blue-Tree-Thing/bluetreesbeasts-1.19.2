@@ -1,8 +1,8 @@
 {
-  "type": "bluetreebeasts:quack_station",
+  "type": "bluetreebeasts:beast_builder",
   "ingredients": [
     {
-      "item": "bluetreebeasts:empty_quack_jar"
+      "item": "bluetreebeasts:puppet_catalyst"
     },
     {
       "item": "bluetreebeasts:cowardice_leaf"

@@ -1,0 +1,14 @@
+{
+  "type": "bluetreebeasts:beast_builder",
+  "ingredients": [
+    {
+      "item": "bluetreebeasts:puppet_catalyst"
+    },
+    {
+      "item": "bluetreebeasts:worn_glove"
+    }
+  ],
+  "output": {
+    "item": "bluetreebeasts:quack_jar_of_primal_instinct"
+  }
+}

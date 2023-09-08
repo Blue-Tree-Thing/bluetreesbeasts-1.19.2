@@ -1,14 +1,15 @@
 {
   "block.bluetreebeasts.healcup": "Healcup",
   "block.bluetreebeasts.gasgrass": "Gasgrass",
-  "block.bluetreebeasts.quack_station": "Quack Station",
+  "block.bluetreebeasts.beast_builder": "Beast Builder",
 
   "itemGroup.bluetreebeasts.heartburn_glaive": "Bluetree's Beasts",
 
   "item.bluetreebeasts.hell_bender_heart": "Hellbender Heart",
   "item.bluetreebeasts.grappler_chop": "Grappler Mandible",
+  "item.bluetreebeasts.worn_glove": "Chassis of the Worn Glove",
   "item.bluetreebeasts.cowardice_leaf": "Cowardice Leaf",
-  "item.bluetreebeasts.empty_quack_jar": "Empty Quackery Jar",
+  "item.bluetreebeasts.puppet_catalyst": "Puppet Catalyst",
   "item.bluetreebeasts.quack_jar_of_primal_instinct": "Quackery Jar Of Primal Instincts",
   "item.bluetreebeasts.quack_jar_of_cowardice": "Quackery Jar Of Cowardice",
   "item.bluetreebeasts.hell_bender_spawn_egg": "Hellbender Spawn Egg",

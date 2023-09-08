@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "bluetreebeasts:block/beast_builder"
+    },
+    "facing=south": {
+      "model": "bluetreebeasts:block/beast_builder",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "bluetreebeasts:block/beast_builder",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "bluetreebeasts:block/beast_builder",
+      "y": 90
+    }
+  }
+}

@@ -1,13 +1,9 @@
 package net.fabricmc.bluetreebeasts.block.entity;
 
-import net.fabricmc.bluetreebeasts.block.ModBlocks;
-import net.fabricmc.bluetreebeasts.items.ModItems;
-import net.fabricmc.bluetreebeasts.recipe.QuackStationRecipe;
-import net.fabricmc.bluetreebeasts.screen.QuackStationScreenHandler;
-import net.minecraft.MinecraftVersion;
+import net.fabricmc.bluetreebeasts.recipe.BeastBuilderRecipe;
+import net.fabricmc.bluetreebeasts.screen.BeastBuilderScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -26,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class QuackStationBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
+public class BeastBuilderBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 
     protected final PropertyDelegate propertyDelegate;
@@ -36,15 +32,15 @@ public class QuackStationBlockEntity extends BlockEntity implements NamedScreenH
 
 
 
-    public QuackStationBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.QUACKSTATION, pos, state);
+    public BeastBuilderBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.BEASTBUILDER, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
 
                 switch (index) {
-                    case 0: return QuackStationBlockEntity.this.progress;
-                    case 1: return QuackStationBlockEntity.this.maxProgress;
+                    case 0: return BeastBuilderBlockEntity.this.progress;
+                    case 1: return BeastBuilderBlockEntity.this.maxProgress;
                     default: return 0;
                 }
             }
@@ -52,8 +48,8 @@ public class QuackStationBlockEntity extends BlockEntity implements NamedScreenH
             @Override
             public void set(int index, int value) {
                 switch(index) {
-                    case 0: QuackStationBlockEntity.this.progress = value; break;
-                    case 1: QuackStationBlockEntity.this.maxProgress = value; break;
+                    case 0: BeastBuilderBlockEntity.this.progress = value; break;
+                    case 1: BeastBuilderBlockEntity.this.maxProgress = value; break;
                 }
             }
 
@@ -69,13 +65,13 @@ public class QuackStationBlockEntity extends BlockEntity implements NamedScreenH
 
     @Override
     public Text getDisplayName() {
-        return Text.translatable("Quack Station");
+        return Text.translatable("Beast Builder");
     }
 
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return new QuackStationScreenHandler(syncId, inv, this, this.propertyDelegate);
+        return new BeastBuilderScreenHandler(syncId, inv, this, this.propertyDelegate);
     }
 
     @Override
@@ -100,7 +96,7 @@ public class QuackStationBlockEntity extends BlockEntity implements NamedScreenH
         this.progress = 0;
     }
 
-    public static  void tick(World world, BlockPos blockPos, BlockState state, QuackStationBlockEntity entity) {
+    public static  void tick(World world, BlockPos blockPos, BlockState state, BeastBuilderBlockEntity entity) {
         if(world.isClient()){
             return;
         }
@@ -119,14 +115,14 @@ public class QuackStationBlockEntity extends BlockEntity implements NamedScreenH
 
 
 
-    private static void craftItem(QuackStationBlockEntity entity) {
+    private static void craftItem(BeastBuilderBlockEntity entity) {
         SimpleInventory inventory = new SimpleInventory(entity.size());
         for (int i = 0; i < entity.size(); i++) {
             inventory.setStack(i, entity.getStack(i));
         }
 
-        Optional<QuackStationRecipe> recipe = entity.getWorld().getRecipeManager()
-                .getFirstMatch(QuackStationRecipe.Type.INSTANCE, inventory, entity.getWorld());
+        Optional<BeastBuilderRecipe> recipe = entity.getWorld().getRecipeManager()
+                .getFirstMatch(BeastBuilderRecipe.Type.INSTANCE, inventory, entity.getWorld());
 
         if(hasRecipe(entity)){
             entity.removeStack(1,1);
@@ -138,13 +134,13 @@ public class QuackStationBlockEntity extends BlockEntity implements NamedScreenH
         }
     }
 
-    private static boolean hasRecipe(QuackStationBlockEntity entity) {
+    private static boolean hasRecipe(BeastBuilderBlockEntity entity) {
         SimpleInventory inventory = new SimpleInventory(entity.size());
         for (int i = 0; i < entity.size(); i++) {
             inventory.setStack(i, entity.getStack(i));
         }
-        Optional<QuackStationRecipe> match = entity.getWorld().getRecipeManager()
-                .getFirstMatch(QuackStationRecipe.Type.INSTANCE, inventory, entity.getWorld());
+        Optional<BeastBuilderRecipe> match = entity.getWorld().getRecipeManager()
+                .getFirstMatch(BeastBuilderRecipe.Type.INSTANCE, inventory, entity.getWorld());
         return match.isPresent() && canInsertAmountIntoOutputSlot(inventory) && canInsertItemIntoOutputSlot(inventory, match.get().getOutput().getItem());
     }
 

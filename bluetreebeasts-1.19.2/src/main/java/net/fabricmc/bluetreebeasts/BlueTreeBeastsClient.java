@@ -5,7 +5,7 @@ import net.fabricmc.bluetreebeasts.block.ModBlocks;
 import net.fabricmc.bluetreebeasts.entities.ModEntities;
 import net.fabricmc.bluetreebeasts.entities.client.*;
 import net.fabricmc.bluetreebeasts.screen.ModScreenHandlers;
-import net.fabricmc.bluetreebeasts.screen.QuackStationScreen;
+import net.fabricmc.bluetreebeasts.screen.BeastBuilderScreen;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
@@ -24,6 +24,6 @@ public class BlueTreeBeastsClient implements ClientModInitializer {
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.HEALCUP, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.GASGRASS, RenderLayer.getCutout());
-        HandledScreens.register(ModScreenHandlers.QUACK_STATION_SCREEN_HANDLER, QuackStationScreen::new);
+        HandledScreens.register(ModScreenHandlers.BEAST_BUILDER_SCREEN_HANDLER, BeastBuilderScreen::new);
     }
 }

@@ -5,17 +5,13 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
-import net.minecraft.entity.ai.pathing.SpiderNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -85,9 +81,10 @@ public class GreaterGrapplerEntity extends HostileEntity implements IAnimatable 
         return PlayState.CONTINUE;
     }
     private PlayState attackPredicate (AnimationEvent event) {
-        if (event.isMoving() && this.isAttacking()) {
+        if (this.handSwinging) {
             event.getController().markNeedsReload();
             event.getController().setAnimation(attack_animation);
+            this.handSwinging = false;
             return PlayState.CONTINUE;
         }
         return PlayState.CONTINUE;
