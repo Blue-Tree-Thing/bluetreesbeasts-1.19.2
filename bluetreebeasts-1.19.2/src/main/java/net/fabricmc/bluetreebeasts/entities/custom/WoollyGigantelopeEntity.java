@@ -45,7 +45,7 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 40)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, .5f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, .4f)
                 .add(EntityAttributes.GENERIC_ARMOR, 4f);
     }
 

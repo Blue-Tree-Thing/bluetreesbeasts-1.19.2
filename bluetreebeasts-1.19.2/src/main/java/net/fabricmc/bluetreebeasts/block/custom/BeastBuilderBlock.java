@@ -38,7 +38,7 @@ public class BeastBuilderBlock extends BlockWithEntity implements BlockEntityPro
     @Override
     public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
         if(Screen.hasShiftDown()){
-            tooltip.add(Text.literal("Hate the complexity of brewing? Now, simply mush up something in a jar and call it a day!").formatted(Formatting.AQUA));
+            tooltip.add(Text.literal("The Build-A-Beast Workshop!").formatted(Formatting.AQUA));
         }else{
             tooltip.add(Text.literal("Press Shift For Enlightenment :)").formatted(Formatting.GOLD));
         }

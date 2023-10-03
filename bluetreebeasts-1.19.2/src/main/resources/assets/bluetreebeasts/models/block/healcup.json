@@ -1,5 +1,0 @@
-{
-  "parent": "minecraft:block/cross", "textures": {
-  "cross": "bluetreebeasts:block/healcup"
-}
-}

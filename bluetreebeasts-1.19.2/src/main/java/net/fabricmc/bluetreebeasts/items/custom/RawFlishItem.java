@@ -18,14 +18,6 @@ import java.util.List;
 public class RawFlishItem extends Item {
     public static final FoodComponent RAWFLISH = new FoodComponent.Builder().hunger(4).saturationModifier(2f).meat().build();
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if(Screen.hasShiftDown()){
-            tooltip.add(Text.literal("It's sushi that flies. What more to say?").formatted(Formatting.AQUA));
-        }else{
-            tooltip.add(Text.literal("Press Shift For Enlightenment :)").formatted(Formatting.GOLD));
-        }
-    }
     public RawFlishItem(Settings settings) {
         super(settings);
     }

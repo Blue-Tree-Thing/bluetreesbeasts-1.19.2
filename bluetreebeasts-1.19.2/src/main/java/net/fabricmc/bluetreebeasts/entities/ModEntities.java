@@ -19,6 +19,11 @@ public class ModEntities {
             Registry.ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "greater_grappler"), FabricEntityTypeBuilder.create
                     (SpawnGroup.MONSTER, GreaterGrapplerEntity::new).dimensions(EntityDimensions.fixed(2f,2f)).build());
 
+    public static final EntityType<WornGloveEntity> WORNGLOVE = register(
+            Registry.ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "worn_glove"), FabricEntityTypeBuilder.create
+                    (SpawnGroup.MISC, WornGloveEntity::new).dimensions(EntityDimensions.fixed(2f,2f)).build());
+
+
     public static final EntityType<ForestFlishEntity> FORESTFLISH = register(
             Registry.ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "forest_flish"), FabricEntityTypeBuilder.create
                     (SpawnGroup.CREATURE, ForestFlishEntity::new).dimensions(EntityDimensions.fixed(.5f,.5f)).build());

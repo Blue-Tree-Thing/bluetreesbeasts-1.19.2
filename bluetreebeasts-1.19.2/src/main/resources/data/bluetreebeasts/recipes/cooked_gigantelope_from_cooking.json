@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "bluetreebeasts:raw_gigantelope"
+  },
+  "result": "bluetreebeasts:cooked_gigantelope"
+}

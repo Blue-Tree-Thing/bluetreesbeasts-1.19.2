@@ -38,7 +38,7 @@ public class BeastBuilderScreen extends HandledScreen<BeastBuilderScreenHandler>
 
     private void renderProgressArrow(MatrixStack matrices, int x, int y) {
         if(handler.isCrafting()) {
-            drawTexture(matrices, x + 77, y + 16, 177, 17, 32, handler.getScaledProgress());
+            drawTexture(matrices, x + 77, y + 15, 176, 16, 23, handler.getScaledProgress());
         }
     }
 

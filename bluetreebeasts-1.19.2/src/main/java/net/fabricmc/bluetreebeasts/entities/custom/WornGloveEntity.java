@@ -9,9 +9,13 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -20,14 +24,14 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class GreaterGrapplerEntity extends HostileEntity implements IAnimatable {
+public class WornGloveEntity extends AnimalEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     private static final AnimationBuilder run_animation = new AnimationBuilder().addAnimation("animation.greater_grappler_run", true);
     private static final AnimationBuilder idle_animation = new AnimationBuilder().addAnimation("animation.greater_grappler_idle", true);
     private static final AnimationBuilder attack_animation = new AnimationBuilder().addAnimation("animation.greater_grappler_attack", true);
     private LivingEntity target;
 
-    public GreaterGrapplerEntity(EntityType<? extends HostileEntity> entityType, World world) {
+    public WornGloveEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
         this.setPersistent();
         this.checkDespawn();
@@ -49,14 +53,12 @@ public class GreaterGrapplerEntity extends HostileEntity implements IAnimatable 
     @Override
     protected void initGoals() {
         this.goalSelector.add(1, new LookAtEntityGoal(this, LivingEntity.class, 20.0f));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, .5f));
-        this.goalSelector.add(1, new MeleeAttackGoal(this, .5, false));
+        this.goalSelector.add(1, new WanderAroundFarGoal(this, .5f));
+        this.goalSelector.add(2, new MeleeAttackGoal(this, .5, false));
         this.targetSelector.add(1, new RevengeGoal(this));
         this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(3, new LookAroundGoal(this));
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, AnimalEntity.class, true));
-        this.targetSelector.add(1, new ActiveTargetGoal<>(this, CreeperEntity.class, true));
+        this.targetSelector.add(2, new ActiveTargetGoal<>(this, HostileEntity.class, true));
     }
 
     @Override
@@ -100,5 +102,11 @@ public class GreaterGrapplerEntity extends HostileEntity implements IAnimatable 
     @Override
     public AnimationFactory getFactory() {
         return factory;
+    }
+
+    @Nullable
+    @Override
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+        return null;
     }
 }

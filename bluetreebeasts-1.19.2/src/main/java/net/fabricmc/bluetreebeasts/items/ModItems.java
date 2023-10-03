@@ -15,17 +15,20 @@ public class ModItems {
     public static final Item HELLBENDEREART = registerItem("hell_bender_heart", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final Item GRAPPLERCHOP = registerItem("grappler_chop", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item PUPPETCATALYST = registerItem("puppet_catalyst", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
-    public static final Item QUACKJAROFPRIMALINSTINCT = registerItem("quack_jar_of_primal_instinct", new Item(new Item.Settings().food(QuackJarOfPrimalInstinctsItem.QUACKJAROFPRIMALINSTINCT).group(ModItemGroup.BLUETREEBEASTS)));
-    public static final Item QUACKJAROFCOWARDICE = registerItem("quack_jar_of_cowardice", new Item(new Item.Settings().food(QuackJarOfCowardiceItem.QUACKJAROFCOWARDICE).group(ModItemGroup.BLUETREEBEASTS)));
-    public static final Item COWARDICELEAF = registerItem("cowardice_leaf", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item RAWFLISH = registerItem("raw_flish", new Item(new Item.Settings().food(RawFlishItem.RAWFLISH).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item COOKEDFLISH = registerItem("cooked_flish", new Item(new Item.Settings().food(CookedFlishItem.COOKEDFLISH).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item WORNGLOVE = registerItem("worn_glove", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
+    public static final Item RAWGIGANTELOPE = registerItem("raw_gigantelope", new Item(new Item.Settings().food(RawGigantelopeItem.RAWGIGANTELOPE).group(ModItemGroup.BLUETREEBEASTS)));
+    public static final Item COOKEDGIGANTELOPE= registerItem("cooked_gigantelope", new Item(new Item.Settings().food(CookedGigantelopeItem.COOKEDGIGANTELOPE).group(ModItemGroup.BLUETREEBEASTS)));
+
+    public static final Item BLAZINGHEART = registerItem("blazing_heart", new BlazingHeartItem(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
 
 
 
 
     public static final SpawnEggItem HELLBENDERSPAWNEGG = (SpawnEggItem) registerItem ("hell_bender_spawn_egg", new SpawnEggItem(ModEntities.HELLBENDER, 0xf44600,0xeff660, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
+    public static final SpawnEggItem WORNGLOVESPAWNEGG = (SpawnEggItem) registerItem ("worn_glove_spawn_egg", new SpawnEggItem(ModEntities.WORNGLOVE,0xf44600,1, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
+
     public static final SpawnEggItem GREATERGRAPPLERSPAWNEGG = (SpawnEggItem) registerItem ("greater_grappler_spawn_egg", new SpawnEggItem(ModEntities.GREATERGRAPPLER, 0xfa9100,0xefd110, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final SpawnEggItem FORESTFLISHSPAWNEGG = (SpawnEggItem) registerItem ("forest_flish_spawn_egg", new SpawnEggItem(ModEntities.FORESTFLISH, 0xa66420,0x9999, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final SpawnEggItem OCEANFLISHSPAWNEGG = (SpawnEggItem) registerItem ("ocean_flish_spawn_egg", new SpawnEggItem(ModEntities.OCEANFLISH, 0xa77726,0xa33190, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));

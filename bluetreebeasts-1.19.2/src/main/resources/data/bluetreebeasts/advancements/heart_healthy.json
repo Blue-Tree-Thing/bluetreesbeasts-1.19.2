@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "bluetreebeasts:blazing_heart"
+    },
+    "title": "Heart Healthy",
+    "description": "Don a Blazing Heart and become immune to harmful status effects. What else does it protect against?",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "bluetreebeasts:bluetreebeastsadvancement",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "bluetreebeasts:blazing_heart"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

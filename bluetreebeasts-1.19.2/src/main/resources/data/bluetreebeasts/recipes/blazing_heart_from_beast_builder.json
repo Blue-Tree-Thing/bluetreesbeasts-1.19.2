@@ -1,0 +1,14 @@
+{
+  "type": "bluetreebeasts:beast_builder",
+  "ingredients": [
+    {
+      "item": "minecraft:netherite_ingot"
+    },
+    {
+      "item": "bluetreebeasts:hellbender_heart"
+    }
+  ],
+  "output": {
+    "item": "bluetreebeasts:blazing_heart"
+  }
+}

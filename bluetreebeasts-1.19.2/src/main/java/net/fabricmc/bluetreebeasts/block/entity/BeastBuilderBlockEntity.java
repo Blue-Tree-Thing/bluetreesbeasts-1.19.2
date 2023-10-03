@@ -29,9 +29,6 @@ public class BeastBuilderBlockEntity extends BlockEntity implements NamedScreenH
     private int progress = 0;
     private int maxProgress = 72;
 
-
-
-
     public BeastBuilderBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.BEASTBUILDER, pos, state);
         this.propertyDelegate = new PropertyDelegate() {

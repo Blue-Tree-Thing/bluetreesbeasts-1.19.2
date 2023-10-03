@@ -23,12 +23,4 @@ public class CookedFlishItem extends Item {
         super(settings);
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if(Screen.hasShiftDown()){
-            tooltip.add(Text.literal("It's like chicken and seafood, what more could you ask for?").formatted(Formatting.AQUA));
-        }else{
-            tooltip.add(Text.literal("Press Shift For Enlightenment :)").formatted(Formatting.GOLD));
-        }
-    }
 }
