@@ -18,12 +18,20 @@ public class WoollyGigantelopeRenderer extends GeoEntityRenderer<WoollyGigantelo
 
     @Override
     public Identifier getTexture(WoollyGigantelopeEntity entity) {
-        return new Identifier(BlueTreeBeasts.MODID, "textures/entities/woolly_gigantelope_texture.png");
+        if(!entity.isBaby()){
+            return new Identifier(BlueTreeBeasts.MODID, "textures/entities/woolly_gigantelope_texture.png");
+
+        }else
+            return new Identifier(BlueTreeBeasts.MODID, "textures/entities/baby_gigantelope_texture.png");
     }
 
     @Override
     public RenderLayer getRenderType(WoollyGigantelopeEntity animatable, float partialTicks, MatrixStack stack, VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn, Identifier textureLocation) {
         stack.scale(1.1f,1.1f,1.1f);
+
+        if(animatable.isBaby()){
+            stack.scale(.5f,.5f,.5f);
+        }
 
         return super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
     }

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped", "pattern":
+[
+  "o",
+  "#",
+  "o"
+],"key": {
+  "#": {
+    "item": "bluetreebeasts:hell_bender_heart"
+  },
+  "o": {
+    "item": "minecraft:netherite_ingot"
+  }
+},
+  "result": {
+    "count": 1,
+    "item": "bluetreebeasts:blazing_heart"
+  }
+}

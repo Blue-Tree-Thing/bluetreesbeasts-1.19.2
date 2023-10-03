@@ -14,17 +14,27 @@ public class WoollyGigantelopeModel extends AnimatedGeoModel<WoollyGigantelopeEn
 
     @Override
     public Identifier getModelResource(WoollyGigantelopeEntity object) {
-        return  new Identifier(BlueTreeBeasts.MODID, "geo/woolly_gigantelope.geo.json");
+        if(object.isBaby()){
+            return  new Identifier(BlueTreeBeasts.MODID, "geo/baby_gigantelope.geo.json");
+        }else{
+        return  new Identifier(BlueTreeBeasts.MODID, "geo/woolly_gigantelope.geo.json");}
     }
 
     @Override
     public Identifier getTextureResource(WoollyGigantelopeEntity object) {
-        return  new Identifier(BlueTreeBeasts.MODID, "textures/woolly_gigantelope_texture.png");
+        if(object.isBaby()){
+            return  new Identifier(BlueTreeBeasts.MODID, "textures/baby_gigantelope_texture.png");
+        }else{
+        return  new Identifier(BlueTreeBeasts.MODID, "textures/woolly_gigantelope_texture.png");}
+
     }
 
     @Override
     public Identifier getAnimationResource(WoollyGigantelopeEntity animatable) {
-        return  new Identifier(BlueTreeBeasts.MODID, "animations/woolly_gigantelope.animation.json");
+        if(animatable.isBaby()){
+            return new Identifier(BlueTreeBeasts.MODID, "animations/baby_gigantelope.animation.json");
+        }else{
+        return  new Identifier(BlueTreeBeasts.MODID, "animations/woolly_gigantelope.animation.json");}
     }
 
 

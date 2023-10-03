@@ -142,16 +142,17 @@ public class OceanFlishEntity extends AnimalEntity implements IAnimatable {
                 }
             }
         } else {
-            if (!(this.hangingPosition == null || this.world.isAir(this.hangingPosition) && this.hangingPosition.getY() > this.world.getBottomY())) {
-                this.hangingPosition = null;
-            }
-            if (this.hangingPosition == null || this.random.nextInt(100) == 0 || this.hangingPosition.isWithinDistance(this.getPos(), 2.0)) {
-                this.hangingPosition = new BlockPos(this.getX() + (double)this.random.nextInt(7) - (double)this.random.nextInt(7), this.getY() + (double)this.random.nextInt(6) - 2.0, this.getZ() + (double)this.random.nextInt(7) - (double)this.random.nextInt(7));
-            }
             if(this.getY() < 80) {
+                if (!(this.hangingPosition == null || this.world.isAir(this.hangingPosition) && this.hangingPosition.getY() > this.world.getBottomY())) {
+                    this.hangingPosition = null;
+                }
+                if (this.hangingPosition == null || this.random.nextInt(100) == 0 || this.hangingPosition.isWithinDistance(this.getPos(), 2.0)) {
+                    this.hangingPosition = new BlockPos(this.getX() + (double) this.random.nextInt(7) - (double) this.random.nextInt(7), this.getY() + (double) this.random.nextInt(6) - 2.0, this.getZ() + (double) this.random.nextInt(7) - (double) this.random.nextInt(7));
+                }
+
                 double d = (double) this.hangingPosition.getX() + 0.5 - this.getX();
                 assert this.hangingPosition != null;
-                double e = (double) this.hangingPosition.getY() + 0.1 - this.getY();
+                double e = (double) this.hangingPosition.getY() - 0.1 - this.getY();
                 assert this.hangingPosition != null;
                 double f = (double) this.hangingPosition.getZ() + 0.5 - this.getZ();
                 Vec3d vec3d = this.getVelocity();
@@ -161,22 +162,13 @@ public class OceanFlishEntity extends AnimalEntity implements IAnimatable {
                 float h = MathHelper.wrapDegrees(g - this.getYaw());
                 this.forwardSpeed = 3f;
                 this.setYaw(this.getYaw() + h);
+
+                if (this.random.nextInt(100) == 0 && this.world.getBlockState(blockPos2).isFullCube(this.world, blockPos2)) {
+                    this.setRoosting(true);
+                }
+
             }else{
-                double d = (double) this.hangingPosition.getX() + 0.5 - this.getX();
-                assert this.hangingPosition != null;
-                double e = (double) this.hangingPosition.getY() - 0.5 - this.getY();
-                assert this.hangingPosition != null;
-                double f = (double) this.hangingPosition.getZ() + 0.5 - this.getZ();
-                Vec3d vec3d = this.getVelocity();
-                Vec3d vec3d2 = vec3d.add((Math.signum(d) * 0.5 - vec3d.x) * (double) 0.1f, (Math.signum(e) * (double) -0.1f - vec3d.y) * (double) 0.1f, (Math.signum(f) * 0.5 - vec3d.z) * (double) 0.1f);
-                this.setVelocity(vec3d2);
-                float g = (float) (MathHelper.atan2(vec3d2.z, vec3d2.x) * 57.2957763671875) - 90.0f;
-                float h = MathHelper.wrapDegrees(g - this.getYaw());
-                this.forwardSpeed = 3f;
-                this.setYaw(this.getYaw() + h);
-            }
-            if (this.random.nextInt(100) == 0 && this.world.getBlockState(blockPos2).isFullCube(this.world, blockPos2)) {
-                this.setRoosting(true);
+                this.setVelocity(0,-0.25f,0);
             }
         }
     }

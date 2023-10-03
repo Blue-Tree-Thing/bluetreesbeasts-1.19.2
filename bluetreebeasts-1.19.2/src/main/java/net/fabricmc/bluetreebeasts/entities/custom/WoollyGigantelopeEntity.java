@@ -1,5 +1,7 @@
 package net.fabricmc.bluetreebeasts.entities.custom;
 
+import net.fabricmc.bluetreebeasts.entities.ModEntities;
+import net.fabricmc.bluetreebeasts.items.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -11,8 +13,13 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.predicate.block.BlockStatePredicate;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
@@ -35,6 +42,8 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
     private static final AnimationBuilder walking_animation = new AnimationBuilder().addAnimation("animation.woolly_gigantelope.walk", true);
     private static final AnimationBuilder foraging_animation = new AnimationBuilder().addAnimation("animation.woolly_gigantelope.feed", true);
     private static final AnimationBuilder idle_animation = new AnimationBuilder().addAnimation("animation.woolly_gigantelope.idle", true);
+    private static final AnimationBuilder baby_idle_animation = new AnimationBuilder().addAnimation("animation.baby_gigantelope.idle", true);
+    private static final AnimationBuilder baby_walking_animation = new AnimationBuilder().addAnimation("animation.baby_gigantelope.walk", true);
     private int eatGrassTimer;
     public static boolean isDigging;
 
@@ -45,7 +54,7 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 40)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, .5f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, .4f)
                 .add(EntityAttributes.GENERIC_ARMOR, 4f);
     }
 
@@ -57,6 +66,8 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
         this.goalSelector.add(1, new EscapeDangerGoal(this, .6));
         this.goalSelector.add(3, new LookAroundGoal(this));
         this.goalSelector.add(2, new GigantelopeForageGoal(this));
+
+        this.targetSelector.add(1, new AnimalMateGoal(this,1));
 
     }
 
@@ -148,11 +159,24 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
         }
     }
 
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return stack.getItem() == Items.WHEAT;
+    }
+
+    @Override
+    public ActionResult interactMob(PlayerEntity player, Hand hand) {
+            return super.interactMob(player, hand);
+
+    }
+
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return null;
+        return ModEntities.WOOLLYGIGANTELOPE.create(world);
     }
+
+
 
     private PlayState predicate (AnimationEvent event) {
         if (!event.isMoving()) {
@@ -160,6 +184,14 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
             return PlayState.CONTINUE;
         } else if(event.isMoving()){
             event.getController().setAnimation(walking_animation);}
+        return PlayState.CONTINUE;
+    }
+    private PlayState babyPredicate (AnimationEvent event) {
+        if (this.isBaby() && !event.isMoving()) {
+            event.getController().setAnimation(baby_idle_animation);
+            return PlayState.CONTINUE;
+        } else if(this.isBaby() &&event.isMoving()){
+            event.getController().setAnimation(baby_walking_animation);}
         return PlayState.CONTINUE;
     }
 
@@ -175,6 +207,7 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
     @Override
     public void registerControllers(AnimationData animationData) {
         animationData.addAnimationController(new AnimationController(this,"controller", 0, this::predicate));
+        animationData.addAnimationController(new AnimationController(this,"baby_controller", 0, this::babyPredicate));
         animationData.addAnimationController(new AnimationController(this,"feed_controller", 0, this::feedPredicate));
     }
 

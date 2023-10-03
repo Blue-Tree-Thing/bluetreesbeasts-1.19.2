@@ -63,7 +63,7 @@ public class HellBenderEntity extends HostileEntity implements IAnimatable {
 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 200)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 300)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.5f)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 12f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 6f)
@@ -76,11 +76,13 @@ public class HellBenderEntity extends HostileEntity implements IAnimatable {
             this.goalSelector.add(1, new HalfHealthGoal(this));
             this.goalSelector.add(2, new PlaceFireTrailGoal(this));
             this.goalSelector.add(2, new SwimGoal(this));
+            this.goalSelector.add(1, new RevengeGoal(this));
             this.goalSelector.add(3, new MeleeAttackGoal(this, .5, true));
             this.goalSelector.add(3, new PounceAtTargetGoal(this, 0.6f));
 
 
         this.targetSelector.add(2, new ActiveTargetGoal<>( this, PlayerEntity.class, true));
+
 
 
     }
@@ -129,17 +131,16 @@ public class HellBenderEntity extends HostileEntity implements IAnimatable {
         }
 
         public void tick(){
-            if(hellbender.getHealth() <= 150){
+            if(hellbender.getHealth() <= 200){
 
                 hellbender.bossBar.setColor(BossBar.Color.YELLOW);
-                hellbender.speed = hellbender.speed * 2f;
-                hellbender.isImmuneToExplosion();
 
-                if(hellbender.getHealth() <= 75){
+
+
+                if(hellbender.getHealth() <= 100){
 
                     hellbender.bossBar.setColor(BossBar.Color.RED);
-                    hellbender.speed = hellbender.speed * 2f;
-                    hellbender.isImmuneToExplosion();
+
 
                 }
             }

@@ -1,13 +1,8 @@
 package net.fabricmc.bluetreebeasts.block;
 
 import net.fabricmc.bluetreebeasts.BlueTreeBeasts;
-import net.fabricmc.bluetreebeasts.block.custom.BeastBuilderBlock;
-import net.fabricmc.bluetreebeasts.block.custom.BeastBuilderBlock;
-import net.fabricmc.bluetreebeasts.items.ModItemGroup;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -16,9 +11,6 @@ import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
 
-    public static final Block HEALCUP = registerBlock("healcup", new FernBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).collidable(false)), ModItemGroup.BLUETREEBEASTS);
-    public static final Block GASGRASS = registerBlock("gasgrass", new FernBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).collidable(false)), ModItemGroup.BLUETREEBEASTS);
-    public static final Block BEASTBUIDER = registerBlock("beast_builder", new BeastBuilderBlock(FabricBlockSettings.of(Material.WOOD).strength(2f).requiresTool().nonOpaque()), ModItemGroup.BLUETREEBEASTS);
 
     private static Block registerBlock(String name, Block block, ItemGroup tab){
         registerBlockItem(name, block, tab);

@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "bluetreebeasts:blazing_heart"
+    },
+    "title": "Set your heart ablaze",
+    "description": "Don a Blazing Heart and become more powerful... perhaps in more ways than mere increased stats.",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "bluetreebeasts:bluetreebeastsadvancement",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "bluetreebeasts:blazing_heart"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

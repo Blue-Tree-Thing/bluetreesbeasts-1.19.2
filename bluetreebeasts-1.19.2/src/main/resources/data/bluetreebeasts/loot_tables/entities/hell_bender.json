@@ -15,15 +15,8 @@
                 "min": 1.0
               },
               "function": "minecraft:set_count"
-            },
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:looting_enchant"
             }
+
           ],
           "name": "bluetreebeasts:hell_bender_heart"
         }

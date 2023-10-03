@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped", "pattern":
+[
+  "o",
+  "#",
+  "o"
+],"key": {
+  "#": {
+    "item": "bluetreebeasts:woolly_hair"
+  },
+  "o": {
+    "item": "minecraft:magma_cream"
+  }
+},
+  "result": {
+    "count": 1,
+    "item": "bluetreebeasts:savage_silk"
+  }
+}
