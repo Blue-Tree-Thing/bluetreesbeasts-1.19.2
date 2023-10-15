@@ -82,6 +82,8 @@ public class HellBenderEntity extends HostileEntity implements IAnimatable {
 
 
         this.targetSelector.add(2, new ActiveTargetGoal<>( this, PlayerEntity.class, true));
+        this.targetSelector.add(2, new ActiveTargetGoal<>( this, WornGloveEntity.class, true));
+
 
 
 

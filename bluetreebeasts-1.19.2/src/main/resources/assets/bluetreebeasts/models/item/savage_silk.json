@@ -1,1 +1,5 @@
+<<<<<<<< HEAD:bluetreebeasts-1.19.2/src/main/resources/assets/bluetreebeasts/models/item/savage_silk.json
 {"parent" :"item/generated", "textures": {"layer0":"bluetreebeasts:item/savage_silk"}}
+========
+{"parent" :"item/generated", "textures": {"layer0":"bluetreebeasts:item/gigantelope_raw_innards"}}
+>>>>>>>> github/master:bluetreebeasts-1.19.2/src/main/resources/assets/bluetreebeasts/models/item/raw_gigantelope.json

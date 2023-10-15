@@ -1,7 +1,6 @@
 package net.fabricmc.bluetreebeasts;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.bluetreebeasts.block.ModBlocks;
 import net.fabricmc.bluetreebeasts.effect.ModEffects;
 import net.fabricmc.bluetreebeasts.entities.ModEntities;
 import net.fabricmc.bluetreebeasts.entities.custom.*;
@@ -27,7 +26,6 @@ public class BlueTreeBeasts implements ModInitializer {
 		BTBStructures.registerStructureFeatures();
 		ModItems.registerModItems();
 		ModSounds.registerModSounds();
-		ModBlocks.registerModBlocks();
 		ModEffects.registerEffects();
 		ModRecipes.registerRecipes();
 		GeckoLib.initialize();
@@ -37,6 +35,7 @@ public class BlueTreeBeasts implements ModInitializer {
 		WoollyGigantelopeEntitySpawn.addWoollyGigantelopeEntitySpawn();
 		FabricDefaultAttributeRegistry.register(ModEntities.HELLBENDER, HellBenderEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.GREATERGRAPPLER, GreaterGrapplerEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.WORNGLOVE, WornGloveEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.FORESTFLISH, ForestFlishEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.OCEANFLISH, OceanFlishEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.WOOLLYGIGANTELOPE, WoollyGigantelopeEntity.setAttributes());

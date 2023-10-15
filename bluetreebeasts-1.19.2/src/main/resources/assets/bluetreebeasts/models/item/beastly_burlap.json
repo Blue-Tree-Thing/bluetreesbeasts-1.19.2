@@ -1,1 +1,5 @@
+<<<<<<<< HEAD:bluetreebeasts-1.19.2/src/main/resources/assets/bluetreebeasts/models/item/beastly_burlap.json
 {"parent" :"item/generated", "textures": {"layer0":"bluetreebeasts:item/beastly_burlap"}}
+========
+{"parent" :"item/generated", "textures": {"layer0":"bluetreebeasts:item/gigantelope_innards"}}
+>>>>>>>> github/master:bluetreebeasts-1.19.2/src/main/resources/assets/bluetreebeasts/models/item/cooked_gigantelope.json
