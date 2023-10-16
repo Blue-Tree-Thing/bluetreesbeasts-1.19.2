@@ -5,6 +5,7 @@
   "item.bluetreebeasts.hell_bender_heart": "Hellbender Heart",
   "item.bluetreebeasts.grappler_chop": "Grappler Mandible",
   "item.bluetreebeasts.hell_bender_spawn_egg": "Hellbender Spawn Egg",
+  "item.bluetreebeasts.tyflew_spawn_egg": "Tyflew Spawn Egg",
   "item.bluetreebeasts.greater_grappler_spawn_egg": "Greater Grappler Spawn Egg",
   "item.bluetreebeasts.forest_flish_spawn_egg": "Forest Flish Spawn Egg",
   "item.bluetreebeasts.ocean_flish_spawn_egg": "Ocean Flish Spawn Egg",
@@ -17,12 +18,13 @@
   "item.bluetreebeasts.blazing_heart": "Blazing Heart",
   "item.bluetreebeasts.beastly_burlap": "Beastly Burlap",
   "item.bluetreebeasts.savage_silk": "Savage Silk",
-  "item.bluetreebeasts.woolly_hair": "Gigantelope Hair",
   "item.bluetreebeasts.tyflews_call": "Tyflew's Call",
 
 
 
   "entity.bluetreebeasts.hell_bender": "Hellbender",
+  "entity.bluetreebeasts.tyflew": "Tyflew",
+
   "entity.bluetreebeasts.forest_flish": "Forest Flish",
   "entity.bluetreebeasts.ocean_flish": "Ocean Flish",
   "entity.bluetreebeasts.greater_grappler": "Greater Grappler",

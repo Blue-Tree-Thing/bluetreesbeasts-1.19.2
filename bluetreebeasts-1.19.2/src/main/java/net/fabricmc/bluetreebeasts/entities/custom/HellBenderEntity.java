@@ -53,7 +53,7 @@ public class HellBenderEntity extends HostileEntity implements IAnimatable {
         this.navigation = new HellBenderNavigation(this, world);
         this.setPathfindingPenalty(PathNodeType.LAVA, 0f);
         this.moveControl = getMoveControl();
-        this.experiencePoints = 100;
+        this.experiencePoints = 1000;
     }
     @Override
     protected EntityNavigation createNavigation(World world) {
@@ -82,10 +82,6 @@ public class HellBenderEntity extends HostileEntity implements IAnimatable {
 
 
         this.targetSelector.add(2, new ActiveTargetGoal<>( this, PlayerEntity.class, true));
-        this.targetSelector.add(2, new ActiveTargetGoal<>( this, WornGloveEntity.class, true));
-
-
-
 
     }
     @Override
