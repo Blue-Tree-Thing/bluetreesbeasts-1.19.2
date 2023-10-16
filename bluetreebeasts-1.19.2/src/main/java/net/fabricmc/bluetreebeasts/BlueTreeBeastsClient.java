@@ -11,6 +11,7 @@ public class BlueTreeBeastsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         register(ModEntities.HELLBENDER, HellBenderRenderer::new);
+        register(ModEntities.TYFLEW, TyflewRenderer::new);
         register(ModEntities.GREATERGRAPPLER, GreaterGrapplerRenderer::new);
         register(ModEntities.FORESTFLISH, ForestFlishRenderer::new);
         register(ModEntities.OCEANFLISH, OceanFlishRenderer::new);

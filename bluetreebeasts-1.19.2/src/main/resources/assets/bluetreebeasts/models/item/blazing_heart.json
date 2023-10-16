@@ -1,5 +1,2 @@
-<<<<<<<< HEAD:bluetreebeasts-1.19.2/src/main/resources/assets/bluetreebeasts/models/item/blazing_heart.json
 {"parent" :"item/generated", "textures": {"layer0":"bluetreebeasts:item/blazing_heart"}}
-========
-{"parent" :"item/generated", "textures": {"layer0":"bluetreebeasts:item/worn_glove_summoning_bag"}}
->>>>>>>> github/master:bluetreebeasts-1.19.2/src/main/resources/assets/bluetreebeasts/models/item/worn_glove_spawn_egg.json
+

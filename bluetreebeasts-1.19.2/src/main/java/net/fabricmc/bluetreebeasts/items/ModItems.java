@@ -20,7 +20,6 @@ public class ModItems {
     public static final Item COOKEDGIGANTELOPE= registerItem("cooked_gigantelope", new Item(new Item.Settings().food(CookedGigantelopeItem.COOKEDGIGANTELOPE).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item BEASTLYBURLAP = registerItem("beastly_burlap", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item SAVAGESILK = registerItem("savage_silk", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
-    public static final Item WOOLLY_HAIR = registerItem("woolly_hair", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
 
     public static final Item BLAZINGHEART = registerItem("blazing_heart", new BlazingHeartItem(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final Item TYFLEWSCALL = registerItem("tyflews_call", new TyflewsCallItem(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
@@ -29,6 +28,9 @@ public class ModItems {
 
 
     public static final SpawnEggItem HELLBENDERSPAWNEGG = (SpawnEggItem) registerItem ("hell_bender_spawn_egg", new SpawnEggItem(ModEntities.HELLBENDER, 0xf44600,0xeff660, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
+    public static final SpawnEggItem TYFLEWSPAWNEGG = (SpawnEggItem) registerItem ("tyflew_spawn_egg", new SpawnEggItem(ModEntities.TYFLEW, 0xf44600,0xeff660, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
+
+
 
     public static final SpawnEggItem GREATERGRAPPLERSPAWNEGG = (SpawnEggItem) registerItem ("greater_grappler_spawn_egg", new SpawnEggItem(ModEntities.GREATERGRAPPLER, 0xfa9100,0xefd110, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final SpawnEggItem FORESTFLISHSPAWNEGG = (SpawnEggItem) registerItem ("forest_flish_spawn_egg", new SpawnEggItem(ModEntities.FORESTFLISH, 0xa66420,0x9999, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));

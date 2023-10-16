@@ -30,7 +30,7 @@ public class WoollyGigantelopeRenderer extends GeoEntityRenderer<WoollyGigantelo
         stack.scale(1.1f,1.1f,1.1f);
 
         if(animatable.isBaby()){
-            stack.scale(.5f,.5f,.5f);
+            stack.scale(.75f,.75f,.75f);
         }
 
         return super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
