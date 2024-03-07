@@ -49,7 +49,6 @@ public class GreaterGrapplerEntity extends HostileEntity implements IAnimatable 
     @Override
     protected void initGoals() {
         this.goalSelector.add(1, new LookAtEntityGoal(this, LivingEntity.class, 20.0f));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, .5f));
         this.goalSelector.add(1, new MeleeAttackGoal(this, .5, false));
         this.targetSelector.add(1, new RevengeGoal(this));
         this.goalSelector.add(1, new SwimGoal(this));

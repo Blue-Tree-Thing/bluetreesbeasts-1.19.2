@@ -33,8 +33,8 @@ public class GreaterGrapplerModel extends AnimatedGeoModel<GreaterGrapplerEntity
 
         EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
         if (head != null) {
-            head.setRotationX(extraData.headPitch * ((float) Math.PI/250));
-            head.setRotationY(extraData.netHeadYaw * ((float) Math.PI/250));
+            head.setRotationX(extraData.headPitch * ((float) Math.PI/270));
+            head.setRotationY(extraData.netHeadYaw * ((float) Math.PI/270));
         }
     }
 }

@@ -61,7 +61,7 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
     @Override
     protected void initGoals() {
         this.goalSelector.add(1, new LookAtEntityGoal(this, LivingEntity.class, 20.0f));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, .4f));
+        this.goalSelector.add(1, new WanderAroundFarGoal(this, .4f));
         this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(1, new EscapeDangerGoal(this, .6));
         this.goalSelector.add(3, new LookAroundGoal(this));
@@ -97,7 +97,7 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
         }
         @Override
         public boolean canStart() {
-            if (this.woollyGigantelope.getRandom().nextInt(this.woollyGigantelope.isBaby() ? 50 : 1000) != 0) {
+            if (this.woollyGigantelope.getRandom().nextInt(this.woollyGigantelope.isBaby() ? 25 : 500) != 0) {
                 return false;
             }
             BlockPos blockPos = this.woollyGigantelope.getBlockPos();

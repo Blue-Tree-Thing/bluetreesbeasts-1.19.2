@@ -1,10 +1,8 @@
 package net.fabricmc.bluetreebeasts.entities.custom;
 
 import net.fabricmc.bluetreebeasts.entities.ModEntities;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -13,7 +11,6 @@ import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
@@ -32,9 +29,9 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.Comparator;
+
 import java.util.EnumSet;
-import java.util.List;
+
 
 public class TyflewEntity extends HostileEntity implements IAnimatable {
     private PlayerEntity player;
@@ -182,45 +179,52 @@ public class TyflewEntity extends HostileEntity implements IAnimatable {
             TyflewEntity.this.targetPosition = Vec3d.of(TyflewEntity.this.circlingCenter).add(this.radius * MathHelper.cos(this.angle),  this.yOffset, this.radius * MathHelper.sin(this.angle));
         }
     }
-    class TyflewMoveControl
-            extends MoveControl {
-        private float targetSpeed;
+    class TyflewMoveControl extends MoveControl {
+        private final TyflewEntity tyflewEntity;
 
-        public TyflewMoveControl(MobEntity owner) {
-            super(owner);
-            this.targetSpeed = 0.1f;
+        public TyflewMoveControl(TyflewEntity entity) {
+            super(entity);
+            this.tyflewEntity = entity;
         }
 
         @Override
         public void tick() {
-            if (TyflewEntity.this.horizontalCollision) {
-                TyflewEntity.this.setYaw(TyflewEntity.this.getYaw() + 180.0f);
-                this.targetSpeed = 0.1f;
+            if (this.tyflewEntity.horizontalCollision) {
+                this.tyflewEntity.setYaw(this.tyflewEntity.getYaw() + 180.0f);
             }
-            double d = TyflewEntity.this.targetPosition.x - TyflewEntity.this.getX();
-            double e = TyflewEntity.this.targetPosition.y - TyflewEntity.this.getY();
-            double f = TyflewEntity.this.targetPosition.z - TyflewEntity.this.getZ();
-            double g = Math.sqrt(d * d + f * f);
-            if (Math.abs(g) > (double)1.0E-5f) {
-                double h = 1.0 - Math.abs(e * (double)0.7f) / g;
-                g = Math.sqrt((d *= h) * d + (f *= h) * f);
-                double i = Math.sqrt(d * d + f * f + e * e);
-                float j = TyflewEntity.this.getYaw();
-                float k = (float)MathHelper.atan2(f, d);
-                float l = MathHelper.wrapDegrees(TyflewEntity.this.getYaw() + 90.0f);
-                float m = MathHelper.wrapDegrees(k * 57.295776f);
-                TyflewEntity.this.setYaw(MathHelper.stepUnwrappedAngleTowards(l, m, 4.0f) - 90.0f);
-                TyflewEntity.this.bodyYaw = TyflewEntity.this.getYaw();
-                this.targetSpeed = MathHelper.angleBetween(j, TyflewEntity.this.getYaw()) < 3.0f ? MathHelper.stepTowards(this.targetSpeed, 1.8f, 0.005f * (1.8f / this.targetSpeed)) : MathHelper.stepTowards(this.targetSpeed, 0.2f, 0.025f);
-                float n = (float)(-(MathHelper.atan2(-e, g) * 57.2957763671875));
-                TyflewEntity.this.setPitch(n);
-                float o = TyflewEntity.this.getYaw() + 90.0f;
-                double p = (double)(this.targetSpeed * MathHelper.cos(o * ((float)Math.PI / 180))) * Math.abs(d / i);
-                double q = (double)(this.targetSpeed * MathHelper.sin(o * ((float)Math.PI / 180))) * Math.abs(f / i);
-                double r = (double)(this.targetSpeed * MathHelper.sin(n * ((float)Math.PI / 180))) * Math.abs(e / i);
-                Vec3d vec3d = TyflewEntity.this.getVelocity();
-                TyflewEntity.this.setVelocity(vec3d.add(new Vec3d(p, r, q).subtract(vec3d).multiply(0.2)));
+
+            double dX = this.tyflewEntity.targetPosition.x - this.tyflewEntity.getX();
+            double dY = this.tyflewEntity.targetPosition.y - this.tyflewEntity.getY();
+            double dZ = this.tyflewEntity.targetPosition.z - this.tyflewEntity.getZ();
+            double horizontalDistance = Math.sqrt(dX * dX + dZ * dZ);
+            double totalDistance = Math.sqrt(dX * dX + dY * dY + dZ * dZ);
+
+            // Ensure there's some distance to move towards to prevent division by zero
+            if (totalDistance < 0.1) {
+                this.tyflewEntity.setVelocity(Vec3d.ZERO);
+                return;
             }
+
+            float desiredYaw = (float) (MathHelper.atan2(dZ, dX) * (180D / Math.PI)) - 90.0F;
+            this.tyflewEntity.setYaw(this.wrapDegrees(this.tyflewEntity.getYaw(), desiredYaw, 5.0F)); // Smoother rotation
+            this.tyflewEntity.bodyYaw = this.tyflewEntity.getYaw();
+            this.tyflewEntity.headYaw = this.tyflewEntity.getYaw();
+
+            // Adjust for wave-like motion if health is below half
+            if (this.tyflewEntity.getHealth() <= this.tyflewEntity.getMaxHealth() * 0.5) {
+                double waveAmplitude = 5.0;
+                double waveFrequency = 0.1;
+                dY += waveAmplitude * Math.sin(this.tyflewEntity.age * waveFrequency);
+            }
+
+            // Normalize and apply the velocity towards the target position
+            Vec3d normalizedVelocity = new Vec3d(dX / totalDistance, dY / totalDistance, dZ / totalDistance);
+            this.tyflewEntity.setVelocity(normalizedVelocity.multiply(0.1)); // You might need to adjust the multiplier for speed
+        }
+
+        public float wrapDegrees(float currentYaw, float targetYaw, float maxTurn) {
+            float degrees = MathHelper.wrapDegrees(targetYaw - currentYaw);
+            return currentYaw + MathHelper.clamp(degrees, -maxTurn, maxTurn);
         }
     }
 

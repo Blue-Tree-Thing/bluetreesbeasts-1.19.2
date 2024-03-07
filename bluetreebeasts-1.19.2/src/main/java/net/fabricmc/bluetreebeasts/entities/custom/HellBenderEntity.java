@@ -73,12 +73,12 @@ public class HellBenderEntity extends HostileEntity implements IAnimatable {
     @Override
     protected void initGoals() {
 
-            this.goalSelector.add(1, new HalfHealthGoal(this));
-            this.goalSelector.add(2, new PlaceFireTrailGoal(this));
-            this.goalSelector.add(2, new SwimGoal(this));
-            this.goalSelector.add(1, new RevengeGoal(this));
-            this.goalSelector.add(3, new MeleeAttackGoal(this, .5, true));
-            this.goalSelector.add(3, new PounceAtTargetGoal(this, 0.6f));
+        this.goalSelector.add(1, new HalfHealthGoal(this));
+        this.goalSelector.add(2, new PlaceFireTrailGoal(this));
+        this.goalSelector.add(2, new SwimGoal(this));
+        this.goalSelector.add(1, new RevengeGoal(this));
+        this.goalSelector.add(3, new MeleeAttackGoal(this, .5, true));
+        this.goalSelector.add(3, new PounceAtTargetGoal(this, 0.6f));
 
 
         this.targetSelector.add(2, new ActiveTargetGoal<>( this, PlayerEntity.class, true));
@@ -217,28 +217,28 @@ public class HellBenderEntity extends HostileEntity implements IAnimatable {
 
         @Override
         public void tick() {
-                if(this.isIdle()) {
-                    if (this.targetPos != null) {
+            if(this.isIdle()) {
+                if (this.targetPos != null) {
 
-                        if (this.targetPos.isWithinDistance(this.entity.getPos(), this.entity.getWidth()) || this.entity.getY() >= (double) this.targetPos.getY() && new BlockPos(this.targetPos.getX(), this.entity.getY(), this.targetPos.getZ()).isWithinDistance(this.entity.getPos(), this.entity.getWidth())) {
-                            this.targetPos = null;
-                            recalculatePath();
-                        } else {
-                            this.entity.getMoveControl().moveTo(this.targetPos.getX(), this.targetPos.getY(), this.targetPos.getZ(), this.speed);
-                            isFollowingPath();
-                        }
-
+                    if (this.targetPos.isWithinDistance(this.entity.getPos(), this.entity.getWidth()) || this.entity.getY() >= (double) this.targetPos.getY() && new BlockPos(this.targetPos.getX(), this.entity.getY(), this.targetPos.getZ()).isWithinDistance(this.entity.getPos(), this.entity.getWidth())) {
+                        this.targetPos = null;
+                        recalculatePath();
+                    } else {
+                        this.entity.getMoveControl().moveTo(this.targetPos.getX(), this.targetPos.getY(), this.targetPos.getZ(), this.speed);
+                        isFollowingPath();
                     }
+
+                }
                 return;
             }
 
             super.tick();
         }
     }
-     @Override
+    @Override
     protected void mobTick(){
 
-         this.bossBar.setPercent(this.getHealth() / this.getMaxHealth());
+        this.bossBar.setPercent(this.getHealth() / this.getMaxHealth());
     }
 
 

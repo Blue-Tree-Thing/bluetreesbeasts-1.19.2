@@ -1,6 +1,7 @@
 package net.fabricmc.bluetreebeasts.items;
 
 import net.fabricmc.yarn.constants.MiningLevels;
+import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Lazy;
@@ -8,7 +9,7 @@ import net.minecraft.util.Lazy;
 import java.util.function.Supplier;
 
 public enum BTBToolMaterials  implements ToolMaterial {
-    GLAIVE(MiningLevels.NETHERITE, 2738, 5.0f, 2.0f, 20, () -> Ingredient.ofItems(ModItems.HELLBENDEREART));
+    HEARTBURN_GLAIVE(5, 2500, 10.0F, 3.0F, 20, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)); // Example ingredient
 
     private final int miningLevel;
     private final int itemDurability;
@@ -17,16 +18,14 @@ public enum BTBToolMaterials  implements ToolMaterial {
     private final int enchantability;
     private final Lazy<Ingredient> repairIngredient;
 
-         BTBToolMaterials(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
+    BTBToolMaterials(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
         this.miningLevel = miningLevel;
         this.itemDurability = itemDurability;
         this.miningSpeed = miningSpeed;
         this.attackDamage = attackDamage;
         this.enchantability = enchantability;
-        this.repairIngredient = new Lazy<Ingredient>(repairIngredient);
+        this.repairIngredient = new Lazy<>(repairIngredient);
     }
-
-
 
     @Override
     public int getDurability() {
@@ -58,3 +57,4 @@ public enum BTBToolMaterials  implements ToolMaterial {
         return this.repairIngredient.get();
     }
 }
+

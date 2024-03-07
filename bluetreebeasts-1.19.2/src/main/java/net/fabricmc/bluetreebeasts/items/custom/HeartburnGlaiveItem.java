@@ -1,22 +1,28 @@
 package net.fabricmc.bluetreebeasts.items.custom;
 
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
+import net.fabricmc.bluetreebeasts.items.BTBToolMaterials;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.TridentItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.stat.Stats;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.World;
+import net.minecraft.text.Text;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.util.Formatting;
+import net.minecraft.client.item.TooltipContext;
+import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class HeartburnGlaiveItem extends SwordItem {
 
-    public HeartburnGlaiveItem(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Settings settings) {
-        super(toolMaterial, attackDamage, attackSpeed, settings);
+    public HeartburnGlaiveItem(Settings settings) {
+        super(BTBToolMaterials.HEARTBURN_GLAIVE, 10, 1F, settings); // Adjust the damage and speed as desired
+
     }
 
     @Override
@@ -30,12 +36,23 @@ public class HeartburnGlaiveItem extends SwordItem {
     }
 
     @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack itemStack = user.getStackInHand(hand);
+
+        user.incrementStat(Stats.USED.getOrCreateStat(this));
+        user.swingHand(hand);
+        return TypedActionResult.success(itemStack, world.isClient());
+    }
+
+    @Override
+    public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+        super.onStoppedUsing(stack, world, user, remainingUseTicks);
+        // You can add custom effects or actions here when the trident throw is stopped
+    }
+
+    @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        target.setOnFire(true);
         target.setOnFireFor(86400);
-
-
-
         return super.postHit(stack, target, attacker);
     }
 }

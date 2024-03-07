@@ -1,6 +1,5 @@
 package net.fabricmc.bluetreebeasts.entities.custom;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
@@ -10,42 +9,47 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import net.fabricmc.bluetreebeasts.effect.ModEffects; // Make sure to import your ModEffects class
+import net.fabricmc.bluetreebeasts.effect.ModEffects;
 
-import java.util.List;
-import java.util.UUID;
+
 
 public class HomingFlishEntity extends PathAwareEntity implements IAnimatable {
     private LivingEntity target;
     private final AnimationFactory factory = new AnimationFactory(this);
     private State currentState = State.SPAWNING;
-    private int timer = 20; // Initial pause for 1 second (20 ticks)
-    private final double chargeSpeed = 1.0; // Speed at which the entity charges
-    private Vec3d chargeDirection; // Direction in which to charge
-    private int lifeSpan = 200; // Entity lifespan in ticks
-    private UUID ownerUuid; // UUID of the owner
+    private int timer = 20;
+    private final double chargeSpeed = 1.0;
+    private Vec3d chargeDirection;
+    private int lifeSpan = 200;
+
+    private enum State {
+        SPAWNING,
+        LOCKING_ON,
+        CHARGING,
+    }
 
     public HomingFlishEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
-        this.noClip = false;
+        this.noClip = true; // Prevents collision with blocks
+        this.setNoGravity(true); // Prevents the entity from being affected by gravity
     }
 
-    public void setOwnerUuid(UUID ownerUuid) {
-        this.ownerUuid = ownerUuid;
+    public void setTarget(LivingEntity target) {
+        this.target = target;
     }
 
     public static DefaultAttributeContainer.Builder createHomingFlishAttributes() {
         return PathAwareEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.5);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1);
     }
 
     @Override
@@ -57,50 +61,85 @@ public class HomingFlishEntity extends PathAwareEntity implements IAnimatable {
     public void tick() {
         super.tick();
         if (!this.world.isClient) {
-            if (--lifeSpan <= 0) {
+            if (this.lifeSpan-- <= 0) {
                 this.remove(RemovalReason.DISCARDED);
                 return;
             }
 
-            switch (currentState) {
-                case SPAWNING:
-                    if (--timer <= 0) {
-                        currentState = State.LOCKING_ON;
-                        timer = 10; // Half-second pause
+            if (this.currentState == State.SPAWNING) {
+                if (--this.timer <= 0) {
+                    this.currentState = State.LOCKING_ON;
+                    this.timer = 20; // Time before locking on
+                }
+            } else if (this.currentState == State.LOCKING_ON) {
+                if (this.target != null) {
+                    Vec3d direction = this.target.getPos().subtract(this.getPos()).normalize();
+                    this.updateRotationTowards(direction);
+                    if (--this.timer <= 0) {
+                        this.currentState = State.CHARGING;
+                        // Finalize direction when charging starts
+                        this.setChargeDirection(direction);
                     }
-                    break;
-                case LOCKING_ON:
-                    if (target != null && --timer <= 0) {
-                        Vec3d direction = target.getPos().subtract(this.getPos()).normalize();
-                        float yaw = (float) (MathHelper.atan2(direction.z, direction.x) * (180 / Math.PI) - 90);
-                        this.setYaw(yaw);
-                        this.bodyYaw = yaw;
-                        this.chargeDirection = direction;
-                        currentState = State.CHARGING;
-                    }
-                    break;
-                case CHARGING:
-                    this.setVelocity(chargeDirection.multiply(chargeSpeed));
-                    this.move(MovementType.SELF, this.getVelocity());
-                    if (this.squaredDistanceTo(target.getPos()) < 2.0 || !this.isAlive()) {
-                        this.remove(RemovalReason.KILLED);
-                    }
-                    applyEffects();
-                    break;
-                case DESTROY:
-                    this.remove(RemovalReason.KILLED);
-                    break;
+                }
+            } else if (this.currentState == State.CHARGING) {
+                this.setVelocity(this.chargeDirection.multiply(this.chargeSpeed));
+                this.move(MovementType.SELF, this.getVelocity());
+                this.checkCollision();
             }
+
+            emitParticles();
         }
     }
 
-    private void applyEffects() {
-        List<Entity> entities = this.world.getOtherEntities(this, this.getBoundingBox().expand(0.3));
-        for (Entity entity : entities) {
-            if (entity instanceof LivingEntity livingEntity && !entity.getUuid().equals(this.ownerUuid)) {
-                // Here you apply your custom effect, for example:
-                livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.SPECTRALPOISON, 200, 0)); // Duration and amplifier are examples
+    private void updateRotationTowards(Vec3d direction) {
+        float targetYaw = (float) MathHelper.atan2(direction.z, direction.x) * (180F / (float) Math.PI) - 90F;
+        float targetPitch = (float) -(MathHelper.atan2(direction.y, direction.horizontalLength()) * (180F / (float) Math.PI));
+
+        // Smoothly interpolate yaw and pitch
+        this.setYaw(interpolateRotation(this.getYaw(), targetYaw, 2.0F)); // Adjust 2.0F for speed of yaw change
+        this.setPitch(interpolateRotation(this.getPitch(), targetPitch, 2.0F)); // Adjust 2.0F for speed of pitch change
+    }
+
+    /**
+     * Interpolates rotation towards a target angle smoothly.
+     * @param currentAngle The current rotation angle.
+     * @param targetAngle The target rotation angle.
+     * @param turnSpeed The speed of turning.
+     * @return The interpolated rotation angle.
+     */
+    private float interpolateRotation(float currentAngle, float targetAngle, float turnSpeed) {
+        float angleDifference = MathHelper.wrapDegrees(targetAngle - currentAngle);
+        return currentAngle + MathHelper.clamp(angleDifference, -turnSpeed, turnSpeed);
+    }
+
+    private void setChargeDirection(Vec3d direction) {
+        // Calculate yaw and pitch to face the target
+        float yaw = (float) MathHelper.atan2(direction.z, direction.x) * (180F / (float) Math.PI) - 90F;
+        float pitch = (float) -(MathHelper.atan2(direction.y, direction.horizontalLength()) * (180F / (float) Math.PI));
+        this.setYaw(yaw);
+        this.setPitch(pitch);
+        this.chargeDirection = direction;
+    }
+
+    private void checkCollision() {
+        if (this.world instanceof ServerWorld && this.target != null && this.squaredDistanceTo(this.target) < 1.0) { // Reduced effective radius check
+            // Apply any effects to the target here
+            if (this.target != null) {
+                LivingEntity livingTarget = this.target;
+                livingTarget.addStatusEffect(new StatusEffectInstance(ModEffects.SPECTRALPOISON, 100, 0));
             }
+            // Simulate an explosion visually without causing damage
+            simulateExplosionVisuals();
+            this.remove(RemovalReason.KILLED);
+        }
+    }
+
+    private void simulateExplosionVisuals() {
+        if (this.world instanceof ServerWorld serverWorld) {
+            // Play explosion sound
+            serverWorld.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, this.getSoundCategory(), 1.0F, 1.0F);
+            // Create explosion particles
+            serverWorld.spawnParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
         }
     }
 
@@ -119,9 +158,5 @@ public class HomingFlishEntity extends PathAwareEntity implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
-    }
-
-    private enum State {
-        SPAWNING, LOCKING_ON, CHARGING, DESTROY
     }
 }

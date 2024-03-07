@@ -37,8 +37,7 @@ public class ModItems {
     public static final SpawnEggItem OCEANFLISHSPAWNEGG = (SpawnEggItem) registerItem ("ocean_flish_spawn_egg", new SpawnEggItem(ModEntities.OCEANFLISH, 0xa77726,0xa33190, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final SpawnEggItem WOOLLYGIGANTELOPESPAWNEGG = (SpawnEggItem) registerItem ("woolly_gigantelope_spawn_egg", new SpawnEggItem(ModEntities.WOOLLYGIGANTELOPE, 0xd111266,0xe99800, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
 
-    public static final Item HEARTBURN_GLAIVE = registerItem("heartburn_glaive",new HeartburnGlaiveItem(BTBToolMaterials.GLAIVE, 7, -2f, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
-
+    public static final Item HEARTBURN_GLAIVE = registerItem("heartburn_glaive", new HeartburnGlaiveItem(new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     private static Item registerItem (String name, Item item){
         return Registry.register(Registry.ITEM, new Identifier(BlueTreeBeasts.MODID, name), item);
     }

@@ -1,26 +1,18 @@
 package net.fabricmc.bluetreebeasts.entities.custom;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
+
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.TargetPredicate;
+import net.minecraft.entity.MovementType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldEvents;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -32,28 +24,21 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class OceanFlishEntity extends AnimalEntity implements IAnimatable {
 
-
-    public static final int field_28637 = MathHelper.ceil(2.4166098f);
-
-    private static final TrackedData<Byte> BAT_FLAGS = DataTracker.registerData(OceanFlishEntity.class, TrackedDataHandlerRegistry.BYTE);
-    private static final TargetPredicate CLOSE_PLAYER_PREDICATE = TargetPredicate.createNonAttackable().setBaseMaxDistance(4.0);
-    @Nullable
-    private BlockPos hangingPosition;
-    @Nullable
     private final AnimationFactory factory = new AnimationFactory(this);
-    private static final AnimationBuilder flight_animation = new AnimationBuilder().addAnimation("animation.ocean_flish.flying", true);
-    private static final AnimationBuilder resting_animation = new AnimationBuilder().addAnimation("animation.ocean_flish.shriek", true);
+    private Vec3d movementDirection = Vec3d.ZERO;
+    private final double movementSpeed = 0.1;
+    private final double maxTurnSpeedRadians = Math.toRadians(2);
+    private double targetAltitude;
+    private Vec3d previousPosition = Vec3d.ZERO;
+    private int ticksSinceLastMove = 0;
+
 
     public OceanFlishEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
-        this.setRoosting(true);
-        this.experiencePoints = 7;
+        this.noClip = false;
+        this.setNoGravity(true);
+        this.targetAltitude = this.getY();
 
-    }
-
-    @Override
-    public boolean hasWings() {
-        return !this.isRoosting() && this.age % field_28637 == 0;
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -62,120 +47,118 @@ public class OceanFlishEntity extends AnimalEntity implements IAnimatable {
     }
 
     @Override
-    public boolean hasNoGravity() {
-        return true;
-    }
-
-    @Override
-    protected void initGoals() {
-        super.initGoals();
-
-    }
-
-    @Override
-    public boolean isPushable() {
-        return false;
-    }
-
-    @Override
-    protected void pushAway(Entity entity) {
-    }
-
-    @Override
-    protected void tickCramming() {
-    }
-
-    @Nullable
-    @Override
-    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return null;
-    }
-
-    @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(BAT_FLAGS, (byte)0);
-    }
-
-    public boolean isRoosting() {
-        return (this.dataTracker.get(BAT_FLAGS) & 1) != 0;
-    }
-
-    public void setRoosting(boolean roosting) {
-        byte b = this.dataTracker.get(BAT_FLAGS);
-        if (roosting) {
-            this.dataTracker.set(BAT_FLAGS, (byte)(b | 1));
-        } else {
-            this.dataTracker.set(BAT_FLAGS, (byte)(b & 0xFFFFFFFE));
-        }
-    }
-
-
-
-
-    @Override
     public void tick() {
         super.tick();
-        if (this.isRoosting()) {
-
-        }
-
-    }
-    @Override
-    protected void mobTick() {
-        super.mobTick();
-        BlockPos blockPos = this.getBlockPos();
-        BlockPos blockPos2 = blockPos.down();
-        if (this.isRoosting()) {
-            boolean bl = this.isSilent();
-
-                if (this.world.getClosestPlayer(CLOSE_PLAYER_PREDICATE, this) != null) {
-                    this.setRoosting(false);
-                    if (!bl) {
-                        this.world.syncWorldEvent(null, WorldEvents.BAT_TAKES_OFF, blockPos, 0);
-                    }
-
+        if (!this.world.isClient()) {
+            if (this.getPos().squaredDistanceTo(previousPosition) < 0.01) {
+                ticksSinceLastMove++;
             } else {
-                this.setRoosting(false);
-                if (!bl) {
-                    this.world.syncWorldEvent(null, WorldEvents.BAT_TAKES_OFF, blockPos, 0);
-                }
+                ticksSinceLastMove = 0;
+                previousPosition = this.getPos();
             }
-        } else {
-            if(this.getY() < 80) {
-                if (!(this.hangingPosition == null || this.world.isAir(this.hangingPosition) && this.hangingPosition.getY() > this.world.getBottomY())) {
-                    this.hangingPosition = null;
-                }
-                if (this.hangingPosition == null || this.random.nextInt(100) == 0 || this.hangingPosition.isWithinDistance(this.getPos(), 2.0)) {
-                    this.hangingPosition = new BlockPos(this.getX() + (double) this.random.nextInt(7) - (double) this.random.nextInt(7), this.getY() + (double) this.random.nextInt(6) - 2.0, this.getZ() + (double) this.random.nextInt(7) - (double) this.random.nextInt(7));
-                }
 
-                double d = (double) this.hangingPosition.getX() + 0.5 - this.getX();
-                assert this.hangingPosition != null;
-                double e = (double) this.hangingPosition.getY() - 0.1 - this.getY();
-                assert this.hangingPosition != null;
-                double f = (double) this.hangingPosition.getZ() + 0.5 - this.getZ();
-                Vec3d vec3d = this.getVelocity();
-                Vec3d vec3d2 = vec3d.add((Math.signum(d) * 0.5 - vec3d.x) * (double) 0.1f, (Math.signum(e) * (double) 0.1f - vec3d.y) * (double) 0.1f, (Math.signum(f) * 0.5 - vec3d.z) * (double) 0.1f);
-                this.setVelocity(vec3d2);
-                float g = (float) (MathHelper.atan2(vec3d2.z, vec3d2.x) * 57.2957763671875) - 90.0f;
-                float h = MathHelper.wrapDegrees(g - this.getYaw());
-                this.forwardSpeed = 3f;
-                this.setYaw(this.getYaw() + h);
-
-                if (this.random.nextInt(100) == 0 && this.world.getBlockState(blockPos2).isFullCube(this.world, blockPos2)) {
-                    this.setRoosting(true);
-                }
-
-            }else{
-                this.setVelocity(0,-0.25f,0);
+            // Adjust direction more proactively if an obstacle is within a 5-block radius
+            if (this.random.nextInt(100) == 0 || ticksSinceLastMove > 5 || isPathBlocked()) {
+                chooseNewDirection();
+                ticksSinceLastMove = 0;
             }
+
+            adjustAltitude();
+            moveInDirection();
+            faceMovementDirection();
         }
     }
 
-    @Override
-    protected Entity.MoveEffect getMoveEffect() {
-        return Entity.MoveEffect.EVENTS;
+    private void chooseNewDirection() {
+        // Forward direction based on current yaw and pitch
+        float yawRadians = (float)Math.toRadians(this.getYaw());
+        float pitchRadians = (float)Math.toRadians(this.getPitch()); // Existing pitch
+
+        // Adjust yaw within a 180-degree forward arc
+        float angleOffsetYaw = (this.random.nextFloat() * (float)Math.toRadians(120)) - (float)Math.toRadians(60);
+        float newDirectionYaw = yawRadians + angleOffsetYaw;
+
+        // Slightly adjust pitch to encourage smoother vertical transitions
+        // Ensure the pitch adjustment is modest to avoid drastic altitude changes
+        float pitchAdjustmentRange = (float)Math.toRadians(30); // Example range for pitch adjustment
+        float angleOffsetPitch = (this.random.nextFloat() * pitchAdjustmentRange) - (pitchAdjustmentRange / 2);
+        float newDirectionPitch = MathHelper.clamp(pitchRadians + angleOffsetPitch, (float)Math.toRadians(-45), (float)Math.toRadians(45)); // Clamp pitch
+
+        // Convert updated yaw and pitch back to a direction vector
+        this.movementDirection = Vec3d.fromPolar((float)Math.toDegrees(newDirectionPitch), (float)Math.toDegrees(newDirectionYaw));
+
+        // Update target altitude based on the new pitch
+        this.targetAltitude = this.getY() + (Math.sin(newDirectionPitch) * 10); // Example to link altitude change with pitch
+    }
+
+    private void adjustAltitude() {
+        // This method might now ensure compliance with minimum and maximum altitude limits
+        if (this.getY() < this.world.getSeaLevel() + 5) {
+            this.targetAltitude = this.world.getSeaLevel() + 5; // Avoid going too low
+        } else if (this.getY() > this.world.getSeaLevel() + 15) {
+            this.targetAltitude = this.world.getSeaLevel() + 15; // Avoid going too high
+        }
+        // The actual altitude adjustment is now more influenced by chooseNewDirection's pitch adjustment
+    }
+
+    private void moveInDirection() {
+        Vec3d currentVelocity = this.getVelocity();
+        Vec3d desiredHeading = this.movementDirection.normalize();
+
+        // Determine the desired velocity based on the desired heading and movement speed.
+        Vec3d desiredVelocity = desiredHeading.multiply(movementSpeed);
+
+        // Interpolate between the current velocity and the desired velocity for smoother transitions.
+        double interpolationFactor = 0.1; // Control how quickly the entity adjusts its course. Adjust as needed.
+        Vec3d newVelocity = currentVelocity.add(
+                desiredVelocity.subtract(currentVelocity).multiply(interpolationFactor)
+        );
+
+        // Adjust vertical speed separately if needed
+        double verticalSpeed = (this.targetAltitude - this.getY()) * 0.05; // Smoothing the altitude adjustment
+        newVelocity = new Vec3d(newVelocity.x, verticalSpeed, newVelocity.z);
+
+        this.setVelocity(newVelocity);
+        this.move(MovementType.SELF, newVelocity);
+    }
+
+    private boolean isPathBlocked() {
+        Vec3d startPosition = this.getPos();
+        boolean isBlocked = false;
+
+        for (int i = 1; i <= 5; i++) { // Check 5 blocks ahead for an obstacle
+            Vec3d checkPosition = startPosition.add(this.movementDirection.normalize().multiply(i));
+            BlockPos blockPos = new BlockPos(checkPosition);
+
+            // Check a broader area to maintain distance from obstacles
+            for (int xOffset = -1; xOffset <= 1; xOffset++) {
+                for (int zOffset = -1; zOffset <= 1; zOffset++) {
+                    BlockPos posToCheck = blockPos.add(xOffset, 0, zOffset);
+                    if (!this.world.isAir(posToCheck)) {
+                        isBlocked = true;
+                        break;
+                    }
+                }
+                if (isBlocked) break;
+            }
+            if (isBlocked) break;
+        }
+        return isBlocked;
+    }
+
+    private void faceMovementDirection() {
+        Vec3d direction = this.getVelocity().normalize();
+        float targetYaw = (float)Math.toDegrees(Math.atan2(-direction.x, direction.z));
+        float targetPitch = (float)-Math.toDegrees(Math.atan2(direction.y, Math.sqrt(direction.x * direction.x + direction.z * direction.z)));
+
+        this.setYaw(interpolateRotation(this.getYaw(), targetYaw, maxTurnSpeedRadians));
+        this.setPitch(interpolateRotation(this.getPitch(), targetPitch, maxTurnSpeedRadians));
+    }
+
+    private float interpolateRotation(float current, float target, double maxTurnSpeedRadians) {
+        double angleDifference = Math.toRadians(MathHelper.wrapDegrees(target - current));
+        double turnSpeed = Math.signum(angleDifference) * Math.min(maxTurnSpeedRadians, Math.abs(angleDifference));
+        return current + (float)Math.toDegrees(turnSpeed);
     }
 
     @Override
@@ -183,63 +166,25 @@ public class OceanFlishEntity extends AnimalEntity implements IAnimatable {
         return false;
     }
 
+    // Implement IAnimatable methods
     @Override
-    protected void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
-    @Override
-    public boolean canAvoidTraps() {
-        return true;
-    }
-
-    @Override
-    public boolean damage(DamageSource source, float amount) {
-        if (this.isInvulnerableTo(source)) {
-            return false;
-        }
-        if (!this.world.isClient && this.isRoosting()) {
-            this.setRoosting(false);
-        }
-        return super.damage(source, amount);
-    }
-
-    @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-        this.dataTracker.set(BAT_FLAGS, nbt.getByte("BatFlags"));
-    }
-
-
-    @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
-        nbt.putByte("BatFlags", this.dataTracker.get(BAT_FLAGS));
-    }
-
-    @Override
-    protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
-        return dimensions.height / 2.0f;
-    }
-
-
-    private PlayState predicate (AnimationEvent event) {
-        if (this.isRoosting()) {
-            event.getController().setAnimation(resting_animation);
-            return PlayState.CONTINUE;
-        } else if(!this.isRoosting()){
-            event.getController().setAnimation(flight_animation);}
+    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ocean_flish.flying", true));
         return PlayState.CONTINUE;
     }
 
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController(this,"controller", 0, this::predicate));
-
-    }
-
-    @Override
     public AnimationFactory getFactory() {
-        return factory;
+        return this.factory;
     }
 
+    @Nullable
+    @Override
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+        return null;
+    }
 }
