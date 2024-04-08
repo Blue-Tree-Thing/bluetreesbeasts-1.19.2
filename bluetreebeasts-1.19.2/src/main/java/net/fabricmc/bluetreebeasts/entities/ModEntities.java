@@ -42,6 +42,11 @@ public class ModEntities {
                     (SpawnGroup.CREATURE, WoollyGigantelopeEntity::new).dimensions(EntityDimensions.changing(3f,3f)).build()
     );
 
+    public static final EntityType<CitySnifflerEntity> CITY_SNIFFLER = register(
+            Registry.ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "city_sniffler"), FabricEntityTypeBuilder.create
+                    (SpawnGroup.CREATURE, CitySnifflerEntity::new).dimensions(EntityDimensions.changing(.5f,.5f)).build()
+    );
+
 
     public static void registerModEntities(){
         BlueTreeBeasts.LOGGER.debug("Registering mod entities for " + BlueTreeBeasts.MODID);

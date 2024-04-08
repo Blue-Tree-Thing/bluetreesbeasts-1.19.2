@@ -1,7 +1,6 @@
 package net.fabricmc.bluetreebeasts.entities.client;
 
 import net.fabricmc.bluetreebeasts.BlueTreeBeasts;
-import net.fabricmc.bluetreebeasts.entities.custom.HellBenderEntity;
 import net.fabricmc.bluetreebeasts.entities.custom.TyflewEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;

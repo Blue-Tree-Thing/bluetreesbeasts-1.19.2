@@ -13,20 +13,22 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import net.fabricmc.bluetreebeasts.effect.ModEffects;
-
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 
 public class HomingFlishEntity extends PathAwareEntity implements IAnimatable {
     private LivingEntity target;
-    private final AnimationFactory factory = new AnimationFactory(this);
+    @Nullable
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+
     private State currentState = State.SPAWNING;
     private int timer = 20;
-    private final double chargeSpeed = 1.0;
     private Vec3d chargeDirection;
     private int lifeSpan = 200;
 
@@ -82,7 +84,8 @@ public class HomingFlishEntity extends PathAwareEntity implements IAnimatable {
                     }
                 }
             } else if (this.currentState == State.CHARGING) {
-                this.setVelocity(this.chargeDirection.multiply(this.chargeSpeed));
+                double chargeSpeed = 1.0;
+                this.setVelocity(this.chargeDirection.multiply(chargeSpeed));
                 this.move(MovementType.SELF, this.getVelocity());
                 this.checkCollision();
             }
@@ -96,20 +99,20 @@ public class HomingFlishEntity extends PathAwareEntity implements IAnimatable {
         float targetPitch = (float) -(MathHelper.atan2(direction.y, direction.horizontalLength()) * (180F / (float) Math.PI));
 
         // Smoothly interpolate yaw and pitch
-        this.setYaw(interpolateRotation(this.getYaw(), targetYaw, 2.0F)); // Adjust 2.0F for speed of yaw change
-        this.setPitch(interpolateRotation(this.getPitch(), targetPitch, 2.0F)); // Adjust 2.0F for speed of pitch change
+        this.setYaw(interpolateRotation(this.getYaw(), targetYaw)); // Adjust 2.0F for speed of yaw change
+        this.setPitch(interpolateRotation(this.getPitch(), targetPitch)); // Adjust 2.0F for speed of pitch change
     }
 
     /**
      * Interpolates rotation towards a target angle smoothly.
+     *
      * @param currentAngle The current rotation angle.
-     * @param targetAngle The target rotation angle.
-     * @param turnSpeed The speed of turning.
+     * @param targetAngle  The target rotation angle.
      * @return The interpolated rotation angle.
      */
-    private float interpolateRotation(float currentAngle, float targetAngle, float turnSpeed) {
+    private float interpolateRotation(float currentAngle, float targetAngle) {
         float angleDifference = MathHelper.wrapDegrees(targetAngle - currentAngle);
-        return currentAngle + MathHelper.clamp(angleDifference, -turnSpeed, turnSpeed);
+        return currentAngle + MathHelper.clamp(angleDifference, -(float) 2.0, (float) 2.0);
     }
 
     private void setChargeDirection(Vec3d direction) {
@@ -156,7 +159,7 @@ public class HomingFlishEntity extends PathAwareEntity implements IAnimatable {
     }
 
     @Override
-    public AnimationFactory getFactory() {
+    public @Nullable AnimationFactory getFactory() {
         return this.factory;
     }
 }

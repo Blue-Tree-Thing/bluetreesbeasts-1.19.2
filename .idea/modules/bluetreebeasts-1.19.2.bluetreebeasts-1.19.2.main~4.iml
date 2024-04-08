@@ -81,7 +81,7 @@
     <orderEntry type="library" name="Gradle: io.netty:netty-transport-native-epoll:linux-x86_64:4.1.77.Final" level="project" />
     <orderEntry type="library" name="Gradle: net.fabricmc:fabric-loader:0.14.19" level="project" />
     <orderEntry type="library" name="Gradle: net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.net.fabricmc.fabric-api:fabric-api:0.76.0+1.19.2" level="project" />
-    <orderEntry type="library" name="Gradle: net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.software.bernie.geckolib:geckolib-fabric-1.19:3.1.18" level="project" />
+    <orderEntry type="library" name="Gradle: net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.software.bernie.geckolib:geckolib-fabric-1.19:3.1.40" level="project" />
     <orderEntry type="library" name="Gradle: net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.net.fabricmc.fabric-api:fabric-transfer-api-v1:2.1.6+413cbbc790" level="project" />
     <orderEntry type="library" name="Gradle: net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.net.fabricmc.fabric-api:fabric-api-lookup-api-v1:1.6.14+93d8cb8290" level="project" />
     <orderEntry type="library" name="Gradle: net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.net.fabricmc.fabric-api:fabric-blockrenderlayer-v1:1.1.25+cafc6e8e90" level="project" />
@@ -167,9 +167,8 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl-tinyfd:natives-windows-x86:3.3.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.9.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.eliotlash.molang:molang:18" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.eliotlash.mclib:mclib:18" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: software.bernie.geckolib:geckolib-core:1.0.14" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.eliotlash.mclib:mclib:20" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: software.bernie.geckolib:geckolib-core:1.0.23" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.code.findbugs:jsr305:3.0.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.9.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.9.0" level="project" />

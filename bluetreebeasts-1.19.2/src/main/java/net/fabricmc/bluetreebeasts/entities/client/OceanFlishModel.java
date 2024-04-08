@@ -15,7 +15,7 @@ public class OceanFlishModel extends AnimatedGeoModel<OceanFlishEntity> {
 
     @Override
     public Identifier getTextureResource(OceanFlishEntity object) {
-        return  new Identifier(BlueTreeBeasts.MODID, "textures/ocean_flish_texture.png");
+        return  new Identifier(BlueTreeBeasts.MODID, "textures/entities/ocean_flish_texture.png");
     }
 
     @Override

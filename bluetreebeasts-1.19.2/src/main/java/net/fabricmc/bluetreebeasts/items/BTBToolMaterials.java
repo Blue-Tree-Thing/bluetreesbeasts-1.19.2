@@ -9,7 +9,7 @@ import net.minecraft.util.Lazy;
 import java.util.function.Supplier;
 
 public enum BTBToolMaterials  implements ToolMaterial {
-    HEARTBURN_GLAIVE(5, 2500, 10.0F, 3.0F, 20, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)); // Example ingredient
+    HEARTBURN_GLAIVE(5, 2500, 1.0F, 1.0F, 20, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)); // Example ingredient
 
     private final int miningLevel;
     private final int itemDurability;

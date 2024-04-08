@@ -12,6 +12,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -19,12 +20,17 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
+
+import static software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes.LOOP;
 
 public class GreaterGrapplerEntity extends HostileEntity implements IAnimatable {
-    private final AnimationFactory factory = new AnimationFactory(this);
-    private static final AnimationBuilder run_animation = new AnimationBuilder().addAnimation("animation.greater_grappler_run", true);
-    private static final AnimationBuilder idle_animation = new AnimationBuilder().addAnimation("animation.greater_grappler_idle", true);
-    private static final AnimationBuilder attack_animation = new AnimationBuilder().addAnimation("animation.greater_grappler_attack", true);
+    @Nullable
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+
+    private static final AnimationBuilder run_animation = new AnimationBuilder().addAnimation("animation.greater_grappler_run", LOOP);
+    private static final AnimationBuilder idle_animation = new AnimationBuilder().addAnimation("animation.greater_grappler_idle", LOOP);
+    private static final AnimationBuilder attack_animation = new AnimationBuilder().addAnimation("animation.greater_grappler_attack", LOOP);
     private LivingEntity target;
 
     public GreaterGrapplerEntity(EntityType<? extends HostileEntity> entityType, World world) {

@@ -17,7 +17,7 @@ public class HellBenderModel extends AnimatedGeoModel<HellBenderEntity>{
 
         @Override
         public Identifier getTextureResource(HellBenderEntity object) {
-            return new Identifier(BlueTreeBeasts.MODID, "textures/hell_bender_texture.png");
+            return new Identifier(BlueTreeBeasts.MODID, "textures/entities/hell_bender_texture.png");
         }
 
         @Override

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped", "pattern":
+[
+  "#  ",
+  " c ",
+  "  o"
+],"key": {
+  "#": {
+    "item": "minecraft:redstone_torch"
+  },
+  "c": {
+    "item": "bluetreebeasts:gigantelope_antler"
+  },
+  "o": {
+    "item": "minecraft:iron_ingot"
+  }
+},
+  "result": {
+    "count": 1,
+    "item": "bluetreebeasts:metal_detector"
+  }
+}

@@ -15,7 +15,7 @@ public class ForestFlishModel extends AnimatedGeoModel<ForestFlishEntity> {
 
     @Override
     public Identifier getTextureResource(ForestFlishEntity object) {
-        return  new Identifier(BlueTreeBeasts.MODID, "textures/forest_flish_texture.png");
+        return  new Identifier(BlueTreeBeasts.MODID, "textures/entities/forest_flish_texture.png");
     }
 
     @Override

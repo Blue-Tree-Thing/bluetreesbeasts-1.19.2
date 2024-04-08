@@ -21,10 +21,15 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
+
+import static software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes.LOOP;
 
 public class OceanFlishEntity extends AnimalEntity implements IAnimatable {
 
-    private final AnimationFactory factory = new AnimationFactory(this);
+    @Nullable
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+
     private Vec3d movementDirection = Vec3d.ZERO;
     private final double movementSpeed = 0.1;
     private final double maxTurnSpeedRadians = Math.toRadians(2);
@@ -173,7 +178,7 @@ public class OceanFlishEntity extends AnimalEntity implements IAnimatable {
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ocean_flish.flying", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ocean_flish.flying", LOOP));
         return PlayState.CONTINUE;
     }
 

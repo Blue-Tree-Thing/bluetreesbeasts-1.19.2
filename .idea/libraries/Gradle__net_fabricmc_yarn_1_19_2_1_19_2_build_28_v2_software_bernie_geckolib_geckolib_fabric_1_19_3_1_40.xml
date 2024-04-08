@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.software.bernie.geckolib:geckolib-fabric-1.19:3.1.40" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2.software.bernie.geckolib" artifactId="geckolib-fabric-1.19" version="3.1.40" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bluetreebeasts-1.19.2/.gradle/loom-cache/remapped_mods/net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2/software/bernie/geckolib/geckolib-fabric-1.19/3.1.40/geckolib-fabric-1.19-3.1.40.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/bluetreebeasts-1.19.2/.gradle/loom-cache/remapped_mods/net_fabricmc_yarn_1_19_2_1_19_2_build_28_v2/software/bernie/geckolib/geckolib-fabric-1.19/3.1.40/geckolib-fabric-1.19-3.1.40-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

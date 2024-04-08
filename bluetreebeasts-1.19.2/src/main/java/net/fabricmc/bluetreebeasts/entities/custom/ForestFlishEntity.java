@@ -26,6 +26,9 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
+
+import static software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes.LOOP;
 
 public class ForestFlishEntity extends AnimalEntity implements IAnimatable {
 
@@ -36,9 +39,9 @@ public class ForestFlishEntity extends AnimalEntity implements IAnimatable {
     @Nullable
     private BlockPos hangingPosition;
     @Nullable
-    private final AnimationFactory factory = new AnimationFactory(this);
-    private static final AnimationBuilder flight_animation = new AnimationBuilder().addAnimation("animation.forest_flish.flight", true);
-    private static final AnimationBuilder resting_animation = new AnimationBuilder().addAnimation("animation.forest_flish.resting", true);
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    private static final AnimationBuilder flight_animation = new AnimationBuilder().addAnimation("animation.forest_flish.flight", LOOP);
+    private static final AnimationBuilder resting_animation = new AnimationBuilder().addAnimation("animation.forest_flish.resting",LOOP);
 
     public ForestFlishEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);

@@ -1,0 +1,87 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "bluetreebeasts:item/metal_detector_texture",
+		"particle": "bluetreebeasts:item/metal_detector_texture"
+	},
+	"elements": [
+		{
+			"from": [7, 0, 7],
+			"to": [9, 15, 9],
+			"faces": {
+				"north": {"uv": [0, 4, 1, 11.5], "texture": "#0"},
+				"east": {"uv": [1, 4, 2, 11.5], "texture": "#0"},
+				"south": {"uv": [2, 4, 3, 11.5], "texture": "#0"},
+				"west": {"uv": [3, 4, 4, 11.5], "texture": "#0"},
+				"up": {"uv": [7, 3, 6, 2], "texture": "#0"},
+				"down": {"uv": [7, 3, 6, 4], "texture": "#0"}
+			}
+		},
+		{
+			"from": [5, 17.32367, 6.7639],
+			"to": [11, 18.32367, 14.7639],
+			"rotation": {"angle": -45, "axis": "x", "origin": [8, 15.82367, 10.7639]},
+			"faces": {
+				"north": {"uv": [6, 1, 9, 1.5], "texture": "#0"},
+				"east": {"uv": [4, 4, 8, 4.5], "texture": "#0"},
+				"south": {"uv": [6, 1.5, 9, 2], "texture": "#0"},
+				"west": {"uv": [4, 4.5, 8, 5], "texture": "#0"},
+				"up": {"uv": [3, 4, 0, 0], "texture": "#0"},
+				"down": {"uv": [6, 0, 3, 4], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, 15, 8],
+			"to": [10, 16, 10],
+			"rotation": {"angle": -45, "axis": "x", "origin": [8, 15.5, 9]},
+			"faces": {
+				"north": {"uv": [4, 6, 6, 6.5], "texture": "#0"},
+				"east": {"uv": [6, 5.5, 7, 6], "texture": "#0"},
+				"south": {"uv": [6, 5, 8, 5.5], "texture": "#0"},
+				"west": {"uv": [6, 6, 7, 6.5], "texture": "#0"},
+				"up": {"uv": [6, 6, 4, 5], "texture": "#0"},
+				"down": {"uv": [8, 0, 6, 1], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [-60, 0, 0],
+			"translation": [-0.75, 3.25, -4.25]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [-60, 0, 0],
+			"translation": [-0.75, 3.25, -4.25]
+		},
+		"firstperson_righthand": {
+			"rotation": [-100, 0, 0],
+			"translation": [-9, 0, 0]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-100, 0, 0],
+			"translation": [-9, 0, 0]
+		},
+		"ground": {
+			"rotation": [90, 0, 0]
+		},
+		"gui": {
+			"rotation": [-23.37, 22.21, -123.18],
+			"translation": [-1.5, 1.5, 0]
+
+		},
+		"fixed": {
+			"rotation": [-134.16, -26.12, 57.85],
+			"translation": [2.5, 1.5, 0]
+		}
+	},
+	"groups": [
+		{
+			"name": "metal_detector",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"nbt": "{}",
+			"children": [0, 1, 2]
+		}
+	]
+}

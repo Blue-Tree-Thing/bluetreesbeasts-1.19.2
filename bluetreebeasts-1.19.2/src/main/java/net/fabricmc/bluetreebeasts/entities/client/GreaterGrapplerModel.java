@@ -17,7 +17,7 @@ public class GreaterGrapplerModel extends AnimatedGeoModel<GreaterGrapplerEntity
 
         @Override
         public Identifier getTextureResource(GreaterGrapplerEntity object) {
-            return new Identifier(BlueTreeBeasts.MODID, "textures/greater_grappler_texture.png");
+            return new Identifier(BlueTreeBeasts.MODID, "textures/entities/greater_grappler_texture.png");
         }
 
         @Override
@@ -28,7 +28,7 @@ public class GreaterGrapplerModel extends AnimatedGeoModel<GreaterGrapplerEntity
         }
     @Override
     public void setLivingAnimations(GreaterGrapplerEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
-        super.setLivingAnimations(entity, uniqueID, customPredicate);
+        super.setCustomAnimations(entity, uniqueID, customPredicate);
         IBone head = this.getAnimationProcessor().getBone("head");
 
         EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);

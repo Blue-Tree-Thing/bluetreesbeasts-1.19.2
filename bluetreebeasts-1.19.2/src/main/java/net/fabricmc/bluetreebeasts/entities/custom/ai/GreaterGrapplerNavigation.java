@@ -1,10 +1,8 @@
 package net.fabricmc.bluetreebeasts.entities.custom.ai;
 
-import com.google.gson.internal.bind.JsonTreeReader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.MobNavigation;
-import net.minecraft.entity.ai.pathing.Path;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -12,14 +10,12 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
-
 public class GreaterGrapplerNavigation extends MobNavigation {
     @Nullable
     private BlockPos targetPos;
     private Vec3d movementDirection = Vec3d.ZERO;
     private final double wanderSpeed = 0.5;
-    private final double chargeSpeed = 1.5;
+    private final double chargeSpeed = 1;
     private long lastWanderUpdateTime = 0;
     private static final long WANDER_UPDATE_COOLDOWN = 10000; // Adjust if needed for wandering updates
     private boolean obstacleDetected = false;
@@ -58,15 +54,17 @@ public class GreaterGrapplerNavigation extends MobNavigation {
         if (!obstacleDetected) {
             lastWanderUpdateTime = System.currentTimeMillis();
             chooseNewDirectionWithinArc();
-            Vec3d newPosition = entity.getPos().add(movementDirection.multiply(10)); // Adjust the multiplier as necessary
+            Vec3d newPosition = entity.getPos().add(movementDirection.multiply(5)); // Adjust the multiplier as necessary
             this.startMovingTo(newPosition.x, newPosition.y, newPosition.z, wanderSpeed);
         }
     }
 
     private void updateChargingTowardsTarget(Entity target) {
-        Vec3d targetDirection = target.getPos().subtract(entity.getPos()).normalize();
-        movementDirection = targetDirection;
-        this.startMovingTo(target, chargeSpeed);
+        Vec3d targetDirection = new Vec3d(target.getX() - this.entity.getX(), target.getY() - this.entity.getY(), target.getZ() - this.entity.getZ()).normalize();
+        this.movementDirection = targetDirection;
+        double distanceToTarget = this.entity.squaredDistanceTo(target.getX(), target.getY(), target.getZ());
+        double adjustedSpeed = calculateSpeedModifier(Math.sqrt(distanceToTarget));
+        this.startMovingTo(target.getX(), target.getY(), target.getZ(), adjustedSpeed);
     }
 
     private void chooseNewDirectionWithinArc() {
@@ -79,39 +77,30 @@ public class GreaterGrapplerNavigation extends MobNavigation {
     }
 
     private void handleObstacleAvoidance() {
-        // Choose a new direction without the arc limitation when an obstacle is detected
-        double angle = Math.toRadians(this.entity.getRandom().nextInt(360));
+        // Simplify direction change to avoid sharp turns
+        double angle = Math.toRadians(this.entity.getRandom().nextInt(180) - 90); // Limit angle change
         movementDirection = new Vec3d(Math.cos(angle), 0, Math.sin(angle));
-        this.entity.getMoveControl().moveTo(
-                entity.getX() + movementDirection.x * 10,
-                entity.getY(),
-                entity.getZ() + movementDirection.z * 10,
-                wanderSpeed);
-        obstacleDetected = false; // Reset the flag after handling
+        Vec3d newPosition = entity.getPos().add(movementDirection.multiply(5)); // Move 5 blocks in the new direction
+        this.startMovingTo(newPosition.x, newPosition.y, newPosition.z, wanderSpeed);
+        obstacleDetected = false;
     }
+
+
 
     private void smoothRotationAndMovement() {
+        double targetYaw;
         if (targetPos != null) {
-            double distance = entity.squaredDistanceTo(Vec3d.ofCenter(targetPos));
-            if (distance > 1) {
-                adjustMovementForDistance(distance);
-            } else {
-                // Very close to target, minimize movement and rotation speed to prevent spinning
-                entity.getNavigation().stop();
-                entity.setVelocity(Vec3d.ZERO);
-                entity.setYaw(lerpRotation(entity.getYaw(), entity.headYaw, 0.5F)); // Slowly align yaw with head to stop spinning
-            }
+            double deltaX = targetPos.getX() - entity.getX();
+            double deltaZ = targetPos.getZ() - entity.getZ();
+            targetYaw = Math.toDegrees(Math.atan2(deltaZ, deltaX)) - 90;
+        } else {
+            // Use current movement direction to determine yaw when wandering
+            targetYaw = Math.toDegrees(Math.atan2(movementDirection.z, movementDirection.x)) - 90;
         }
-    }
+        // Smoothly update yaw towards the target direction
+        entity.setYaw(lerpRotation(entity.getYaw(), (float) targetYaw, 0.1F)); // Lower delta value for smoother rotation
 
-    private void adjustMovementForDistance(double distance) {
-        double deltaX = targetPos.getX() - entity.getX();
-        double deltaZ = targetPos.getZ() - entity.getZ();
-        double targetYaw = Math.toDegrees(Math.atan2(deltaZ, deltaX)) - 90;
-        entity.setYaw(lerpRotation(entity.getYaw(), (float)targetYaw, 0.1F)); // Smoother rotation
-
-        double speedModifier = calculateSpeedModifier(distance);
-        entity.getNavigation().startMovingTo(targetPos.getX(), targetPos.getY(), targetPos.getZ(), speedModifier);
+        // Additional logic to adjust velocity or stop movement near targets can remain unchanged
     }
 
     private double calculateSpeedModifier(double distance) {
@@ -119,7 +108,7 @@ public class GreaterGrapplerNavigation extends MobNavigation {
         if (distance < 10) {
             return wanderSpeed * (distance / 10);
         } else {
-            return entity.getTarget() == null ? wanderSpeed : chargeSpeed;
+            return entity.getTarget() == null ? wanderSpeed : this.chargeSpeed;
         }
     }
 

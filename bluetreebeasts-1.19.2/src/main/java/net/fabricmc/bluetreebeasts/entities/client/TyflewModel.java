@@ -15,7 +15,7 @@ public class TyflewModel extends AnimatedGeoModel<TyflewEntity>{
 
         @Override
         public Identifier getTextureResource(TyflewEntity object) {
-            return new Identifier(BlueTreeBeasts.MODID, "textures/tyflew_texture.png");
+            return new Identifier(BlueTreeBeasts.MODID, "textures/entities/tyflew_texture.png");
         }
 
         @Override

@@ -21,7 +21,7 @@ import java.util.List;
 public class HeartburnGlaiveItem extends SwordItem {
 
     public HeartburnGlaiveItem(Settings settings) {
-        super(BTBToolMaterials.HEARTBURN_GLAIVE, 10, 1F, settings); // Adjust the damage and speed as desired
+        super(BTBToolMaterials.HEARTBURN_GLAIVE, 5, .2F, settings); // Adjust the damage and speed as desired
 
     }
 
@@ -47,7 +47,6 @@ public class HeartburnGlaiveItem extends SwordItem {
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         super.onStoppedUsing(stack, world, user, remainingUseTicks);
-        // You can add custom effects or actions here when the trident throw is stopped
     }
 
     @Override

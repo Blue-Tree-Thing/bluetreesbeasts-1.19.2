@@ -16,7 +16,7 @@ public class HomingFlishModel extends AnimatedGeoModel<HomingFlishEntity> {
 
     @Override
     public Identifier getTextureResource(HomingFlishEntity object) {
-        return new Identifier(BlueTreeBeasts.MODID, "textures/tyflew_projectile_texture.png");
+        return new Identifier(BlueTreeBeasts.MODID, "textures/entities/tyflew_projectile_texture.png");
     }
 
     @Override

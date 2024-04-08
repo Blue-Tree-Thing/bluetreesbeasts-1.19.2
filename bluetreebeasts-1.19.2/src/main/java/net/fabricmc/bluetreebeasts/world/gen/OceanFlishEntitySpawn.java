@@ -14,7 +14,7 @@ import net.minecraft.world.biome.BiomeKeys;
 public class OceanFlishEntitySpawn {
 
     public static void addOceanFlishEntitySpawn(){
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.OCEAN, BiomeKeys.LUKEWARM_OCEAN, BiomeKeys.WARM_OCEAN, BiomeKeys.MUSHROOM_FIELDS), SpawnGroup.CREATURE, ModEntities.OCEANFLISH, 50, 5,8);
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.OCEAN, BiomeKeys.LUKEWARM_OCEAN, BiomeKeys.WARM_OCEAN, BiomeKeys.MUSHROOM_FIELDS, BiomeKeys.BEACH), SpawnGroup.CREATURE, ModEntities.OCEANFLISH, 80, 5,8);
         SpawnRestriction.register(ModEntities.OCEANFLISH, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.WORLD_SURFACE_WG, AnimalEntity::isValidNaturalSpawn);
     }
 

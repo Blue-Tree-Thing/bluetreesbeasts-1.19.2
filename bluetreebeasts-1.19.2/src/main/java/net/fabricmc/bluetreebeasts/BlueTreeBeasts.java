@@ -1,6 +1,7 @@
 package net.fabricmc.bluetreebeasts;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.bluetreebeasts.block.ModBlockEntities;
 import net.fabricmc.bluetreebeasts.block.Modblocks;
 import net.fabricmc.bluetreebeasts.effect.ModEffects;
 import net.fabricmc.bluetreebeasts.entities.ModEntities;
@@ -25,6 +26,7 @@ public class BlueTreeBeasts implements ModInitializer {
 	public void onInitialize() {
 		BTBStructures.registerStructureFeatures();
 		ModItems.registerModItems();
+		ModBlockEntities.registerAllBlockEntities();
 		Modblocks.registerModBlocks();
 		ModSounds.registerModSounds();
 		ModEffects.registerEffects();
@@ -40,6 +42,6 @@ public class BlueTreeBeasts implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.FORESTFLISH, ForestFlishEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.OCEANFLISH, OceanFlishEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.WOOLLYGIGANTELOPE, WoollyGigantelopeEntity.setAttributes());
-
+		FabricDefaultAttributeRegistry.register(ModEntities.CITY_SNIFFLER, CitySnifflerEntity.setAttributes());
 	}
 }

@@ -28,17 +28,22 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 
 import java.util.EnumSet;
 
+import static software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes.LOOP;
+
 
 public class TyflewEntity extends HostileEntity implements IAnimatable {
     private PlayerEntity player;
-    private static final AnimationBuilder fly_animation = new AnimationBuilder().addAnimation("animation.tyflew.fly", true);
+    private static final AnimationBuilder fly_animation = new AnimationBuilder().addAnimation("animation.tyflew.fly", LOOP);
 
     private final ServerBossBar bossBar = (ServerBossBar)new ServerBossBar(this.getDisplayName(), BossBar.Color.GREEN, BossBar.Style.PROGRESS).setDarkenSky(false);
-    private final AnimationFactory factory = new AnimationFactory(this);
+    @Nullable
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+
     Vec3d targetPosition = Vec3d.ZERO;
     BlockPos circlingCenter = BlockPos.ORIGIN;
     TyflewEntity.TyflewMovementType movementType = TyflewEntity.TyflewMovementType.CIRCLE;

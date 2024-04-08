@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "bottom": "bluetreebeasts:blocks/snifflercolonyenterblockbottom",
+    "side": "bluetreebeasts:blocks/snifflercolonyenterblockside",
+    "top": "bluetreebeasts:blocks/snifflercolonyoriginblocktop"
+  }
+}

@@ -23,9 +23,9 @@ public class WoollyGigantelopeModel extends AnimatedGeoModel<WoollyGigantelopeEn
     @Override
     public Identifier getTextureResource(WoollyGigantelopeEntity object) {
         if(object.isBaby()){
-            return  new Identifier(BlueTreeBeasts.MODID, "textures/baby_gigantelope_texture.png");
+            return  new Identifier(BlueTreeBeasts.MODID, "textures/entities/baby_gigantelope_texture.png");
         }else{
-        return  new Identifier(BlueTreeBeasts.MODID, "textures/woolly_gigantelope_texture.png");}
+        return  new Identifier(BlueTreeBeasts.MODID, "textures/entities/woolly_gigantelope_texture.png");}
 
     }
 
@@ -40,7 +40,7 @@ public class WoollyGigantelopeModel extends AnimatedGeoModel<WoollyGigantelopeEn
 
     @Override
     public void setLivingAnimations(WoollyGigantelopeEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
-        super.setLivingAnimations(entity, uniqueID, customPredicate);
+        super.setCustomAnimations(entity, uniqueID, customPredicate);
         IBone head = this.getAnimationProcessor().getBone("head");
 
         EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
