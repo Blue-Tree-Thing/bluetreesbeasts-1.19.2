@@ -13,8 +13,14 @@ repositories {
 
 	maven {
 		name = 'GeckoLib'
-		url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+		url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
 	}
+	maven {
+		name = "Fabric"
+		url = "https://maven.fabricmc.net/"
+	}
+
+
 }
 
 dependencies {
@@ -22,10 +28,9 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
+
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.40'
-
-
 	modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 
 

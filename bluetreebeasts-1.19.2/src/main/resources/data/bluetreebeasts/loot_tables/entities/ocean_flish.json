@@ -26,12 +26,14 @@
             }
           ],
           "name": "bluetreebeasts:raw_flish"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "bluetreebeasts:ocean_flish_wing",
+          "weight": 2
         }
       ],
       "rolls": 1.0
     }
-
-
-
   ]
 }

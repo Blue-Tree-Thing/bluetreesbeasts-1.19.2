@@ -1,0 +1,331 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.gannet_whale_idle_land": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"body": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					},
+					"scale": {
+						"vector": [1, 1, 1]
+					}
+				},
+				"neck": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 180) * 2", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 180 + 200) * 2", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"beak1": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"beak2": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"feet": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 180) * 3", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"animation.gannet_whale_move_land": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"body": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"neck": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 180 * 2)", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, "Math.sin(query.anim_time * 180 * -2) * 1 "]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 180 * 2)", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, "Math.sin(query.anim_time * 180 * -2) * 1"]
+					}
+				},
+				"beak1": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"beak2": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"flipper1": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, "Math.sin(query.anim_time * 180 * -2) * -3"]
+					}
+				},
+				"flipper2": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, "Math.sin(query.anim_time * 180 * -2) * -3"]
+					}
+				},
+				"feet": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 180 * 2) * -1", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"animation.gannet_whale_honk": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"body": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					},
+					"scale": {
+						"vector": [1, 1, 1]
+					}
+				},
+				"neck": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 360) * 10", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					},
+					"scale": {
+						"vector": [1, 1, 1]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 180) * -30", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"beak1": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * -360) * 10 - 10", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"beak2": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 360) * -10 + 10", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"flipper1": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"flipper2": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"feet": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"animation.gannet_whale_dive": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 1,
+			"bones": {
+				"body": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 270) * -10", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"neck": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 270) * -30", 0, 0]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 270) * 20", 0, 0]
+					}
+				},
+				"flipper1": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 360) * 20 -20", "Math.cos(query.anim_time * 360) * 10 - 10", "Math.cos(query.anim_time * 360) * -10 + 10"]
+					}
+				},
+				"flipper2": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 360) * 20 -20", "Math.cos(query.anim_time * 360) * - 10 + 10", "Math.cos(query.anim_time * 360) * 10 - 10"]
+					}
+				},
+				"feet": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 360) * 20 -20", 0, 0]
+					}
+				}
+			}
+		},
+		"animation.gannet_whale_idle_water": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"body": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"neck": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 180) * - 2 + 30", 0, 0]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 180) -30", 0, 0]
+					}
+				},
+				"flipper1": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * -180)", 0, "Math.sin(query.anim_time * -180) * 3"]
+					}
+				},
+				"flipper2": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 180)", 0, "Math.sin(query.anim_time * 180) * 3"]
+					}
+				}
+			}
+		},
+		"animation.gannet_whale_move_water": {
+			"loop": true,
+			"animation_length": 2,
+			"bones": {
+				"neck": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 180) * -5+30", 0, 0]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 180) -30", 0, 0]
+					}
+				},
+				"flipper1": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * -180)", 0, "Math.cos(query.anim_time * -180) * -15"]
+					}
+				},
+				"flipper2": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * -180)", 0, "Math.cos(query.anim_time * -180) * 15"]
+					}
+				}
+			}
+		},
+		"animation.gannet_whale_breach": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 0.5,
+			"bones": {
+				"neck": {
+					"rotation": {
+						"vector": ["35+Math.sin(query.anim_time * 180) * -40 ", 0, 0]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": ["-15+Math.sin(query.anim_time * 270) * 20", 0, 0]
+					}
+				},
+				"flipper1": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * -180)", 0, "Math.cos(query.anim_time * -180) * -15"]
+					}
+				},
+				"flipper2": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * -180)", 0, "Math.cos(query.anim_time * -180) * 15"]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

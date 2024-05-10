@@ -4,8 +4,6 @@ package net.fabricmc.bluetreebeasts.entities.custom.ai;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.ai.goal.Goal;
-import net.fabricmc.bluetreebeasts.entities.custom.ai.IBlockCarrier;
-
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -44,9 +42,8 @@ public class CustomLandMobWanderGoal extends Goal {
         boolean isIdle = this.mob.getNavigation().isIdle();
         boolean isTimeForExecution = this.mob.getRandom().nextInt(executionChance) == 0;
         boolean isCooldownElapsed = (currentTime - this.lastStartTime) > this.cooldown;
-
-        // Check if the mob implements IBlockCarrier and if it's not carrying a block
-        boolean notCarryingBlock = true; // Assume true if not IBlockCarrier
+        this.mob.isOnGround();
+        boolean notCarryingBlock = true;
         if (this.mob instanceof IBlockCarrier) {
             notCarryingBlock = !((IBlockCarrier) this.mob).isCarryingBlock();
         }
@@ -56,6 +53,7 @@ public class CustomLandMobWanderGoal extends Goal {
 
     @Override
     public void start() {
+        this.mob.setNoGravity(false);
         Vec3d targetPos = findRandomTarget();
         if (targetPos != null && !targetPos.equals(currentDestination)) {
             this.mob.getNavigation().startMovingTo(targetPos.x, targetPos.y, targetPos.z, this.speed);
@@ -107,23 +105,22 @@ public class CustomLandMobWanderGoal extends Goal {
     }
     private Vec3d findRandomTarget() {
         net.minecraft.util.math.random.Random random = this.mob.getRandom();
-
-
         double minDistanceSquared = 25; // Minimum distance squared, 5 blocks away.
         Vec3d bestTarget = null;
         double bestDistanceSquared = 0;
 
         for (int i = 0; i < 10; i++) {
             double angle = random.nextDouble() * 2 * Math.PI; // Random angle in radians
-            double distance = 10 + random.nextDouble() * 10; // Increasing minimum distance to 10 and maximum to 20 blocks
+            double distance = 10 + random.nextDouble() * 10; // Distance between 10 and 20 blocks
             double dx = Math.cos(angle) * distance;
             double dz = Math.sin(angle) * distance;
-            BlockPos targetPos = new BlockPos(this.mob.getX() + dx, this.mob.getY(), this.mob.getZ() + dz);
+            int dy = random.nextBoolean() ? random.nextInt(4) - 1 : 0; // Randomly decide to go down up to 1 block or stay at the same level
+            BlockPos targetPos = new BlockPos(this.mob.getX() + dx, this.mob.getY() + dy, this.mob.getZ() + dz);
 
             if (isPositionSafe(targetPos, (World) worldView)) {
                 double dxCenter = this.mob.getX() - (targetPos.getX() + 0.5);
                 double dzCenter = this.mob.getZ() - (targetPos.getZ() + 0.5);
-                double targetDistanceSquared = dxCenter * dxCenter + dzCenter * dzCenter; // Manually calculating squared distance
+                double targetDistanceSquared = dxCenter * dxCenter + dzCenter * dzCenter;
 
                 if (bestTarget == null || targetDistanceSquared > bestDistanceSquared) {
                     bestTarget = Vec3d.ofCenter(targetPos);

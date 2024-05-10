@@ -19,10 +19,16 @@ public class ModItems {
     public static final Item RAWGIGANTELOPE = registerItem("raw_gigantelope", new Item(new Item.Settings().food(RawGigantelopeItem.RAWGIGANTELOPE).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item COOKEDGIGANTELOPE= registerItem("cooked_gigantelope", new Item(new Item.Settings().food(CookedGigantelopeItem.COOKEDGIGANTELOPE).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item GIGANTELOPEANTLER = registerItem("gigantelope_antler", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
+    public static final Item SNIFFLERPRODUCE = registerItem("sniffler_produce", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
+
+    public static final Item DERELICT_MECHANISM = registerItem("derelict_mechanism", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
+    public static final Item OCEAN_FLISH_WING = registerItem("ocean_flish_wing", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
+    public static final Item FOREST_FLISH_WING = registerItem("forest_flish_wing", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
 
     public static final Item BLAZINGHEART = registerItem("blazing_heart", new BlazingHeartItem(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final Item TYFLEWSCALL = registerItem("tyflews_call", new TyflewsCallItem(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final Item METALDETECTORITEM = registerItem("metal_detector", new MetalDetectorItem(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
+    public static final Item FLUTTERPACK = registerItem("flutter_pack", new FlutterPackItem(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
 
 
 
@@ -46,6 +52,9 @@ public class ModItems {
     public static final SpawnEggItem GREATERGRAPPLERSPAWNEGG = (SpawnEggItem) registerItem ("greater_grappler_spawn_egg", new SpawnEggItem(ModEntities.GREATERGRAPPLER, 0xA52A2A, 0xD2B48C, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
 
     public static final SpawnEggItem CITYSNIFFLERSPAWNEGG = (SpawnEggItem) registerItem ("city_sniffler_spawn_egg", new SpawnEggItem(ModEntities.CITY_SNIFFLER, 0x32CD32, 0xD2B48C, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
+
+    public static final SpawnEggItem GANNETWHALESPAWNEGG = (SpawnEggItem) registerItem ("gannet_whale_spawn_egg", new SpawnEggItem(ModEntities.GANNETWHALE, 0x32CD32, 0xD2B48C, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
+
 
     public static final Item HEARTBURN_GLAIVE = registerItem("heartburn_glaive", new HeartburnGlaiveItem(new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     private static Item registerItem (String name, Item item){

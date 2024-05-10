@@ -20,7 +20,9 @@
     "main": [
       "net.fabricmc.bluetreebeasts.BlueTreeBeasts"
     ],
-    "client": ["net.fabricmc.bluetreebeasts.BlueTreeBeastsClient"]
+    "client": ["net.fabricmc.bluetreebeasts.BlueTreeBeastsClient"],
+
+    "fabric-datagen": ["net.fabricmc.bluetreebeasts.BlueTreeBeastsDataGenerator"]
   },
   "mixins": [
     "modid.mixins.json"

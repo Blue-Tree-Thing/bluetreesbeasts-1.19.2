@@ -1,12 +1,18 @@
 package net.fabricmc.bluetreebeasts.entities.custom.ai;
 
 import net.fabricmc.bluetreebeasts.block.custom.SnifflerColonyEnterBlock;
+import net.fabricmc.bluetreebeasts.block.custom.SnifflerColonyFeedBlock;
+import net.fabricmc.bluetreebeasts.block.entity.SnifflerColonyEnterBlockEntity;
+import net.fabricmc.bluetreebeasts.block.entity.SnifflerColonyFeedBlockEntity;
 import net.fabricmc.bluetreebeasts.entities.custom.CitySnifflerEntity;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-import java.util.EnumSet;
+import java.util.*;
 
 public class CitySnifflerEnterNestGoal extends Goal {
     private final CitySnifflerEntity sniffler;
@@ -47,20 +53,47 @@ public class CitySnifflerEnterNestGoal extends Goal {
 
     @Override
     public void tick() {
-        if (this.targetPos != null && this.sniffler.getBlockPos().isWithinDistance(targetPos, 2.0)) { // Use proximity check
+        if (this.targetPos != null && this.sniffler.getBlockPos().isWithinDistance(targetPos, 2.0)) {
             this.sniffler.getDataTracker().set(CitySnifflerEntity.INSIDE_NEST, true);
-            this.stop(); // Stop the goal if the sniffler is close enough
+            if (this.sniffler.hasSeeds()) {
+                depositSeedInFeedBlock(this.sniffler);
+            }
+            if (this.sniffler.hasProduce()) {
+                consumeProduceAndEnablePoison();
+            }
+            this.stop();
+        }
+    }
+
+    private void consumeProduceAndEnablePoison() {
+        if (this.sniffler.hasProduce()) {
+            this.sniffler.decrementProduceCount();
+            this.sniffler.enablePoisonAbility(sniffler.getRecentDamageSource(), 1);
+        }
+    }
+
+    private void depositSeedInFeedBlock(CitySnifflerEntity sniffler) {
+        BlockPos feedBlockPos = targetPos.down(); // Assuming the feed block is directly under the enter block
+        BlockEntity entity = this.world.getBlockEntity(feedBlockPos);
+        if (entity instanceof SnifflerColonyFeedBlockEntity) {
+            SnifflerColonyFeedBlockEntity feedBlock = (SnifflerColonyFeedBlockEntity) entity;
+            if (!feedBlock.isFull()) {
+                feedBlock.addSeed();
+                sniffler.decreaseSeedCount(); // Assume there is a method in sniffler to manage its seed count
+            } else {
+                System.out.println("Feed block is full or not found.");
+            }
         }
     }
 
     @Override
     public boolean shouldContinue() {
-        return !this.sniffler.getNavigation().isIdle() && !this.sniffler.getBlockPos().isWithinDistance(targetPos, 2.0);
+        return false;
     }
 
     @Override
     public void stop() {
-        if (this.sniffler.getBlockPos().isWithinDistance(targetPos, 2.0)) {
+        if (this.sniffler.getBlockPos().isWithinDistance(targetPos, 1.0)) {
             this.sniffler.getDataTracker().set(CitySnifflerEntity.INSIDE_NEST, true);
         }
     }

@@ -4,7 +4,6 @@ package net.fabricmc.bluetreebeasts.items.custom;
 import net.fabricmc.bluetreebeasts.items.BTBToolMaterials;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.SwordItem;
-import net.minecraft.item.TridentItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.stat.Stats;
@@ -21,7 +20,7 @@ import java.util.List;
 public class HeartburnGlaiveItem extends SwordItem {
 
     public HeartburnGlaiveItem(Settings settings) {
-        super(BTBToolMaterials.HEARTBURN_GLAIVE, 5, .2F, settings); // Adjust the damage and speed as desired
+        super(BTBToolMaterials.HEARTBURN_GLAIVE, 7, -2.4f, settings); // Adjust the damage and speed as desired
 
     }
 

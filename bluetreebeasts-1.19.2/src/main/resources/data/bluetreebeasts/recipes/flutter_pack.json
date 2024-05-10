@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped", "pattern":
+[
+  "bob",
+  "x#x",
+  "aoa "
+],"key": {
+  "#": {
+    "item": "minecraft:iron_chestplate"
+  },
+  "o": {
+    "item": "minecraft:copper_ingot"
+  },
+  "a": {
+    "item": "minecraft:forest_flish_wing"
+  },
+  "b": {
+    "item": "minecraft:ocean_flish_wing"
+  },
+  "x": {
+    "item": "bluetreebeasts:derelict_mechanism"
+  }
+},
+  "result": {
+    "count": 1,
+    "item": "bluetreebeasts:flutter_pack"
+  }
+}

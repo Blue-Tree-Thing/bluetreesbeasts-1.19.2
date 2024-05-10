@@ -4,10 +4,7 @@ import net.fabricmc.bluetreebeasts.entities.ModEntities;
 
 import net.fabricmc.bluetreebeasts.entities.custom.ai.CustomLandMobWanderGoal;
 import net.fabricmc.bluetreebeasts.entities.custom.ai.GigantelopeForageGoal;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityStatuses;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;

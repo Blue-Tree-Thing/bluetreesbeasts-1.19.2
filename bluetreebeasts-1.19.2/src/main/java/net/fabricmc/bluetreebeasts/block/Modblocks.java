@@ -1,10 +1,7 @@
 package net.fabricmc.bluetreebeasts.block;
 
 import net.fabricmc.bluetreebeasts.BlueTreeBeasts;
-import net.fabricmc.bluetreebeasts.block.custom.SnifflerColonyBlock;
-import net.fabricmc.bluetreebeasts.block.custom.SnifflerColonyEnterBlock;
-import net.fabricmc.bluetreebeasts.block.custom.SnifflerColonyFeedBlock;
-import net.fabricmc.bluetreebeasts.block.custom.SnifflerColonyOriginBlock;
+import net.fabricmc.bluetreebeasts.block.custom.*;
 import net.fabricmc.bluetreebeasts.items.ModItemGroup;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -25,6 +22,8 @@ public class Modblocks {
     public static final Block SNIFFLER_COLONY_ENTER_BLOCK = new SnifflerColonyEnterBlock();
     public static final Block SNIFFLER_COLONY_BLOCK = new SnifflerColonyBlock();
     public static final Block SNIFFLER_COLONY_FEED_BLOCK = new SnifflerColonyFeedBlock();
+    public static final Block SOPHONT_SCRAP = new SophontScrapBlock();
+    public static final Block EVER_METAL = new EverMetalBlock();
 
     private static Block registerBlock(String name, Block block, ItemGroup tab){
         registerBlockItem(name, block, tab);
@@ -43,5 +42,7 @@ public class Modblocks {
         registerBlock("sniffler_colony_enter_block", SNIFFLER_COLONY_ENTER_BLOCK, ModItemGroup.BLUETREEBEASTS);
         registerBlock("sniffler_colony_block", SNIFFLER_COLONY_BLOCK, ModItemGroup.BLUETREEBEASTS);
         registerBlock("sniffler_colony_feed_block", SNIFFLER_COLONY_FEED_BLOCK, ModItemGroup.BLUETREEBEASTS);
+        registerBlock("sophont_scrap", SOPHONT_SCRAP, ModItemGroup.BLUETREEBEASTS);
+        registerBlock("ever_metal_block", EVER_METAL, ModItemGroup.BLUETREEBEASTS);
     }
 }

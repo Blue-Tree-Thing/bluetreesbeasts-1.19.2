@@ -42,27 +42,27 @@ public class SnifflerColonyOriginBlock extends Block {
         int radius = 1; // for a 3x3x3 cube
         BlockPos.Mutable mutablePos = new BlockPos.Mutable();
 
-        // Iterate over a cube area to construct the nest
-        for (int y = -1; y >= -3; y--) { // Building downwards
+        // Construct the nest structure layer by layer
+        // Top layer - Enter Block at the origin position
+        world.setBlockState(originPos, Modblocks.SNIFFLER_COLONY_ENTER_BLOCK.getDefaultState(), 3);
+
+        // Middle layer - Feed Block directly under the enter block
+        BlockPos feedPos = originPos.down();
+        world.setBlockState(feedPos, Modblocks.SNIFFLER_COLONY_FEED_BLOCK.getDefaultState(), 3);
+
+        // Fill the remaining area around and below the feed block with colony blocks
+        for (int y = 0; y >= -2; y--) { // Adjusted to -2 to fit the new design
             for (int x = -radius; x <= radius; x++) {
                 for (int z = -radius; z <= radius; z++) {
                     mutablePos.set(originPos).move(x, y, z);
-                    BlockState newState = getBlockStateForPosition(x, y, z, world, mutablePos);
+                    if (mutablePos.equals(originPos) || mutablePos.equals(feedPos)) {
+                        // Skip the enter and feed blocks, already placed
+                        continue;
+                    }
+                    BlockState newState = Modblocks.SNIFFLER_COLONY_BLOCK.getDefaultState(); // Use normal colony block
                     world.setBlockState(mutablePos, newState, 3);
                 }
             }
-        }
-
-        // Replace the origin block last to avoid collapsing the entity
-        world.setBlockState(originPos, Modblocks.SNIFFLER_COLONY_ENTER_BLOCK.getDefaultState(), 3);
-    }
-
-    private BlockState getBlockStateForPosition(int x, int y, int z, World world, BlockPos pos) {
-        // Example logic to determine which block state to place based on position
-        if (y == -3) {
-            return Modblocks.SNIFFLER_COLONY_FEED_BLOCK.getDefaultState(); // Bottom layer
-        } else {
-            return Modblocks.SNIFFLER_COLONY_BLOCK.getDefaultState(); // Middle layers
         }
     }
 }

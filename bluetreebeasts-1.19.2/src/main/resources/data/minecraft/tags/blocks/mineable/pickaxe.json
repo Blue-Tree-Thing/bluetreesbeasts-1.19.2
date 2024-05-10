@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-
+    "bluetreebeasts:sophont_scrap",
+    "bluetreebeasts:ever_metal_block"
   ]
 }

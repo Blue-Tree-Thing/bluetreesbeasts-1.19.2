@@ -1,0 +1,133 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.flutter_pack_idle": {
+			"loop": true,
+			"bones": {
+				"wing1": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90 + 200) * 2", 0, 0]
+					}
+				},
+				"wing2": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90 + 200) * 2", 0, 0]
+					}
+				},
+				"wing3": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * 90 + 200) * 2", 0, 0]
+					}
+				},
+				"wing4": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90 + 200) * 2", 0, 0]
+					}
+				},
+				"mechanism1": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"animation.flutter_pack_charge": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 1,
+			"bones": {
+				"wing1": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90) * 20", 0, 0]
+					}
+				},
+				"wing2": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90) * 10", 0, 0]
+					}
+				},
+				"wing3": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90) * 20", 0, 0]
+					}
+				},
+				"wing4": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90) * 10", 0, 0]
+					}
+				},
+				"mechanism1": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90) * -10", 0, 0]
+					}
+				},
+				"mechanism2": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * 90) * -10", 0, 0]
+					}
+				}
+			}
+		},
+		"animation.flutter_pack_thrust": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 0.5,
+			"bones": {
+				"wing1": {
+					"rotation": {
+						"vector": ["20+ Math.sin(query.anim_time * -180) * 50", 0, 0]
+					}
+				},
+				"wing2": {
+					"rotation": {
+						"vector": ["20+ Math.sin(query.anim_time * -180) * 50", 0, 0]
+					}
+				},
+				"wing3": {
+					"rotation": {
+						"vector": ["20+ Math.sin(query.anim_time * -180) * 50", 0, 0]
+					}
+				},
+				"wing4": {
+					"rotation": {
+						"vector": ["20+ Math.sin(query.anim_time * -180) * 50", 0, 0]
+					}
+				},
+				"mechanism1": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * -360) * -15", 0, 0]
+					}
+				},
+				"mechanism2": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * -360) * -15", 0, 0]
+					}
+				}
+			}
+		},
+		"animation.flutter_pack_slow_descent": {
+			"loop": true,
+			"bones": {
+				"wing1": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * -720) * -15", 0, 0]
+					}
+				},
+				"wing2": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * -720) * -15", 0, 0]
+					}
+				},
+				"wing3": {
+					"rotation": {
+						"vector": ["Math.sin(query.anim_time * -720) * -15", 0, 0]
+					}
+				},
+				"wing4": {
+					"rotation": {
+						"vector": ["Math.cos(query.anim_time * -720) * -15", 0, 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

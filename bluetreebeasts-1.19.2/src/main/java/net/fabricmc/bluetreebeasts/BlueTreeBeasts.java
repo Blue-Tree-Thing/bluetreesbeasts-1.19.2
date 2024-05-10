@@ -11,10 +11,13 @@ import net.fabricmc.bluetreebeasts.sounds.ModSounds;
 import net.fabricmc.bluetreebeasts.world.gen.ForestFlishEntitySpawn;
 import net.fabricmc.bluetreebeasts.world.gen.OceanFlishEntitySpawn;
 import net.fabricmc.bluetreebeasts.world.gen.WoollyGigantelopeEntitySpawn;
+
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
+
 
 
 public class BlueTreeBeasts implements ModInitializer {
@@ -22,8 +25,11 @@ public class BlueTreeBeasts implements ModInitializer {
 	public static final String MODID = "bluetreebeasts";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
 
+
 	@Override
 	public void onInitialize() {
+
+
 		BTBStructures.registerStructureFeatures();
 		ModItems.registerModItems();
 		ModBlockEntities.registerAllBlockEntities();
@@ -32,6 +38,7 @@ public class BlueTreeBeasts implements ModInitializer {
 		ModEffects.registerEffects();
 		GeckoLib.initialize();
 		ModEntities.registerModEntities();
+
 		ForestFlishEntitySpawn.addForestFlishEntitySpawn();
 		OceanFlishEntitySpawn.addOceanFlishEntitySpawn();
 		WoollyGigantelopeEntitySpawn.addWoollyGigantelopeEntitySpawn();
@@ -43,5 +50,6 @@ public class BlueTreeBeasts implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.OCEANFLISH, OceanFlishEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.WOOLLYGIGANTELOPE, WoollyGigantelopeEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.CITY_SNIFFLER, CitySnifflerEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.GANNETWHALE, GannetWhaleEntity.setAttributes());
 	}
 }

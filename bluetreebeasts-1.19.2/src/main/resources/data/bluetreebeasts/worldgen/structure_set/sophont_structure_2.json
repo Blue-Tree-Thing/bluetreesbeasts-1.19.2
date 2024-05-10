@@ -1,0 +1,19 @@
+{
+
+  "structures": [
+    {
+      "structure": "bluetreebeasts:sophont_structure_2",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1243368973,
+
+    "spacing": 30,
+
+    "separation": 6,
+
+    "type": "minecraft:random_spread"
+  }
+
+}

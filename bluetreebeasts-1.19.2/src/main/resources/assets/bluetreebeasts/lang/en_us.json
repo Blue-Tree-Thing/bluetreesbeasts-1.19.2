@@ -4,6 +4,10 @@
   "block.bluetreebeasts.sniffler_colony_enter_block": "Sniffler Colony Entrance",
   "block.bluetreebeasts.sniffler_colony_block": "Sniffler Colony Support",
   "block.bluetreebeasts.sniffler_colony_feed_block": "Sniffler Colony Food Storage",
+  "block.bluetreebeasts.sophont_scrap": "Sophont Scrap",
+  "block.bluetreebeasts.ever_metal_block": "Block Of Evermetal",
+
+
 
 
 
@@ -12,6 +16,11 @@
 
   "item.bluetreebeasts.hell_bender_heart": "Hellbender Heart",
   "item.bluetreebeasts.grappler_chop": "Grappler Mandible",
+  "item.bluetreebeasts.derelict_mechanism": "Derelict Mechanism",
+  "item.bluetreebeasts.ocean_flish_wing": "Ocean Flish Wing",
+  "item.bluetreebeasts.forest_flish_wing": "Forest Flish Wing",
+
+
   "item.bluetreebeasts.hell_bender_spawn_egg": "Hellbender Spawn Egg",
   "item.bluetreebeasts.tyflew_spawn_egg": "Tyflew Spawn Egg",
   "item.bluetreebeasts.greater_grappler_spawn_egg": "Greater Grappler Spawn Egg",
@@ -19,15 +28,21 @@
   "item.bluetreebeasts.ocean_flish_spawn_egg": "Ocean Flish Spawn Egg",
   "item.bluetreebeasts.woolly_gigantelope_spawn_egg": "Woolly Gigantelope Spawn Egg",
   "item.bluetreebeasts.city_sniffler_spawn_egg": "City Sniffler Spawn Egg",
+  "item.bluetreebeasts.gannet_whale_spawn_egg": "Gannet Whale Spawn Egg",
+
 
   "item.bluetreebeasts.heartburn_glaive": "Heartburn Glaive",
-  "item.bluetreebeasts.metal_detector": "Iron Detector",
+  "item.bluetreebeasts.metal_detector": "Relic Detector",
+  "item.bluetreebeasts.flutter_pack": "Flutter-Pack",
+
 
   "item.bluetreebeasts.raw_flish": "Raw Ocean Flish",
   "item.bluetreebeasts.cooked_flish": "Cooked Ocean Flish",
   "item.bluetreebeasts.raw_gigantelope": "Raw Gigantelope Innards",
   "item.bluetreebeasts.cooked_gigantelope": "Gigantelope Steak Dinner",
   "item.bluetreebeasts.gigantelope_antler": "Gigantelope Antler",
+  "item.bluetreebeasts.sniffler_produce": "Sniffler Produce",
+
 
   "item.bluetreebeasts.blazing_heart": "Blazing Heart",
   "item.bluetreebeasts.tyflews_call": "Tyflew's Call",
@@ -41,6 +56,8 @@
   "entity.bluetreebeasts.greater_grappler": "Greater Grappler",
   "entity.bluetreebeasts.woolly_gigantelope": "Woolly Gigantelope",
   "entity.bluetreebeasts.city_sniffler": "City Sniffler",
+  "entity.bluetreebeasts.gannet_whale": "Gannet Whale",
+
 
 
   "bluetreebeasts.hell_bender_ambient": "Hellbender Ambience",
@@ -49,7 +66,6 @@
 
   "effects.bluetreebeasts.spectral_poision_effect": "Spectral Poison",
 
-  "message.bluetreebeasts.potential_vein_found": "Potential Ore Vein Has Been Found! %s Iron Ore",
-  "message.bluetreebeasts.iron_ore_found": "%s Iron Ore has been Found!",
-  "message.bluetreebeasts.no_iron_found": "No Iron Was Found"
+  "message.bluetreebeasts.no_scrap_found": "No Scrap Detected",
+  "message.bluetreebeasts.scrap_found": "%s Scrap Detected In Area"
 }
