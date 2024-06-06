@@ -35,12 +35,11 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
     @Nullable
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     protected static final AnimationBuilder walking_animation = new AnimationBuilder().addAnimation("animation.woolly_gigantelope.walk", LOOP);
-    private static final AnimationBuilder foraging_animation = new AnimationBuilder().addAnimation("animation.woolly_gigantelope.feed", LOOP);
     private static final AnimationBuilder idle_animation = new AnimationBuilder().addAnimation("animation.woolly_gigantelope.idle", LOOP);
     private static final AnimationBuilder baby_idle_animation = new AnimationBuilder().addAnimation("animation.baby_gigantelope.idle", LOOP);
     private static final AnimationBuilder baby_walking_animation = new AnimationBuilder().addAnimation("animation.baby_gigantelope.walk", LOOP);
     private int eatGrassTimer;
-    public static boolean isDigging;
+
 
 
 
@@ -109,15 +108,12 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
     private PlayState predicate(AnimationEvent<WoollyGigantelopeEntity> event) {
         AnimationController<WoollyGigantelopeEntity> controller = event.getController();
         boolean isMoving = event.isMoving();
-        boolean isForaging = isDigging;
+
 
         String targetAnimation;
         int transitionTicks;
 
-        if (isForaging) {
-            targetAnimation = "animation.woolly_gigantelope.feed";
-            transitionTicks = 5; // Custom transition length for foraging animation
-        } else if (isMoving) {
+        if (isMoving) {
             targetAnimation = "animation.woolly_gigantelope.walk";
             transitionTicks = 7; // Custom transition length for walking animation
         } else {
@@ -129,8 +125,7 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
         if (!currentAnimationName.equals(targetAnimation)) {
             // Use the helper method to set the animation with a custom transition period.
             switch (targetAnimation) {
-                case "animation.woolly_gigantelope.feed" ->
-                        setAnimationWithTransition(controller, foraging_animation, transitionTicks);
+
                 case "animation.woolly_gigantelope.walk" ->
                         setAnimationWithTransition(controller, walking_animation, transitionTicks);
                 case "animation.woolly_gigantelope.idle" ->
@@ -179,7 +174,7 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
     }
 
     @Override
-    public AnimationFactory getFactory() {
+    public @Nullable AnimationFactory getFactory() {
         return factory;
     }
 }

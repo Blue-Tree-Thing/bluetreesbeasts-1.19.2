@@ -7,6 +7,7 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.util.math.BlockPos;
 
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 import java.util.*;
@@ -26,17 +27,15 @@ public class CitySnifflerConstructNestGoal extends Goal {
 
     @Override
     public boolean canStart() {
-
         if (hasPlacedBlock) {
             return false;
         }
         List<PathAwareEntity> nearbyEntities = world.getEntitiesByClass(
                 PathAwareEntity.class,
-                this.entity.getBoundingBox().expand(80), // Search in a larger area
+                this.entity.getBoundingBox().expand(80),
                 e -> e instanceof CitySnifflerEntity && !e.equals(this.entity));
 
         if (nearbyEntities.isEmpty()) {
-            // If no nearby entities are found, start looking for a grass block
             targetBlockPos = findSuitableLocation();
             return targetBlockPos != null;
         }
@@ -49,27 +48,32 @@ public class CitySnifflerConstructNestGoal extends Goal {
             if (entity.getBlockPos().isWithinDistance(targetBlockPos, 2)) {
                 placeBlockAndPrepareAccess(targetBlockPos);
                 hasPlacedBlock = true;
-                standOnBlockTimer = -20; // Delay before moving to the top
+                standOnBlockTimer = -20;
             } else {
                 this.entity.getNavigation().startMovingTo(targetBlockPos.getX() + 0.5, targetBlockPos.getY(), targetBlockPos.getZ() + 0.5, 1.0);
             }
         }
-
         manageStandOnBlockBehavior();
     }
 
     private void placeBlockAndPrepareAccess(BlockPos blockPos) {
         world.setBlockState(blockPos, Modblocks.SNIFFLER_COLONY_ORIGIN_BLOCK.getDefaultState());
-        // Check and modify terrain if needed to ensure the entity can jump on it
         ensureAccessibility(blockPos.up());
     }
 
     private void ensureAccessibility(BlockPos blockPos) {
-        // Example: Make sure the entity can stand on the block. Adjust surrounding blocks if needed.
         if (!world.getBlockState(blockPos).isAir()) {
             world.breakBlock(blockPos, true);
         }
-        // Additional logic to flatten or adjust surrounding blocks for easy access could go here
+        // Adjust the blocks around to create a mini ramp if needed
+        for (Direction dir : Direction.values()) {
+            if (dir != Direction.DOWN) {
+                BlockPos sidePos = blockPos.offset(dir);
+                if (world.getBlockState(sidePos).isAir()) {
+                    world.setBlockState(sidePos, Blocks.DIRT.getDefaultState());
+                }
+            }
+        }
     }
 
     private void manageStandOnBlockBehavior() {
@@ -79,7 +83,6 @@ public class CitySnifflerConstructNestGoal extends Goal {
             } else if (standOnBlockTimer < 0) {
                 standOnBlockTimer++;
                 if (standOnBlockTimer == 0) {
-                    // Ensure the entity moves to the top of the block after the delay
                     BlockPos topOfBlockPos = targetBlockPos.up();
                     this.entity.getNavigation().startMovingTo(topOfBlockPos.getX() + 0.5, topOfBlockPos.getY(), topOfBlockPos.getZ() + 0.5, 1.0);
                 }
@@ -92,18 +95,16 @@ public class CitySnifflerConstructNestGoal extends Goal {
     private void resetGoalState() {
         standOnBlockTimer = 0;
         hasPlacedBlock = false;
-        targetBlockPos = null; // Clear the target block position for the next operation
+        targetBlockPos = null;
     }
 
     private BlockPos findSuitableLocation() {
-        // Example logic to find a grass block at least 40 blocks away from another CitySnifflerEntity
-        // This is a simplified version. You may want to add more conditions based on your game's logic.
         BlockPos entityPos = this.entity.getBlockPos();
         for (int x = -5; x <= 5; x++) {
             for (int z = -5; z <= 5; z++) {
                 BlockPos searchPos = entityPos.add(x, 0, z);
                 if (world.getBlockState(searchPos).isOf(Blocks.GRASS_BLOCK)) {
-                    return searchPos.up(); // Return the position above the grass block
+                    return searchPos.up();
                 }
             }
         }

@@ -43,12 +43,10 @@ public class CustomLandMobWanderGoal extends Goal {
         boolean isTimeForExecution = this.mob.getRandom().nextInt(executionChance) == 0;
         boolean isCooldownElapsed = (currentTime - this.lastStartTime) > this.cooldown;
         this.mob.isOnGround();
-        boolean notCarryingBlock = true;
-        if (this.mob instanceof IBlockCarrier) {
-            notCarryingBlock = !((IBlockCarrier) this.mob).isCarryingBlock();
-        }
 
-        return isIdle && isTimeForExecution && isCooldownElapsed && notCarryingBlock;
+
+
+        return isIdle && isTimeForExecution && isCooldownElapsed;
     }
 
     @Override

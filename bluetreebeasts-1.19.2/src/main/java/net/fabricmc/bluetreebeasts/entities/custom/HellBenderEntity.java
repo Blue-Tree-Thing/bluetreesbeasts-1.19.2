@@ -270,7 +270,7 @@ public class HellBenderEntity extends HostileEntity implements IAnimatable {
         animationData.addAnimationController(new AnimationController(this,"nullController", 0, this::standPredicate));
     }
     @Override
-    public AnimationFactory getFactory() {
+    public @Nullable AnimationFactory getFactory() {
         return factory;
     }
     @Override

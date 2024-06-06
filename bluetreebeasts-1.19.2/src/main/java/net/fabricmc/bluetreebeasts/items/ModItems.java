@@ -21,6 +21,7 @@ public class ModItems {
     public static final Item GIGANTELOPEANTLER = registerItem("gigantelope_antler", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item SNIFFLERPRODUCE = registerItem("sniffler_produce", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
 
+
     public static final Item DERELICT_MECHANISM = registerItem("derelict_mechanism", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item OCEAN_FLISH_WING = registerItem("ocean_flish_wing", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item FOREST_FLISH_WING = registerItem("forest_flish_wing", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));

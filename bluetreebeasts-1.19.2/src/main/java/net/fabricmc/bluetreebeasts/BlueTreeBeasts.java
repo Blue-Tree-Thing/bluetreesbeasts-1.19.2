@@ -51,5 +51,6 @@ public class BlueTreeBeasts implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.WOOLLYGIGANTELOPE, WoollyGigantelopeEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.CITY_SNIFFLER, CitySnifflerEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.GANNETWHALE, GannetWhaleEntity.setAttributes());
+
 	}
 }

@@ -103,13 +103,7 @@ public class HomingFlishEntity extends PathAwareEntity implements IAnimatable {
         this.setPitch(interpolateRotation(this.getPitch(), targetPitch)); // Adjust 2.0F for speed of pitch change
     }
 
-    /**
-     * Interpolates rotation towards a target angle smoothly.
-     *
-     * @param currentAngle The current rotation angle.
-     * @param targetAngle  The target rotation angle.
-     * @return The interpolated rotation angle.
-     */
+
     private float interpolateRotation(float currentAngle, float targetAngle) {
         float angleDifference = MathHelper.wrapDegrees(targetAngle - currentAngle);
         return currentAngle + MathHelper.clamp(angleDifference, -(float) 2.0, (float) 2.0);

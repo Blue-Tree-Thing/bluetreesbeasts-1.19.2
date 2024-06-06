@@ -183,7 +183,7 @@ public class OceanFlishEntity extends AnimalEntity implements IAnimatable {
     }
 
     @Override
-    public AnimationFactory getFactory() {
+    public @Nullable AnimationFactory getFactory() {
         return this.factory;
     }
 

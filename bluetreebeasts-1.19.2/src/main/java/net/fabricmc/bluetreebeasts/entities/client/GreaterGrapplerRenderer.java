@@ -24,7 +24,7 @@ public class GreaterGrapplerRenderer extends GeoEntityRenderer<GreaterGrapplerEn
 
     @Override
     public RenderLayer getRenderType(GreaterGrapplerEntity animatable, float partialTicks, MatrixStack stack, VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder, int packedLightIn, Identifier textureLocation) {
-        stack.scale(1.5f,1.5f,1.5f);
+        stack.scale(1f,1f,1f);
 
         return super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
     }

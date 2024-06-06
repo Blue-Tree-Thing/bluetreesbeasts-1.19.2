@@ -9,9 +9,8 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -46,22 +45,17 @@ public class FlutterPackItem extends ArmorItem implements IAnimatable {
 
                 boolean justStoppedSneaking = nbt.contains("LastSneaking") && !player.isSneaking() && nbt.getBoolean("LastSneaking");
                 if (nbt.getBoolean("IsCharged") && justStoppedSneaking && player.isOnGround()) {
-                    launchPlayer(player, nbt, world);
+                    launchPlayer(player);
                     nbt.putBoolean("IsCharged", false); // Reset the charge after launch
                 }
 
-                // Modify gravity behavior only when the jetpack is equipped and the player is not on the edge of a block
+
                 BlockPos playerPos = player.getBlockPos();
                 boolean isOnEdge = !world.getBlockState(playerPos.down()).isSolidBlock(world, playerPos.down()) &&
                         world.getBlockState(playerPos.down(2)).isSolidBlock(world, playerPos.down(2));
 
                 if (!isOnEdge) {
                     player.setNoGravity(player.getVelocity().y < -0.15f && !player.isOnGround());
-                }
-
-                if (player.world.getBlockState(playerPos.down()).isAir() && player.world.getBlockState(playerPos.down(2)).isSolidBlock(world, playerPos.down(2)) ||
-                        player.world.getBlockState(playerPos.down()).isSolidBlock(world, playerPos.down())) {
-                    player.setNoGravity(false);
                 }
 
                 nbt.putBoolean("LastSneaking", player.isSneaking());
@@ -87,21 +81,9 @@ public class FlutterPackItem extends ArmorItem implements IAnimatable {
         }
     }
 
-    private void launchPlayer(PlayerEntity player, NbtCompound nbt, World world) {
+    private void launchPlayer(PlayerEntity player) {
         player.addVelocity(0, 1.5, 0);
         player.velocityModified = true;
-
-        // Spawn particles when the player takes off
-        double x = player.getX();
-        double y = player.getY();
-        double z = player.getZ();
-
-        // Adjust the particle type, count, speed, and spread as desired
-        world.addParticle(ParticleTypes.CLOUD, x, y, z, 0, 0, 0);
-        world.addParticle(ParticleTypes.CLOUD, x + 0.5, y, z, 0, 0, 0);
-        world.addParticle(ParticleTypes.CLOUD, x - 0.5, y, z, 0, 0, 0);
-        world.addParticle(ParticleTypes.CLOUD, x, y, z + 0.5, 0, 0, 0);
-        world.addParticle(ParticleTypes.CLOUD, x, y, z - 0.5, 0, 0, 0);
     }
 
     @Override

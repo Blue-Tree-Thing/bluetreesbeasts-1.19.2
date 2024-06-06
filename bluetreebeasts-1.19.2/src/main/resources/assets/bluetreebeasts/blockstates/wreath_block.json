@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "bluetreebeasts:block/wreath" },
+    "facing=south": { "model": "bluetreebeasts:block/wreath_south" },
+    "facing=west": { "model": "bluetreebeasts:block/wreath_east" },
+    "facing=east": { "model": "bluetreebeasts:block/wreath_west" }
+  }
+}

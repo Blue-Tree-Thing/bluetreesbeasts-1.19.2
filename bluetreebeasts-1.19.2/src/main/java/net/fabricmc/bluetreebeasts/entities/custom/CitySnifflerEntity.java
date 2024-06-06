@@ -15,11 +15,18 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -33,11 +40,12 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
 
+import java.util.List;
 
 import static software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes.LOOP;
 import static software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes.PLAY_ONCE;
 
-public class CitySnifflerEntity extends AnimalEntity implements IAnimatable, IBlockCarrier {
+public class CitySnifflerEntity extends AnimalEntity implements IAnimatable {
 
     public static final TrackedData<Boolean> INSIDE_NEST = DataTracker.registerData(CitySnifflerEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private int seedCount;
@@ -53,8 +61,8 @@ public class CitySnifflerEntity extends AnimalEntity implements IAnimatable, IBl
     public CitySnifflerEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
         this.seedCount = 0;
-
-
+        this.setPersistent();
+        this.checkDespawn();
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -74,18 +82,14 @@ public class CitySnifflerEntity extends AnimalEntity implements IAnimatable, IBl
 
     @Override
     protected void initGoals() {
-
-
         this.goalSelector.add(1, new LookAtEntityGoal(this, LivingEntity.class, 20.0f));
         this.goalSelector.add(2, new SwimGoal(this));
         this.goalSelector.add(8, new EscapeDangerGoal(this, .8));
-            this.goalSelector.add(6, new CitySnifflerPathGoal(this));
             this.goalSelector.add(6, new CitySnifflerForageGoal(this));
             this.goalSelector.add(5, new CustomLandMobWanderGoal(this, .5, 60, 3));
             this.goalSelector.add(4, new CitySnifflerConstructNestGoal(this));
             this.goalSelector.add(3, new CitySnifflerEnterNestGoal(this));
         this.targetSelector.add(7, new AnimalMateGoal(this,1));
-
     }
 
 
@@ -122,12 +126,68 @@ public class CitySnifflerEntity extends AnimalEntity implements IAnimatable, IBl
         if (produceCount > 0) produceCount--;
     }
 
-    public void enablePoisonAbility(DamageSource damageSource, float amount) {
-        if (damageSource != null && super.damage(damageSource, amount)) {
-            if (damageSource.getAttacker() instanceof LivingEntity attacker) {
-                attacker.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 0)); // 5 seconds of Poison I
+
+
+    public boolean enablePoison = false; // This flag determines if the poison effect should be active
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putBoolean("IsPoisonous", this.enablePoison);
+        nbt.putInt("SeedCount", this.seedCount);
+        nbt.putInt("ProduceCount", this.produceCount);
+        nbt.putBoolean("IsForaging", this.isForaging);
+        nbt.putBoolean("InsideNest", this.dataTracker.get(INSIDE_NEST));
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        this.enablePoison = nbt.getBoolean("IsPoisonous");
+        this.seedCount = nbt.getInt("SeedCount");
+        this.produceCount = nbt.getInt("ProduceCount");
+        this.isForaging = nbt.getBoolean("IsForaging");
+        this.dataTracker.set(INSIDE_NEST, nbt.getBoolean("InsideNest"));
+    }
+
+    @Override
+    public void tickMovement() {
+        super.tickMovement();
+        if (this.isAlive() && this.enablePoison) {
+            // Get entities around this entity but exclude itself from being affected by the poison
+            List<PlayerEntity> list = this.world.getEntitiesByClass(PlayerEntity.class, this.getBoundingBox().expand(0.3),
+                    entity -> entity != null && !entity.isSpectator() && entity.isAlive());
+            for (PlayerEntity player : list) {
+                applyPoisonEffect(player);
+            }
+            List<HostileEntity> listB = this.world.getEntitiesByClass(HostileEntity.class, this.getBoundingBox().expand(0.3),
+                    entity -> entity != null && !entity.isSpectator() && entity.isAlive());
+            for (HostileEntity mobEntity : listB) {
+                applyPoisonEffect(mobEntity);
             }
         }
+    }
+
+    public void applyPoisonEffect(LivingEntity target) {
+        if (target.damage(DamageSource.mob(this), 0)) {
+            target.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 20 , 2), this);
+            this.playSound(SoundEvents.ENTITY_PUFFER_FISH_STING, 1.0f, 1.0f);
+        }
+    }
+
+    @Override
+    public ActionResult interactMob(PlayerEntity player, Hand hand) {
+        ItemStack itemStack = player.getStackInHand(hand);
+        if (itemStack.getItem() == ModItems.SNIFFLERPRODUCE) {
+            if (!this.world.isClient) {
+                this.enablePoison = true; // Enable poison effect
+                if (!player.isCreative()) {
+                    itemStack.decrement(1);
+                }
+                return ActionResult.SUCCESS;
+            }
+        }
+        return super.interactMob(player, hand);
     }
 
     public void decreaseSeedCount() {
@@ -149,10 +209,7 @@ public class CitySnifflerEntity extends AnimalEntity implements IAnimatable, IBl
     }
 
 
-    @Override
-    public boolean isCarryingBlock() {
-        return false;
-    }
+
 
     public boolean isInsideNest() {
         return this.dataTracker.get(INSIDE_NEST);

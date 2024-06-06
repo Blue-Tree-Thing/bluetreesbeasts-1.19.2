@@ -6,6 +6,10 @@
   "block.bluetreebeasts.sniffler_colony_feed_block": "Sniffler Colony Food Storage",
   "block.bluetreebeasts.sophont_scrap": "Sophont Scrap",
   "block.bluetreebeasts.ever_metal_block": "Block Of Evermetal",
+  "block.bluetreebeasts.wreath_block": "Grappler's Wreath",
+
+  "block.bluetreebeasts.gannet_whale_egg": "Gannet Whale Egg Block",
+
 
 
 
@@ -19,6 +23,10 @@
   "item.bluetreebeasts.derelict_mechanism": "Derelict Mechanism",
   "item.bluetreebeasts.ocean_flish_wing": "Ocean Flish Wing",
   "item.bluetreebeasts.forest_flish_wing": "Forest Flish Wing",
+  "item.bluetreebeasts.gannet_whale_egg_item": "Gannet Whale Egg",
+  "item.bluetreebeasts.wreath_item": "Grappler's Wreath",
+
+
 
 
   "item.bluetreebeasts.hell_bender_spawn_egg": "Hellbender Spawn Egg",

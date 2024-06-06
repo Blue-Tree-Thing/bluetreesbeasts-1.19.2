@@ -23,9 +23,8 @@ public class GreaterGrapplerModel extends AnimatedGeoModel<GreaterGrapplerEntity
         @Override
         public Identifier getAnimationResource(GreaterGrapplerEntity animatable) {
             return new Identifier(BlueTreeBeasts.MODID, "animations/greater_grappler.animation.json");
-
-
         }
+
     @Override
     public void setLivingAnimations(GreaterGrapplerEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
         super.setCustomAnimations(entity, uniqueID, customPredicate);

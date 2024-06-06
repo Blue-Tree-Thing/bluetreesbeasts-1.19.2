@@ -19,7 +19,6 @@ public class ModEntities {
             Registry.ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "tyflew"), FabricEntityTypeBuilder.create
                     (SpawnGroup.MONSTER, TyflewEntity::new).dimensions(EntityDimensions.fixed(3f,1.5f)).fireImmune().build());
 
-
     public static final EntityType<GreaterGrapplerEntity> GREATERGRAPPLER = register(
             Registry.ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "greater_grappler"), FabricEntityTypeBuilder.create
                     (SpawnGroup.MONSTER, GreaterGrapplerEntity::new).dimensions(EntityDimensions.fixed(2f,2f)).build());
@@ -34,13 +33,12 @@ public class ModEntities {
 
     public static final EntityType<GannetWhaleEntity> GANNETWHALE = register(
             Registry.ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "gannet_whale"), FabricEntityTypeBuilder.create
-                    (SpawnGroup.CREATURE, GannetWhaleEntity::new).dimensions(EntityDimensions.fixed(2f,2f)).build());
+                    (SpawnGroup.CREATURE, GannetWhaleEntity::new).dimensions(EntityDimensions.changing(2f,2f)).build());
 
 
     public static final EntityType<HomingFlishEntity> HOMINGFLISH = Registry.register(
             Registry.ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "homing_flish"), FabricEntityTypeBuilder.create(
                     SpawnGroup.MISC, HomingFlishEntity::new).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
-
 
     public static final EntityType<WoollyGigantelopeEntity> WOOLLYGIGANTELOPE = register(
             Registry.ENTITY_TYPE, new Identifier(BlueTreeBeasts.MODID, "woolly_gigantelope"), FabricEntityTypeBuilder.create

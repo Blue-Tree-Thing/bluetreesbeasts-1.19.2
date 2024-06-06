@@ -27,7 +27,7 @@ public class CitySnifflerEnterNestGoal extends Goal {
 
     @Override
     public boolean canStart() {
-        if (sniffler.isCarryingBlock() || sniffler.isInsideWaterOrBubbleColumn() || sniffler.isInsideNest() || !sniffler.canEnterNest()) {
+        if (sniffler.isInsideWaterOrBubbleColumn() || sniffler.isInsideNest() || !sniffler.canEnterNest()) {
             return false;
         }
         this.targetPos = findNearestEnterBlockPos();
@@ -68,7 +68,7 @@ public class CitySnifflerEnterNestGoal extends Goal {
     private void consumeProduceAndEnablePoison() {
         if (this.sniffler.hasProduce()) {
             this.sniffler.decrementProduceCount();
-            this.sniffler.enablePoisonAbility(sniffler.getRecentDamageSource(), 1);
+            this.sniffler.enablePoison = true;
         }
     }
 

@@ -230,7 +230,7 @@ public class ForestFlishEntity extends AnimalEntity implements IAnimatable {
     }
 
     @Override
-    public AnimationFactory getFactory() {
+    public @Nullable AnimationFactory getFactory() {
         return factory;
     }
 
