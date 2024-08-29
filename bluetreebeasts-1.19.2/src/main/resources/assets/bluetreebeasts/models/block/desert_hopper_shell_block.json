@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "bluetreebeasts:blocks/hopper_shell_block_top_bottom",
+    "side": "bluetreebeasts:blocks/hopper_shell_block_side"
+  }
+}

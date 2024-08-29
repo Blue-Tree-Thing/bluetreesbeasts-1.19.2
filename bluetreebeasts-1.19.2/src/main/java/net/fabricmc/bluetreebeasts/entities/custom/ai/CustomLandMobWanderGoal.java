@@ -24,7 +24,7 @@ public class CustomLandMobWanderGoal extends Goal {
     private long lastStartTime;
     private final long cooldown;
     private Vec3d currentDestination = null; // Added: Current target destination
-    private static final float MAX_ROTATION_CHANGE_PER_TICK = 10.0F; // Max degrees the entity can rotate per tick
+    private static final float MAX_ROTATION_CHANGE_PER_TICK = 5.0F; // Max degrees the entity can rotate per tick
 
     public CustomLandMobWanderGoal(PathAwareEntity mob, double speed, int executionChance, long cooldown) {
         this.mob = mob;
@@ -103,25 +103,25 @@ public class CustomLandMobWanderGoal extends Goal {
     }
     private Vec3d findRandomTarget() {
         net.minecraft.util.math.random.Random random = this.mob.getRandom();
-        double minDistanceSquared = 25; // Minimum distance squared, 5 blocks away.
+        double minDistanceSquared = 25;  // Minimum distance squared
         Vec3d bestTarget = null;
         double bestDistanceSquared = 0;
 
         for (int i = 0; i < 10; i++) {
-            double angle = random.nextDouble() * 2 * Math.PI; // Random angle in radians
-            double distance = 10 + random.nextDouble() * 10; // Distance between 10 and 20 blocks
+            double angle = random.nextDouble() * 2 * Math.PI;
+            double distance = 10 + random.nextDouble() * 10;
             double dx = Math.cos(angle) * distance;
             double dz = Math.sin(angle) * distance;
-            int dy = random.nextBoolean() ? random.nextInt(4) - 1 : 0; // Randomly decide to go down up to 1 block or stay at the same level
+            int dy = random.nextBoolean() ? random.nextInt(2) - 1 : 0;  // Allow for stepping up or down one block
+
             BlockPos targetPos = new BlockPos(this.mob.getX() + dx, this.mob.getY() + dy, this.mob.getZ() + dz);
 
             if (isPositionSafe(targetPos, (World) worldView)) {
-                double dxCenter = this.mob.getX() - (targetPos.getX() + 0.5);
-                double dzCenter = this.mob.getZ() - (targetPos.getZ() + 0.5);
-                double targetDistanceSquared = dxCenter * dxCenter + dzCenter * dzCenter;
+                Vec3d targetVector = Vec3d.ofCenter(targetPos);
+                double targetDistanceSquared = targetVector.squaredDistanceTo(this.mob.getPos());
 
                 if (bestTarget == null || targetDistanceSquared > bestDistanceSquared) {
-                    bestTarget = Vec3d.ofCenter(targetPos);
+                    bestTarget = targetVector;
                     bestDistanceSquared = targetDistanceSquared;
                 }
             }
@@ -130,26 +130,23 @@ public class CustomLandMobWanderGoal extends Goal {
     }
 
     private boolean isPositionSafe(BlockPos pos, World world) {
-        if (!world.getBlockState(pos.down()).getMaterial().isSolid()) {
+        if (!world.getBlockState(pos.down()).isOpaque()) {
             return false;
         }
 
         EntityDimensions entityDimensions = this.mob.getDimensions(this.mob.getPose());
-        boolean isLargerThanCow = entityDimensions.width > 2F || entityDimensions.height > 2F;
+        boolean isAreaNavigable = isAreaNavigable(pos, world, entityDimensions);
 
-        if (isLargerThanCow && !isAreaNavigable(pos, world, entityDimensions)) {
-            return false;
-        }
-
-        return isLandingSafe(pos, world) && !isEntityBlockingPath(pos, world, entityDimensions);
+        return isAreaNavigable && isLandingSafe(pos, world) && !isEntityBlockingPath(pos, world, entityDimensions);
     }
 
     private boolean isAreaNavigable(BlockPos pos, World world, EntityDimensions dimensions) {
+        // Check for solid ground and sufficient headroom around the entity
         for (int dx = -MathHelper.floor(dimensions.width / 2.0F); dx <= MathHelper.ceil(dimensions.width / 2.0F); dx++) {
             for (int dz = -MathHelper.floor(dimensions.width / 2.0F); dz <= MathHelper.ceil(dimensions.width / 2.0F); dz++) {
                 BlockPos groundPos = pos.add(dx, -1, dz);
-                BlockPos headroomPos = pos.add(dx, (int)Math.ceil(dimensions.height), dz);
-                if (!world.getBlockState(groundPos).getMaterial().isSolid() || !world.isAir(headroomPos)) {
+                BlockPos headroomPos = pos.add(dx, MathHelper.ceil(dimensions.height) - 1, dz);
+                if (!world.getBlockState(groundPos).isOpaque() || !world.isAir(headroomPos)) {
                     return false;
                 }
             }
@@ -158,23 +155,14 @@ public class CustomLandMobWanderGoal extends Goal {
     }
 
     private boolean isEntityBlockingPath(BlockPos pos, World world, EntityDimensions dimensions) {
-        // Define the search box based on the entity's dimensions
-        Box searchBox = new Box(pos).expand(dimensions.width / 2.0F, dimensions.height, dimensions.width / 2.0F);
-
-        // Check for other entities within the box. Exclude the mob itself.
-        List<Entity> otherEntities = world.getOtherEntities(this.mob, searchBox);
-
-        // If there are any entities in the box, the path is considered blocked
+        Box searchBox = new Box(pos.getX() - dimensions.width / 2.0, pos.getY(), pos.getZ() - dimensions.width / 2.0,
+                pos.getX() + dimensions.width / 2.0, pos.getY() + dimensions.height, pos.getZ() + dimensions.width / 2.0);
+        List<Entity> otherEntities = world.getOtherEntities(this.mob, searchBox, e -> !e.equals(this.mob));
         return !otherEntities.isEmpty();
     }
 
     private boolean isLandingSafe(BlockPos pos, World world) {
-        for (int i = 1; i <= 3; i++) {
-            BlockPos belowPos = pos.down(i);
-            if (world.getBlockState(belowPos).getMaterial().isSolid()) {
-                return true;
-            }
-        }
-        return false;
+        BlockPos groundPos = pos.down();
+        return world.getBlockState(groundPos).isOpaque() && world.getBlockState(groundPos.up()).isAir();  // Ensure there's air above the solid block
     }
 }

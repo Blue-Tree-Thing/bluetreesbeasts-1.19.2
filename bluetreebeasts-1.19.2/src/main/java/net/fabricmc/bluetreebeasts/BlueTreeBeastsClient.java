@@ -32,4 +32,6 @@ public class BlueTreeBeastsClient implements ClientModInitializer  {
         register(ModEntities.WOOLLYGIGANTELOPE, WoollyGigantelopeRenderer::new);
         register(ModEntities.CITY_SNIFFLER, CitySnifflerRenderer::new);
         register(ModEntities.GANNETWHALE, GannetWhaleRenderer::new);
+        register(ModEntities.DESERT_HOPPER, DesertHopperRenderer::new);
+        register(ModEntities.HORRANE, HorraneRenderer::new);
     }}

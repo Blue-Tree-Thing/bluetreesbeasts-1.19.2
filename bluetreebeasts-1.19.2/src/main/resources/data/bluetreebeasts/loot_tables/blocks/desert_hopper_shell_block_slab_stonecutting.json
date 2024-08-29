@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "bluetreebeasts:desert_hopper_shell_block"
+  },
+  "result": "bluetreebeasts:desert_hopper_shell_block_slab",
+  "count": 2
+}

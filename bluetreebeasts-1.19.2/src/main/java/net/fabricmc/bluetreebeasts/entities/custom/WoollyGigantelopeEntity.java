@@ -5,9 +5,12 @@ import net.fabricmc.bluetreebeasts.entities.ModEntities;
 import net.fabricmc.bluetreebeasts.entities.custom.ai.CustomLandMobWanderGoal;
 import net.fabricmc.bluetreebeasts.entities.custom.ai.GigantelopeForageGoal;
 
+import net.fabricmc.bluetreebeasts.entities.custom.ai.LargeMobMoveControl;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -30,6 +33,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 import static software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes.LOOP;
 
+
 public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable {
 
     @Nullable
@@ -44,9 +48,10 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
 
 
 
-
     public WoollyGigantelopeEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
+        this.navigation = new MobNavigation(this, world);
+        this.experiencePoints = 10;
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -58,14 +63,17 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new LookAtEntityGoal(this, LivingEntity.class, 20.0f));
+
         this.goalSelector.add(2, new SwimGoal(this));
         this.goalSelector.add(3, new EscapeDangerGoal(this, 1));
+        this.goalSelector.add(3, new CustomLandMobWanderGoal(this, .5, 80, 3));
         this.goalSelector.add(4, new GigantelopeForageGoal(this));
-        this.goalSelector.add(5, new CustomLandMobWanderGoal(this, .5, 80, 3));
+        this.goalSelector.add(1, new LookAtEntityGoal(this, LivingEntity.class, 20.0f));
         this.targetSelector.add(7, new AnimalMateGoal(this,1));
 
     }
+
+
 
 
 
@@ -80,6 +88,7 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
         if (this.world.isClient) {
             this.eatGrassTimer = Math.max(0, this.eatGrassTimer - 1);
         }
+
         super.tickMovement();
     }
 
@@ -100,41 +109,34 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
         return ModEntities.WOOLLYGIGANTELOPE.create(world);
     }
 
-    private void setAnimationWithTransition(AnimationController<WoollyGigantelopeEntity> controller, AnimationBuilder animation, int transitionTicks) {
-        controller.transitionLengthTicks = transitionTicks;
-        controller.setAnimation(animation);
-    }
+
 
     private PlayState predicate(AnimationEvent<WoollyGigantelopeEntity> event) {
         AnimationController<WoollyGigantelopeEntity> controller = event.getController();
         boolean isMoving = event.isMoving();
-
-
         String targetAnimation;
-        int transitionTicks;
 
         if (isMoving) {
             targetAnimation = "animation.woolly_gigantelope.walk";
-            transitionTicks = 7; // Custom transition length for walking animation
-        } else {
+        }else {
             targetAnimation = "animation.woolly_gigantelope.idle";
-            transitionTicks = 2; // Custom transition length for idle animation
         }
 
+        // Ensure transitions are managed properly
         String currentAnimationName = controller.getCurrentAnimation() != null ? controller.getCurrentAnimation().animationName : "";
         if (!currentAnimationName.equals(targetAnimation)) {
-            // Use the helper method to set the animation with a custom transition period.
+            // Assuming a hypothetical way to specify transition ticks.
+            // This is conceptual and may not match GeckoLib's actual API.
+            controller.transitionLengthTicks = 2; // This is a made-up property for illustration purposes.
             switch (targetAnimation) {
-
-                case "animation.woolly_gigantelope.walk" ->
-                        setAnimationWithTransition(controller, walking_animation, transitionTicks);
-                case "animation.woolly_gigantelope.idle" ->
-                        setAnimationWithTransition(controller, idle_animation, transitionTicks);
+                case "animation.woolly_gigantelope.walk" -> controller.setAnimation(walking_animation);
+                case "animation.woolly_gigantelope.idle" -> controller.setAnimation(idle_animation);
             }
         }
 
         return PlayState.CONTINUE;
     }
+
 
     private PlayState babyPredicate(AnimationEvent<WoollyGigantelopeEntity> event) {
         AnimationController<WoollyGigantelopeEntity> controller = event.getController();
@@ -163,14 +165,10 @@ public class WoollyGigantelopeEntity extends AnimalEntity implements IAnimatable
         return PlayState.CONTINUE;
     }
 
-
-
-
-
     @Override
     public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController(this,"controller", 0, this::predicate));
-        animationData.addAnimationController(new AnimationController(this,"baby_controller", 0, this::babyPredicate));
+        animationData.addAnimationController(new AnimationController(this,"controller", 2, this::predicate));
+        animationData.addAnimationController(new AnimationController(this,"baby_controller", 2, this::babyPredicate));
     }
 
     @Override

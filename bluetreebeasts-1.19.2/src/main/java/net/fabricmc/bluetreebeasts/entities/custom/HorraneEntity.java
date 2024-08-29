@@ -15,8 +15,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -28,18 +30,23 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
+import java.util.Collections;
+import java.util.EnumSet;
+
+import static software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes.HOLD_ON_LAST_FRAME;
 import static software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes.LOOP;
 
-public class GreaterGrapplerEntity extends HostileEntity implements IAnimatable {
+public class HorraneEntity extends AnimalEntity implements IAnimatable {
     @Nullable
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
-    private static final AnimationBuilder run_animation = new AnimationBuilder().addAnimation("animation.greater_grappler.walk", LOOP);
-    private static final AnimationBuilder idle_animation = new AnimationBuilder().addAnimation("animation.greater_grappler.idle", LOOP);
-    private static final AnimationBuilder attack_animation = new AnimationBuilder().addAnimation("animation.greater_grappler.attack", LOOP);
+    private static final AnimationBuilder run_animation = new AnimationBuilder().addAnimation("animation.horrane.walk", LOOP);
+    private static final AnimationBuilder idle_animation = new AnimationBuilder().addAnimation("animation.horrane.idle", LOOP);
+    private static final AnimationBuilder attack_animation = new AnimationBuilder().addAnimation("animation.horrane.pounce", HOLD_ON_LAST_FRAME);
+    private boolean isPouncing = false;
 
 
-    public GreaterGrapplerEntity(EntityType<? extends HostileEntity> entityType, World world) {
+    public HorraneEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
         this.setPersistent();
         this.checkDespawn();
@@ -64,11 +71,10 @@ public class GreaterGrapplerEntity extends HostileEntity implements IAnimatable 
 
         this.goalSelector.add(3, new MeleeAttackGoal(this, .5, true));
 
-        this.goalSelector.add(5, new GrapplerDefendWreathGoal(this, 20));
-
         this.goalSelector.add(2, new SwimGoal(this));
+        this.goalSelector.add(2, new PounceGoal(this, 5));
         this.goalSelector.add(3, new LookAroundGoal(this));
-        this.goalSelector.add(5, new CustomLandMobWanderGoal(this, .6, 80, 3));
+        this.goalSelector.add(5, new CustomLandMobWanderGoal(this, 1, 80, 3));
 
 
         this.targetSelector.add(2, new ResettableActiveTargetGoal<>(this, PassiveEntity.class, true, false, 6000));
@@ -103,6 +109,22 @@ public class GreaterGrapplerEntity extends HostileEntity implements IAnimatable 
         return isPacified;
     }
 
+    @Nullable
+    @Override
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+        return null;
+    }
+
+    public void setPouncing(boolean isPouncing) {
+        this.isPouncing = isPouncing;
+    }
+
+    public boolean isPouncing() {
+        return this.isPouncing;
+    }
+
+
+
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
@@ -120,7 +142,7 @@ public class GreaterGrapplerEntity extends HostileEntity implements IAnimatable 
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack itemStack = player.getStackInHand(hand);
 
-        if (itemStack.getItem() == Items.COOKED_BEEF) {
+        if (itemStack.getItem() == Items.CHICKEN) {
             if (!player.world.isClient) {
                 itemStack.decrement(1); // Decrease the item count by one
                 setPacified(true); // Set the entity as pacified
@@ -162,51 +184,81 @@ public class GreaterGrapplerEntity extends HostileEntity implements IAnimatable 
         }
     }
 
+    public static class PounceGoal extends Goal {
+        private final HorraneEntity entity;  // Change to HorraneEntity to use specific methods like setPouncing
+        private final double pounceDistance;
+        private LivingEntity target;
+        private long lastPounceTime;
+        private static final long POUNCE_COOLDOWN = 1000; // Cooldown time in milliseconds
 
-    @Override
-    public boolean disablesShield() {
-        return true;
+        public PounceGoal(HorraneEntity entity, double pounceDistance) {
+            this.entity = entity;
+            this.pounceDistance = pounceDistance;
+            this.setControls(EnumSet.of(Control.MOVE));
+            this.lastPounceTime = 0;
+        }
+
+        @Override
+        public boolean canStart() {
+            long timeSinceLastPounce = System.currentTimeMillis() - lastPounceTime;
+            if (this.entity.isPouncing() || timeSinceLastPounce < POUNCE_COOLDOWN) {
+                return false;
+            }
+
+            this.target = this.entity.getTarget();
+            if (this.target == null) {
+                return false;
+            }
+
+            double distance = this.entity.squaredDistanceTo(this.target.getX(), this.target.getY(), this.target.getZ());
+            return distance < pounceDistance * pounceDistance;
+        }
+
+        @Override
+        public void start() {
+            Vec3d direction = new Vec3d(target.getX() - entity.getX(), 0, target.getZ() - entity.getZ()).normalize();
+            entity.setVelocity(direction.x, 0.4, direction.z); // Adjust the y velocity to control the jump height
+            entity.velocityDirty = true;
+            entity.setPouncing(true);  // Set the pouncing state
+            this.lastPounceTime = System.currentTimeMillis();
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            boolean onGround = entity.isOnGround();
+            if (onGround && entity.isPouncing()) {
+                entity.setPouncing(false); // Reset pouncing state once it lands
+            }
+            return !onGround; // Continue this goal until the entity lands
+        }
+
+        @Override
+        public void stop() {
+            entity.setPouncing(false); // Ensure the pouncing flag is reset when the goal stops
+        }
     }
 
 
 
-    private void setAnimationWithTransition(AnimationController<GreaterGrapplerEntity> controller, AnimationBuilder animation, int transitionTicks) {
-        controller.transitionLengthTicks = transitionTicks;
-        controller.setAnimation(animation);
-    }
 
-    private PlayState predicate(AnimationEvent<GreaterGrapplerEntity> event) {
-        AnimationController<GreaterGrapplerEntity> controller = event.getController();
+
+
+
+
+
+
+    private PlayState predicate(AnimationEvent<HorraneEntity> event) {
+        AnimationController<HorraneEntity> controller = event.getController();
+        // Select animation based on movement and environment
         boolean isMoving = event.isMoving();
-        boolean isAttacking = this.isAttacking();  // This should ideally check if the attack method was invoked
-
-        // Default to idle
-        String targetAnimation = "animation.greater_grappler.idle";
-        int transitionTicks = 2;  // Standard transition time
-
-        // Calculate if the target is within attack range
-        double attackRange = 2.0; // Assuming attack range is 2 blocks
-        boolean withinAttackRange = this.getTarget() != null && this.squaredDistanceTo(this.getTarget()) <= attackRange * attackRange;
-
-        if (isAttacking && withinAttackRange) {
-            targetAnimation = "animation.greater_grappler.attack";
-        } else if (isMoving) {
-            targetAnimation = "animation.greater_grappler.walk";
+        if (isMoving) {
+            controller.setAnimation(run_animation);
+        } else {
+            controller.setAnimation(idle_animation);
         }
-
-        // Check current animation and update if necessary
-        String currentAnimationName = controller.getCurrentAnimation() != null ? controller.getCurrentAnimation().animationName : "";
-        if (!currentAnimationName.equals(targetAnimation)) {
-            AnimationBuilder animation = switch (targetAnimation) {
-                case "animation.greater_grappler.attack" -> attack_animation;
-                case "animation.greater_grappler.walk" -> run_animation;
-                default -> idle_animation;
-            };
-            setAnimationWithTransition(controller, animation, transitionTicks);
-        }
-
         return PlayState.CONTINUE;
     }
+
 
 
 

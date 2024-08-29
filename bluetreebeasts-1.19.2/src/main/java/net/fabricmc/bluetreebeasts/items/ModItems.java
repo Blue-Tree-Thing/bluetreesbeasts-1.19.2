@@ -20,6 +20,8 @@ public class ModItems {
     public static final Item COOKEDGIGANTELOPE= registerItem("cooked_gigantelope", new Item(new Item.Settings().food(CookedGigantelopeItem.COOKEDGIGANTELOPE).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item GIGANTELOPEANTLER = registerItem("gigantelope_antler", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item SNIFFLERPRODUCE = registerItem("sniffler_produce", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
+    public static final Item HOPPERSHELLFRAGMENTITEM = registerItem("hopper_shell_fragment", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
+    public static final Item HOPPERSHELLFITEM = registerItem("hopper_shell", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
 
 
     public static final Item DERELICT_MECHANISM = registerItem("derelict_mechanism", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
@@ -56,6 +58,9 @@ public class ModItems {
 
     public static final SpawnEggItem GANNETWHALESPAWNEGG = (SpawnEggItem) registerItem ("gannet_whale_spawn_egg", new SpawnEggItem(ModEntities.GANNETWHALE, 0x32CD32, 0xD2B48C, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
 
+    public static final SpawnEggItem DESERTHOPPERSPAWNEGG = (SpawnEggItem) registerItem ("desert_hopper_spawn_egg", new SpawnEggItem(ModEntities.DESERT_HOPPER, 0x32CD32, 0xD2B48C, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
+
+    public static final SpawnEggItem HORRANESPAWNEGG = (SpawnEggItem) registerItem ("horrane_spawn_egg", new SpawnEggItem(ModEntities.HORRANE, 0x32CD32, 0xD2B48C, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
 
     public static final Item HEARTBURN_GLAIVE = registerItem("heartburn_glaive", new HeartburnGlaiveItem(new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     private static Item registerItem (String name, Item item){

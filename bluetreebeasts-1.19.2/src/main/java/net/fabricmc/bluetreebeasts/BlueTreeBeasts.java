@@ -8,9 +8,7 @@ import net.fabricmc.bluetreebeasts.entities.ModEntities;
 import net.fabricmc.bluetreebeasts.entities.custom.*;
 import net.fabricmc.bluetreebeasts.items.ModItems;
 import net.fabricmc.bluetreebeasts.sounds.ModSounds;
-import net.fabricmc.bluetreebeasts.world.gen.ForestFlishEntitySpawn;
-import net.fabricmc.bluetreebeasts.world.gen.OceanFlishEntitySpawn;
-import net.fabricmc.bluetreebeasts.world.gen.WoollyGigantelopeEntitySpawn;
+import net.fabricmc.bluetreebeasts.world.gen.*;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 
@@ -42,15 +40,19 @@ public class BlueTreeBeasts implements ModInitializer {
 		ForestFlishEntitySpawn.addForestFlishEntitySpawn();
 		OceanFlishEntitySpawn.addOceanFlishEntitySpawn();
 		WoollyGigantelopeEntitySpawn.addWoollyGigantelopeEntitySpawn();
+		DesertHopperEntitySpawn.addDesertHopperEntitySpawn();
+		HorraneEntitySpawn.addHorraneEntitySpawn();
 		FabricDefaultAttributeRegistry.register(ModEntities.HELLBENDER, HellBenderEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.TYFLEW, TyflewEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.HOMINGFLISH, HomingFlishEntity.createHomingFlishAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.GREATERGRAPPLER, GreaterGrapplerEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.FORESTFLISH, ForestFlishEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.DESERT_HOPPER, DesertHopperEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.OCEANFLISH, OceanFlishEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.WOOLLYGIGANTELOPE, WoollyGigantelopeEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.CITY_SNIFFLER, CitySnifflerEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.GANNETWHALE, GannetWhaleEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.HORRANE, HorraneEntity.setAttributes());
 
 	}
 }

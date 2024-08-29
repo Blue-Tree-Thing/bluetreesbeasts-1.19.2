@@ -50,22 +50,25 @@ public class GrapplerDefendWreathGoal extends Goal {
 
     @Override
     public boolean shouldContinue() {
-        return grappler.isPacified() && grappler.getTarget() == null && wreathPosition != null && grappler.squaredDistanceTo(Vec3d.ofCenter(wreathPosition)) <= range * range;
+        return grappler.isPacified() && grappler.getTarget() == null && wreathPosition != null && world.getBlockState(wreathPosition).getBlock() instanceof WreathBlock;
     }
 
     @Override
     public void start() {
-        // Directly moving towards the wreath block's position
-        if (wreathPosition != null) {
-            this.grappler.getNavigation().startMovingTo(wreathPosition.getX() + 0.5, wreathPosition.getY() + 0.5, wreathPosition.getZ() + 0.5, .6);
-        }
+        moveTowardsWreath();
     }
 
     @Override
     public void tick() {
-        if (wreathPosition != null && this.grappler.squaredDistanceTo(Vec3d.ofCenter(wreathPosition)) > range) {
-            // Ensure the grappler stays within the defend range of the wreath block
-            this.grappler.getNavigation().startMovingTo(wreathPosition.getX() + 0.5, wreathPosition.getY() + 0.5, wreathPosition.getZ() + 0.5, 1.0);
+        double distanceSquared = grappler.squaredDistanceTo(Vec3d.ofCenter(wreathPosition));
+        if (distanceSquared > range * range || !grappler.getNavigation().isFollowingPath()) {
+            moveTowardsWreath();
+        }
+    }
+
+    private void moveTowardsWreath() {
+        if (wreathPosition != null) {
+            this.grappler.getNavigation().startMovingTo(wreathPosition.getX() + 0.5, wreathPosition.getY() + 0.5, wreathPosition.getZ() + 0.5, 0.6);
         }
     }
 

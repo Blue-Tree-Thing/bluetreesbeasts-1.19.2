@@ -15,7 +15,7 @@ public class GannetWhaleWaterMovementGoal extends Goal {
     private final PathAwareEntity whale;
     private final double speed;
     private long lastChangeTime;
-    private final long changeInterval = 5000; // Interval to change direction
+    private final long changeInterval = 9000; // Interval to change direction
     private Vec3d targetPosition;
     private final World world;
     private final double minClearanceAboveFloor = 3.0; // Minimum distance to stay above the ocean floor
@@ -113,7 +113,7 @@ public class GannetWhaleWaterMovementGoal extends Goal {
         double currentY = whale.getY();
         int floorY = world.getTopY(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (int) whale.getX(), (int) whale.getZ()) - 1;
         if (currentY - floorY < minClearanceAboveFloor) {
-            whale.setVelocity(whale.getVelocity().add(0, 0.02, 0)); // Gradually increase the upward velocity
+            whale.setVelocity(whale.getVelocity().add(0, 0.03, 0)); // Gradually increase the upward velocity
             whale.velocityDirty = true; // Ensures the new velocity is processed
         }
     }

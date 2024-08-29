@@ -1,0 +1,9 @@
+{
+  "parent": "block/slab_top",
+  "textures": {
+    "bottom": "bluetreebeasts:blocks/hopper_shell_block_top_bottom",
+    "top": "bluetreebeasts:blocks/hopper_shell_block_top_bottom",
+    "side": "bluetreebeasts:blocks/hopper_shell_block_side"
+  }
+}
+

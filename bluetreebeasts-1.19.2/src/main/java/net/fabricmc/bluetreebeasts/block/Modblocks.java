@@ -24,6 +24,8 @@ public class Modblocks {
     public static final Block SNIFFLER_COLONY_FEED_BLOCK = new SnifflerColonyFeedBlock();
     public static final Block SOPHONT_SCRAP = new SophontScrapBlock();
     public static final Block EVER_METAL = new EverMetalBlock();
+    public static final Block DESERT_HOPPER_SHELL_BLOCK = new DesertHopperShellBlock();
+    public static final Block DESERT_HOPPER_SHELL_BLOCK_SLAB = new DesertHopperShellBlockSlab();
     public static final Block GANNET_WHALE_EGG = new GannetWhaleEggBlock();
     public static final Block WREATH_BLOCK = new WreathBlock();
 
@@ -47,6 +49,8 @@ public class Modblocks {
         registerBlock("sniffler_colony_feed_block", SNIFFLER_COLONY_FEED_BLOCK, ModItemGroup.BLUETREEBEASTS);
         registerBlock("sophont_scrap", SOPHONT_SCRAP, ModItemGroup.BLUETREEBEASTS);
         registerBlock("ever_metal_block", EVER_METAL, ModItemGroup.BLUETREEBEASTS);
+        registerBlock("desert_hopper_shell_block", DESERT_HOPPER_SHELL_BLOCK, ModItemGroup.BLUETREEBEASTS);
+        registerBlock("desert_hopper_shell_block_slab", DESERT_HOPPER_SHELL_BLOCK_SLAB, ModItemGroup.BLUETREEBEASTS);
         registerBlock("gannet_whale_egg", GANNET_WHALE_EGG, ModItemGroup.BLUETREEBEASTS);
         registerBlock("wreath_block", WREATH_BLOCK, ModItemGroup.BLUETREEBEASTS);
 

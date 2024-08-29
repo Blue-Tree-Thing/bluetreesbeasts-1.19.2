@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bluetreebeasts:block/desert_hopper_shell_block_slab"
+    },
+    "type=top": {
+      "model": "bluetreebeasts:block/desert_hopper_shell_block_slab_top"
+    },
+    "type=double": {
+      "model": "bluetreebeasts:block/desert_hopper_shell_block"
+    }
+  }
+}

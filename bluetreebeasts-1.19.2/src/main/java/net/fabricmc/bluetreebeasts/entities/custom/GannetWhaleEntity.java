@@ -1,8 +1,6 @@
 package net.fabricmc.bluetreebeasts.entities.custom;
 
-import net.fabricmc.bluetreebeasts.entities.custom.ai.GannetWhaleLandMovementGoal;
-import net.fabricmc.bluetreebeasts.entities.custom.ai.GannetWhaleWaterMovementGoal;
-import net.fabricmc.bluetreebeasts.entities.custom.ai.GannetWhaleWaterToLand;
+import net.fabricmc.bluetreebeasts.entities.custom.ai.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.control.AquaticMoveControl;
 import net.minecraft.entity.ai.control.LookControl;
@@ -15,7 +13,6 @@ import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.AxolotlSwimNavigation;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -41,6 +38,7 @@ public class GannetWhaleEntity extends AnimalEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     public boolean hasEgg = false;
 
+
     // Animation controls
     private static final AnimationBuilder honk_animation = new AnimationBuilder().addAnimation("animation.gannet_whale_honk", PLAY_ONCE);
     private static final AnimationBuilder move_land_animation = new AnimationBuilder().addAnimation("animation.gannet_whale_move_land", LOOP);
@@ -58,7 +56,7 @@ public class GannetWhaleEntity extends AnimalEntity implements IAnimatable {
     public GannetWhaleEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
         this.landNavigation = new MobNavigation(this, world);
-        this.waterNavigation = new AxolotlSwimNavigation(this, world);
+        this.waterNavigation = new GannetWhaleNavigation(this, world);
         initializeNavigation(this.isSubmergedInWater());
     }
 
@@ -93,8 +91,10 @@ public class GannetWhaleEntity extends AnimalEntity implements IAnimatable {
         super.tick();
         boolean currentlyInWater = this.isSubmergedInWater() || this.isTouchingWater();
         initializeNavigation(currentlyInWater);
+        if(!currentlyInWater){
+            manageHonking();
+        }
 
-        manageHonking();
     }
 
     private void manageHonking() {
@@ -121,12 +121,10 @@ public class GannetWhaleEntity extends AnimalEntity implements IAnimatable {
     protected void initGoals() {
         super.initGoals();
         this.goalSelector.add(2, new EscapeDangerGoal(this, .5));
-        this.goalSelector.add(3, new GannetWhaleWaterToLand(this, 1.5)); // Finding and moving into water
 
         this.goalSelector.add(3, new GannetWhaleWaterMovementGoal(this, 1.5)); // Active swimming
         this.targetSelector.add(7, new AnimalMateGoal(this,.6));
-        this.goalSelector.add(3, new GannetWhaleLandMovementGoal(this, 0.4, 5000, 0.1, 30000));
-
+        this.goalSelector.add(3, new GannetWhaleLandMovementGoal(this, 0.4, 20000, .01f,30000));
     }
 
     @Override
@@ -175,4 +173,3 @@ public class GannetWhaleEntity extends AnimalEntity implements IAnimatable {
         return factory;
     }
 }
-

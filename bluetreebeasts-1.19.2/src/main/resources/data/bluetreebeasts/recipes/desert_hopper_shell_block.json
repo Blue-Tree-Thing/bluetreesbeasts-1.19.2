@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped", "pattern":
+[
+  "oo",
+  "oo"
+],"key": {
+
+  "o": {
+    "item": "bluetreebeasts:hopper_shell_fragment"
+  }
+},
+  "result": {
+    "count": 4,
+    "item": "bluetreebeasts:desert_hopper_shell_block"
+  }
+}

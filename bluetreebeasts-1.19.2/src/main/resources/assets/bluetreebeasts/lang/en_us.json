@@ -6,8 +6,9 @@
   "block.bluetreebeasts.sniffler_colony_feed_block": "Sniffler Colony Food Storage",
   "block.bluetreebeasts.sophont_scrap": "Sophont Scrap",
   "block.bluetreebeasts.ever_metal_block": "Block Of Evermetal",
+  "block.bluetreebeasts.desert_hopper_shell_block": "Desert Hopper Shell Block",
+  "block.bluetreebeasts.desert_hopper_shell_block_slab": "Desert Hopper Shell Slab",
   "block.bluetreebeasts.wreath_block": "Grappler's Wreath",
-
   "block.bluetreebeasts.gannet_whale_egg": "Gannet Whale Egg Block",
 
 
@@ -37,6 +38,10 @@
   "item.bluetreebeasts.woolly_gigantelope_spawn_egg": "Woolly Gigantelope Spawn Egg",
   "item.bluetreebeasts.city_sniffler_spawn_egg": "City Sniffler Spawn Egg",
   "item.bluetreebeasts.gannet_whale_spawn_egg": "Gannet Whale Spawn Egg",
+  "item.bluetreebeasts.desert_hopper_spawn_egg": "Desert Hopper Spawn Egg",
+  "item.bluetreebeasts.horrane_spawn_egg": "Horrane Spawn Egg",
+
+
 
 
   "item.bluetreebeasts.heartburn_glaive": "Heartburn Glaive",
@@ -50,6 +55,10 @@
   "item.bluetreebeasts.cooked_gigantelope": "Gigantelope Steak Dinner",
   "item.bluetreebeasts.gigantelope_antler": "Gigantelope Antler",
   "item.bluetreebeasts.sniffler_produce": "Sniffler Produce",
+  "item.bluetreebeasts.hopper_shell_fragment": "Desert Hopper Shell Fragment",
+  "item.bluetreebeasts.hopper_shell": "Desert Hopper Shell",
+
+
 
 
   "item.bluetreebeasts.blazing_heart": "Blazing Heart",
@@ -65,6 +74,10 @@
   "entity.bluetreebeasts.woolly_gigantelope": "Woolly Gigantelope",
   "entity.bluetreebeasts.city_sniffler": "City Sniffler",
   "entity.bluetreebeasts.gannet_whale": "Gannet Whale",
+  "entity.bluetreebeasts.desert_hopper": "Desert Hopper",
+  "entity.bluetreebeasts.horrane": "Horrane",
+
+
 
 
 
