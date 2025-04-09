@@ -13,7 +13,7 @@ import net.minecraft.world.biome.BiomeKeys;
 public class WoollyGigantelopeEntitySpawn {
 
     public static void addWoollyGigantelopeEntitySpawn(){
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.SNOWY_PLAINS, BiomeKeys.SNOWY_TAIGA), SpawnGroup.CREATURE, ModEntities.WOOLLYGIGANTELOPE, 80, 2,4);
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.SNOWY_PLAINS), SpawnGroup.CREATURE, ModEntities.WOOLLYGIGANTELOPE, 80, 2,4);
         SpawnRestriction.register(ModEntities.WOOLLYGIGANTELOPE, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
     }
 

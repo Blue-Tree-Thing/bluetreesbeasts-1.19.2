@@ -42,9 +42,8 @@ public class BlueTreeBeasts implements ModInitializer {
 		WoollyGigantelopeEntitySpawn.addWoollyGigantelopeEntitySpawn();
 		DesertHopperEntitySpawn.addDesertHopperEntitySpawn();
 		HorraneEntitySpawn.addHorraneEntitySpawn();
-		FabricDefaultAttributeRegistry.register(ModEntities.HELLBENDER, HellBenderEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.TYFLEW, TyflewEntity.setAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.HOMINGFLISH, HomingFlishEntity.createHomingFlishAttributes());
+
+
 		FabricDefaultAttributeRegistry.register(ModEntities.GREATERGRAPPLER, GreaterGrapplerEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.FORESTFLISH, ForestFlishEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.DESERT_HOPPER, DesertHopperEntity.setAttributes());
@@ -53,6 +52,7 @@ public class BlueTreeBeasts implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.CITY_SNIFFLER, CitySnifflerEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.GANNETWHALE, GannetWhaleEntity.setAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.HORRANE, HorraneEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.HOPPERSHELL, HopperShellEntity.createAttributes());
 
 	}
 }

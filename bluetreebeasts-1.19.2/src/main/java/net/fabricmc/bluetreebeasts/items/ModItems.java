@@ -12,24 +12,22 @@ import net.minecraft.util.registry.Registry;
 public class ModItems {
 
 
-    public static final Item HELLBENDEREART = registerItem("hell_bender_heart", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final Item GRAPPLERCHOP = registerItem("grappler_chop", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item RAWFLISH = registerItem("raw_flish", new Item(new Item.Settings().food(RawFlishItem.RAWFLISH).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item COOKEDFLISH = registerItem("cooked_flish", new Item(new Item.Settings().food(CookedFlishItem.COOKEDFLISH).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item RAWGIGANTELOPE = registerItem("raw_gigantelope", new Item(new Item.Settings().food(RawGigantelopeItem.RAWGIGANTELOPE).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item COOKEDGIGANTELOPE= registerItem("cooked_gigantelope", new Item(new Item.Settings().food(CookedGigantelopeItem.COOKEDGIGANTELOPE).group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item GIGANTELOPEANTLER = registerItem("gigantelope_antler", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
+    public static final Item HORRANEHIDE = registerItem("horrane_hide", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item SNIFFLERPRODUCE = registerItem("sniffler_produce", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item HOPPERSHELLFRAGMENTITEM = registerItem("hopper_shell_fragment", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
-    public static final Item HOPPERSHELLFITEM = registerItem("hopper_shell", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
+    public static final Item HOPPERSHELLITEM = registerItem("hopper_shell", new HopperShellItem(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
 
 
     public static final Item DERELICT_MECHANISM = registerItem("derelict_mechanism", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item OCEAN_FLISH_WING = registerItem("ocean_flish_wing", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
     public static final Item FOREST_FLISH_WING = registerItem("forest_flish_wing", new Item(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS)));
 
-    public static final Item BLAZINGHEART = registerItem("blazing_heart", new BlazingHeartItem(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
-    public static final Item TYFLEWSCALL = registerItem("tyflews_call", new TyflewsCallItem(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final Item METALDETECTORITEM = registerItem("metal_detector", new MetalDetectorItem(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     public static final Item FLUTTERPACK = registerItem("flutter_pack", new FlutterPackItem(new Item.Settings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
 
@@ -37,10 +35,8 @@ public class ModItems {
 
 
     // Hellbender: Bold Orange (#FF8C00) and Light Orange (#FFA500)
-    public static final SpawnEggItem HELLBENDERSPAWNEGG = (SpawnEggItem) registerItem ("hell_bender_spawn_egg", new SpawnEggItem(ModEntities.HELLBENDER, 0xFF8C00, 0xFFA500, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
 
     // Tyflew: Grey (#808080) and Light Blue (#ADD8E6)
-    public static final SpawnEggItem TYFLEWSPAWNEGG = (SpawnEggItem) registerItem ("tyflew_spawn_egg", new SpawnEggItem(ModEntities.TYFLEW, 0x808080, 0xADD8E6, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
 
     // Woolly Gigantelope: Light Gray (#D3D3D3) and Beige (#F5F5DC)
     public static final SpawnEggItem WOOLLYGIGANTELOPESPAWNEGG = (SpawnEggItem) registerItem ("woolly_gigantelope_spawn_egg", new SpawnEggItem(ModEntities.WOOLLYGIGANTELOPE, 0xD3D3D3, 0xF5F5DC, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
@@ -62,7 +58,6 @@ public class ModItems {
 
     public static final SpawnEggItem HORRANESPAWNEGG = (SpawnEggItem) registerItem ("horrane_spawn_egg", new SpawnEggItem(ModEntities.HORRANE, 0x32CD32, 0xD2B48C, new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
 
-    public static final Item HEARTBURN_GLAIVE = registerItem("heartburn_glaive", new HeartburnGlaiveItem(new FabricItemSettings().group(ModItemGroup.BLUETREEBEASTS).fireproof()));
     private static Item registerItem (String name, Item item){
         return Registry.register(Registry.ITEM, new Identifier(BlueTreeBeasts.MODID, name), item);
     }

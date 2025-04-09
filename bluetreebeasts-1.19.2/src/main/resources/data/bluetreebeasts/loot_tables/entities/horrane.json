@@ -11,20 +11,24 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 1.0
+                "max": 2,
+                "min": 1
               },
               "function": "minecraft:set_count"
+            },
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 3,
+                "min": 2
+              },
+              "function": "minecraft:looting_enchant"
             }
-
           ],
-          "name": "bluetreebeasts:hell_bender_heart"
+          "name": "bluetreebeasts:horrane_hide"
         }
       ],
       "rolls": 1.0
     }
-
-
-
   ]
 }

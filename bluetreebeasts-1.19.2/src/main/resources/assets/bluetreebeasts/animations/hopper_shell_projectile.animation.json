@@ -1,0 +1,31 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.hopper_shell_projectile.spin": {
+			"loop": true,
+			"animation_length": 0.5,
+			"bones": {
+				"shell": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0],
+							"easing": "linear"
+						},
+						"0.25": {
+							"vector": [0, -180, 0],
+							"easing": "linear"
+						},
+						"0.375": {
+							"vector": [0, -270, 0],
+							"easing": "linear"
+						},
+						"0.5": {
+							"vector": [0, -360, 0],
+							"easing": "linear"
+						}
+					}
+				}
+			}
+		}
+	}
+}

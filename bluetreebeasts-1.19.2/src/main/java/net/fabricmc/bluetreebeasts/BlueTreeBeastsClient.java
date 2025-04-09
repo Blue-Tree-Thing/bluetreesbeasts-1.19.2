@@ -23,9 +23,7 @@ public class BlueTreeBeastsClient implements ClientModInitializer  {
         GeoArmorRenderer.registerArmorRenderer(new FlutterPackRenderer(), ModItems.FLUTTERPACK);
         BlockRenderLayerMap.INSTANCE.putBlock(Modblocks.WREATH_BLOCK, RenderLayer.getCutout());
 
-        register(ModEntities.HELLBENDER, HellBenderRenderer::new);
-        register(ModEntities.TYFLEW, TyflewRenderer::new);
-        register(ModEntities.HOMINGFLISH, HomingFlishRenderer::new);
+
         register(ModEntities.GREATERGRAPPLER, GreaterGrapplerRenderer::new);
         register(ModEntities.FORESTFLISH, ForestFlishRenderer::new);
         register(ModEntities.OCEANFLISH, OceanFlishRenderer::new);
@@ -34,4 +32,5 @@ public class BlueTreeBeastsClient implements ClientModInitializer  {
         register(ModEntities.GANNETWHALE, GannetWhaleRenderer::new);
         register(ModEntities.DESERT_HOPPER, DesertHopperRenderer::new);
         register(ModEntities.HORRANE, HorraneRenderer::new);
+        register(ModEntities.HOPPERSHELL, HopperShellRenderer::new);
     }}

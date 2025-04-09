@@ -7,9 +7,8 @@ import net.minecraft.util.registry.Registry;
 
 public class ModSounds {
 
-    public static SoundEvent HELLBENDER_AMBIENT = registerSoundEvent("hell_bender_ambient");
-    public static SoundEvent HELLBENDER_HURT = registerSoundEvent("hell_bender_hurt");
-    public static SoundEvent HELLBENDER_DEATH = registerSoundEvent("hell_bender_death");
+
+
 
     private static SoundEvent registerSoundEvent(String name){
         Identifier id = new Identifier(BlueTreeBeasts.MODID, name);

@@ -13,6 +13,8 @@
       <root url="jar://$APPLICATION_PLUGINS_DIR$/Minecraft Development/lib/resources/externalAnnotations.jar!/" />
       <root url="jar://$APPLICATION_PLUGINS_DIR$/Minecraft Development/lib/resources/externalAnnotations.jar!/" />
       <root url="jar://$APPLICATION_PLUGINS_DIR$/Minecraft Development/lib/resources/externalAnnotations.jar!/" />
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/Minecraft Development/lib/resources/externalAnnotations.jar!/" />
+      <root url="jar://$APPLICATION_PLUGINS_DIR$/Minecraft Development/lib/resources/externalAnnotations.jar!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/bluetreebeasts-1.19.2/.gradle/loom-cache/minecraftMaven/net/minecraft/minecraft-merged-project-root/1.19.2-net.fabricmc.yarn.1_19_2.1.19.2+build.28-v2/minecraft-merged-project-root-1.19.2-net.fabricmc.yarn.1_19_2.1.19.2+build.28-v2.jar!/" />

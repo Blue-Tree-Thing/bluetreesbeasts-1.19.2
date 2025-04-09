@@ -4,7 +4,9 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-jemalloc/3.3.1/948a89b76a16aa324b046ae9308891216ffce5f9/lwjgl-jemalloc-3.3.1-natives-windows.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-jemalloc/3.3.1/f4e0b389c4bad0057696703915fb1a41eee9c57c/lwjgl-jemalloc-3.3.1-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl/lwjgl-jemalloc/3.3.1/f5858d34e06053b1866858fed7a685cf0c6b5926/lwjgl-jemalloc-3.3.1-sources.jar!/" />
     </SOURCES>

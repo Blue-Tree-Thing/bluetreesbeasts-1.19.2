@@ -10,7 +10,9 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -68,26 +70,28 @@ public class HorraneEntity extends AnimalEntity implements IAnimatable {
     @Override
     protected void initGoals() {
         this.goalSelector.add(2, new LookAtEntityGoal(this, LivingEntity.class, 20.0f));
-
         this.goalSelector.add(3, new MeleeAttackGoal(this, .5, true));
-
         this.goalSelector.add(2, new SwimGoal(this));
         this.goalSelector.add(2, new PounceGoal(this, 5));
         this.goalSelector.add(3, new LookAroundGoal(this));
         this.goalSelector.add(5, new CustomLandMobWanderGoal(this, 1, 80, 3));
 
-
+        // Setup target goals with exclusion of HorraneEntity
         this.targetSelector.add(2, new ResettableActiveTargetGoal<>(this, PassiveEntity.class, true, false, 6000));
-        if (!isPacified()) { // Only target players if not pacified
+
+        if (!isPacified()) {
             this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
             this.targetSelector.add(1, new RevengeGoal(this));
         }
-        if(isPacified){
+
+        if (isPacified) {
             this.targetSelector.add(2, new ActiveTargetGoal<>(this, ZombieEntity.class, true));
             this.targetSelector.add(2, new ActiveTargetGoal<>(this, SpiderEntity.class, true));
             this.targetSelector.add(2, new ActiveTargetGoal<>(this, SkeletonEntity.class, true));
-
         }
+
+        // Exclude other HorraneEntity instances from being targeted
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, AnimalEntity.class, 10, true, false, entity -> !(entity instanceof HorraneEntity)));
     }
 
     public boolean isPacified = false;
